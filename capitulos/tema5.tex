@@ -1,0 +1,110 @@
+% Archivo: capitulos/tema5.tex
+
+% -------------------------------------------------------------------------
+\section{Superficies Abstractas. Introducción a la Geometría de Riemann}
+
+Hasta ahora hemos estudiado superficies inmersas en $\mathbb{R}^3$. Sin embargo, el concepto de superficie puede definirse de manera intrínseca utilizando topología y cartas coordenadas, sin referencia a un espacio ambiente.
+
+\subsection{Definiciones Topológicas}
+
+\begin{definicion}{Superficie Abstracta}
+Una superficie abstracta $S$ es un espacio topológico que cumple las siguientes condiciones:
+\begin{enumerate}
+    \item Es de \textbf{Hausdorff} (puntos distintos pueden separarse por abiertos disjuntos).
+    \item Es \textbf{2AN} (Segundo Axioma de Numerabilidad: admite una base numerable de abiertos).
+    \item Es localmente euclídeo: Para todo punto $p \in S$, existen un entorno abierto $U(p)$, un abierto $V \subset \mathbb{R}^2$ (con la topología usual $\mathcal{T}_u$) y un homeomorfismo:
+    \[ \varphi: U(p) \longrightarrow V, \]
+    llamado \textbf{carta} (o sistema de coordenadas locales).
+\end{enumerate}
+Si escribimos $\varphi(q) = (u(q), v(q))$, las funciones $u$ y $v$ se llaman funciones coordenadas.
+\end{definicion}
+
+\begin{proposicion}{Cambio de Cartas}
+Dada una superficie abstracta $S$, sean $\varphi_1: U_1(p) \to V_1$ y $\varphi_2: U_2(p) \to V_2$ dos cartas que cubren un punto $p$. La aplicación de transición (o cambio de cartas):
+\[
+\varphi_2 \circ \varphi_1^{-1}: \varphi_1(U_1 \cap U_2) \longrightarrow \varphi_2(U_1 \cap U_2)
+\]
+es un homeomorfismo entre abiertos de $\mathbb{R}^2$.
+\end{proposicion}
+
+Para hacer cálculo diferencial, necesitamos pedir más regularidad en estos cambios de cartas.
+
+\begin{definicion}{Superficie Abstracta Diferenciable}
+Una superficie abstracta se dice \textbf{diferenciable} si los cambios de cartas $\varphi_j \circ \varphi_i^{-1}$ son \textbf{difeomorfismos} (diferenciables con inversa diferenciable).
+\end{definicion}
+
+% -------------------------------------------------------------------------
+\section{El Plano Tangente Abstracto}
+
+Como no estamos en $\mathbb{R}^3$, no podemos visualizar los vectores tangentes como flechas saliendo de la superficie. Debemos definirlos operacionalmente como objetos que derivan funciones.
+
+\begin{definicion}{Vector Tangente}
+Sean $S$ una superficie abstracta diferenciable, $p \in S$ y $\alpha: I \to S$ una curva con $\alpha(0)=p$. Un vector tangente en $p$ es un operador $\alpha'(0): \mathcal{C}^\infty(S) \to \mathbb{R}$ definido por:
+\[
+\alpha'(0)(f) := \frac{d}{dt}\Big|_{t=0} (f \circ \alpha)(t).
+\]
+\end{definicion}
+
+\begin{proposicion}{Propiedades algebraicas}
+Este operador verifica dos propiedades fundamentales para cualquier $a, b \in \mathbb{R}$ y $f, g \in \mathcal{C}^\infty(S)$:
+\begin{enumerate}
+    \item \textbf{Linealidad:} $\alpha'(0)(af+bg) = a\alpha'(0)(f) + b\alpha'(0)(g)$.
+    \item \textbf{Regla de Leibniz:} $\alpha'(0)(f \cdot g) = f(p)\alpha'(0)(g) + g(p)\alpha'(0)(f)$.
+\end{enumerate}
+\end{proposicion}
+
+\begin{teorema}{Espacio Tangente $T_pS$}
+Consideremos los conjuntos de operadores lineales:
+\begin{itemize}
+    \item El conjunto de operadores $\{\omega: \mathcal{C}^\infty(S) \to \mathbb{R} \mid \omega \text{ es } \mathbb{R}\text{-lineal}\}$ tiene dimensión infinita.
+    \item El conjunto de operadores $\{\omega: \mathcal{C}^\infty(S) \to \mathbb{R} \mid \omega \text{ es lineal y Leibniz}\}$ es un espacio vectorial real de \textbf{dimensión 2}.
+\end{itemize}
+A este último espacio se le denomina \textbf{Plano Tangente} a $S$ en $p$, denotado por $T_pS$.
+\end{teorema}
+
+% -------------------------------------------------------------------------
+\section{Geometría Riemanniana}
+
+Para recuperar conceptos geométricos (longitudes, ángulos, áreas) en este contexto abstracto, necesitamos dotar al plano tangente de un producto escalar.
+
+\begin{definicion}{Métrica Riemanniana}
+Una métrica riemanniana en $S$ es una elección, para cada $p \in S$, de un producto interior definido positivo $\inner{\cdot}{\cdot}_p$ en $T_pS$. Es decir, para cualesquiera $X, Y, Z \in T_pS$ y $a, b \in \mathbb{R}$:
+\begin{itemize}
+    \item \textbf{Bilinealidad:} $\inner{aX+bY}{Z}_p = a\inner{X}{Z}_p + b\inner{Y}{Z}_p$.
+    \item \textbf{Simetría:} $\inner{X}{Y}_p = \inner{Y}{X}_p$.
+    \item \textbf{Definida positiva:} $\inner{X}{X}_p \ge 0$, siendo 0 si y solo si $X=0$.
+\end{itemize}
+Esta elección debe variar de manera diferenciable con el punto $p$ .
+\end{definicion}
+
+% -------------------------------------------------------------------------
+\section{Objetos Geométricos Intrínsecos}
+
+Una vez fijada la métrica (los coeficientes $E, F, G$), todos los objetos geométricos se definen a partir de ella.
+
+\begin{definicion}{Símbolos de Christoffel}
+Se definen mediante el siguiente sistema de ecuaciones lineales, que involucra a la métrica y sus derivadas parciales:
+\[
+\begin{pmatrix} E & F \\ F & G \end{pmatrix}
+\begin{pmatrix} \Gamma_{11}^1 & \Gamma_{12}^1 & \Gamma_{22}^1 \\ \Gamma_{11}^2 & \Gamma_{12}^2 & \Gamma_{22}^2 \end{pmatrix}
+=
+\begin{pmatrix} \frac{E_u}{2} & \frac{E_v}{2} & F_v - \frac{G_u}{2} \\ F_u - \frac{E_v}{2} & \frac{G_u}{2} & \frac{G_v}{2} \end{pmatrix}.
+\]
+\end{definicion}
+
+\begin{definicion}{Curvatura de Gauss}
+La curvatura de Gauss $K$ es un invariante intrínseco definido por:
+\[
+K := \frac{1}{E} \left[ \Gamma_{11}^1 \Gamma_{12}^2 + (\Gamma_{11}^2)_v + \Gamma_{11}^2 \Gamma_{22}^2 - \Gamma_{12}^1 \Gamma_{11}^2 - (\Gamma_{12}^2)_u - (\Gamma_{12}^2)^2 \right].
+\]
+\end{definicion}
+
+\begin{definicion}{Geodésicas}
+Las geodésicas de $(S, g)$ son las curvas que satisfacen el sistema de ecuaciones diferenciales :
+\[
+\begin{cases}
+u'' + (u')^2\Gamma_{11}^1 + 2u'v'\Gamma_{12}^1 + (v')^2\Gamma_{22}^1 = 0, \\
+v'' + (u')^2\Gamma_{11}^2 + 2u'v'\Gamma_{12}^2 + (v')^2\Gamma_{22}^2 = 0.
+\end{cases}
+\]
+\end{definicion}

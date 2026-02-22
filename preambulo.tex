@@ -1,0 +1,133 @@
+% --- PAQUETES DE IDIOMA Y CODIFICACIÓN ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla]{babel}
+
+% --- PAQUETES MATEMÁTICOS ---
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{mathtools}
+\usepackage{physics} 
+% ...existing code...
+\usepackage{wasysym} 
+
+
+% --- PAQUETES DE DISEÑO Y GRÁFICOS ---
+\usepackage{geometry}
+\geometry{left=2.5cm, right=2.5cm, top=3cm, bottom=3cm}
+\usepackage{xcolor}
+\usepackage{enumitem}
+% Configuración de enlaces bonitos
+\usepackage[colorlinks=true, linkcolor=mainblue, urlcolor=mainblue, citecolor=mainred]{hyperref}
+\usepackage{graphicx} % Para imágenes
+
+% --- CONFIGURACIÓN DE TCOLORBOX (Tus cajas bonitas) ---
+\usepackage[most]{tcolorbox}
+
+% Definición de colores
+\definecolor{mainblue}{RGB}{0, 102, 204}
+\definecolor{mainred}{RGB}{204, 0, 0}
+\definecolor{maingreen}{RGB}{0, 153, 76}
+
+% Cajas personalizadas
+\newtcolorbox[auto counter, number within=section]{definicion}[2][]{
+    colback=mainblue!5!white, colframe=mainblue!75!black, fonttitle=\bfseries,
+    title=Definición~\thetcbcounter: #2, sharp corners=downhill, enhanced,
+    attach boxed title to top left={yshift=-2mm, xshift=2mm},
+    boxed title style={colback=mainblue!75!black}, #1
+}
+
+\newtcolorbox[auto counter, number within=section]{teorema}[2][]{
+    colback=red!5!white, colframe=mainred!75!black, fonttitle=\bfseries,
+    title=Teorema~\thetcbcounter: #2, sharp corners=downhill, enhanced,
+    attach boxed title to top left={yshift=-2mm, xshift=2mm},
+    boxed title style={colback=mainred!75!black}, #1
+}
+% --- CAJA PARA LEMAS (Lila claro) ---
+\newtcolorbox[auto counter, number within=section]{lema}[2][]{
+    colback=violet!5!white,          % Fondo lila muy suave
+    colframe=violet!60!black,        % Borde violeta oscuro para contraste
+    fonttitle=\bfseries,
+    title=Lema~\thetcbcounter: #2, 
+    sharp corners=downhill, 
+    enhanced,
+    attach boxed title to top left={yshift=-2mm, xshift=2mm},
+    boxed title style={colback=violet!60!black},
+    #1
+}
+% --- CAJA PARA OBSERVACIONES (Verde) ---
+\newtcolorbox[auto counter, number within=section]{observacion}[2][]{
+    colback=pink!5!white,           % Fondo verde muy suave
+    colframe=pink!60!black,         % Borde verde oscuro
+    fonttitle=\bfseries,
+    title=Observación~\thetcbcounter: #2, 
+    sharp corners=downhill, 
+    enhanced,
+    attach boxed title to top left={yshift=-2mm, xshift=2mm},
+    boxed title style={colback=pink!60!black},
+    breakable,
+    #1
+}
+
+% --- CAJA PARA COROLARIOS (Azul Cerceta / Teal) ---
+\newtcolorbox[auto counter, number within=section]{corolario}[2][]{
+    colback=teal!5!white,            % Fondo azulado muy suave
+    colframe=teal!60!black,          % Borde azul oscuro/pavesa
+    fonttitle=\bfseries,
+    title=Corolario~\thetcbcounter: #2, 
+    sharp corners=downhill, 
+    enhanced,
+    attach boxed title to top left={yshift=-2mm, xshift=2mm},
+    boxed title style={colback=teal!60!black},
+    #1
+}
+
+\newtcolorbox[auto counter, number within=section]{proposicion}[2][]{
+    colback=yellow!10!white,         % Amarillo muy claro para el fondo
+    colframe=yellow!60!black,        % Amarillo oscuro/dorado para el borde
+    fonttitle=\bfseries,
+    title=Proposición~\thetcbcounter: #2, 
+    sharp corners=downhill, 
+    enhanced,
+    attach boxed title to top left={yshift=-2mm, xshift=2mm},
+    boxed title style={colback=yellow!60!black}, % Color del fondo del título
+    #1
+}
+
+\newtcolorbox[auto counter, number within=section]{ejemplo}[2][]{
+    colback=maingreen!5!white, colframe=maingreen!75!black, fonttitle=\bfseries,
+    title=Ejemplo~\thetcbcounter: #2, breakable, enhanced, #1
+}
+
+% --- COMANDOS MATEMÁTICOS PERSONALIZADOS ---
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Ssf}{\mathbb{S}}
+\newcommand{\Xfrak}{\mathfrak{X}}
+\newcommand{\inner}[2]{\langle #1, #2 \rangle}
+
+% --- CONFIGURACIÓN DE ENCABEZADO Y PIE DE PÁGINA ---
+\usepackage{fancyhdr}
+\setlength{\headheight}{15pt} % Evita advertencias de altura
+
+% Activamos el estilo 'fancy'
+\pagestyle{fancy}
+\fancyhf{} % Borra los ajustes por defecto
+
+% --- CONFIGURACIÓN DEL ENCABEZADO ---
+\fancyhead[L]{\small \textbf{Geometría Global de Superficies}} 
+\fancyhead[R]{\small \nouppercase{\leftmark}} % Derecha: Nombre del Capítulo actual
+
+% --- CONFIGURACIÓN DEL PIE DE PÁGINA ---
+\fancyfoot[L]{\hyperlink{indice}{\textbf{Ir al Índice}}} 
+% Modificamos el centro para incluir el enlace:
+\fancyfoot[C]{\thepage} 
+\fancyfoot[R]{\small UMU -- 2025}
+
+% --- LÍNEAS SEPARADORAS ---
+\renewcommand{\headrulewidth}{0.4pt} % Grosor línea superior
+\renewcommand{\footrulewidth}{0.4pt} % Grosor línea inferior
+% --- CONFIGURACIÓN DE PÁRRAFOS ---
+\setlength{\parindent}{0pt}  % Quita la sangría (el hueco al principio)
+\setlength{\parskip}{0.8em}  % Añade espacio entre párrafos (opcional pero recomendado)
+
+% Evita que LaTeX estire el espacio verticalmente para llenar la página
+\raggedbottom

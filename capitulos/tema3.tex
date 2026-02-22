@@ -1,0 +1,264 @@
+
+\section{Versión local del teorema de Gauss-Bonnet}
+
+% [ESPACIO PARA DIBUJO PÁGINA 2: Curva con vectores tangentes y ángulo externo]
+\begin{center}
+    \textit{[Aquí iría el dibujo de la curva $\alpha$ con los vértices, los vectores tangentes $\alpha'_-, \alpha'_+$ y el ángulo externo $\epsilon_i$]}
+\end{center}
+
+\begin{definicion}{Polígono curvado}
+Sea $\alpha : [0, l] \longrightarrow \mathbb{R}^2$ una curva regular a trozos, p.p.a., cerrada (i.e. $\alpha(0) = \alpha(l)$) y simple. Consideremos una partición $0 = s_0 < s_1 < \dots < s_k = l$ del intervalo $[0, l]$ de forma que $\alpha(s_i)$, $i = 0, \dots, k$, son los \textbf{vértices} de $\alpha$.
+La imagen de $\alpha$ recibe el nombre de \textbf{\textcolor{mainred}{polígono curvado}}.
+
+Se dice que la parametrización de $\alpha$ está \textbf{positivamente orientada} si el vector normal $J\alpha'(s)$ apunta al interior de la región acotada por $\alpha$ para todo $s \in [0, l]$ (donde $\alpha$ es regular).
+
+
+En cada vértice $\alpha(s_i)$, representamos por $\epsilon_i$ el \textbf{ángulo externo}, definido como el ángulo entre el vector tangente de llegada y el de salida:
+\[
+\epsilon_i = \text{áng}(\alpha'_-(s_i), \alpha'_+(s_i)) \in (-\pi, \pi].
+\]
+\end{definicion}
+\textit{Nota: Cuando decimos que apunta al interior nos referimos a que, literalmente, al dibujarlo apunte hacia la superficie.}
+\begin{teorema}{Rotación de las tangentes (Hopf)}
+Sea $\alpha : [0, l] \longrightarrow \mathbb{R}^2$ una curva regular a trozos, p.p.a., cerrada y simple, con vértices $\alpha(s_i)$. Sean $\epsilon_i$ los correspondientes ángulos externos y $\theta_i(s)$ el ángulo que forma el vector tangente $\alpha'(s)$ con una dirección fija (eje X) en cada tramo regular. Entonces:
+\[
+\sum_{i=1}^k (\theta_i(s_i) - \theta_i(s_{i-1})) + \sum_{i=1}^k \epsilon_i = \pm 2\pi,
+\]
+donde el signo depende de la orientación de $\alpha$ ($+2\pi$ si es positiva).
+\end{teorema}
+
+\begin{tcolorbox}[colback=maingreen!5!white, colframe=maingreen!75!black, title=Observaciones: Extensión a superficies]
+¿Se puede extender este resultado al caso de curvas cerradas y simples en una superficie regular $S$?
+\begin{itemize}
+    \item Sea $(U, X)$ una parametrización positiva de $S$ tal que $U$ es homeomorfo a un disco abierto del plano y sea $\alpha : I \longrightarrow S$ una curva regular a trozos, p.p.a., cerrada y simple, con $\alpha(I) \subset X(U)$.
+    \item El teorema de rotación de las tangentes sigue siendo cierto, pero ahora:
+    \begin{enumerate}
+        \item $J$ es la estructura compleja de la superficie (rotación de 90º en el plano tangente).
+        \item Los ángulos de rotación se miden respecto a una base ortonormal, por ejemplo $\{ \frac{X_u}{\sqrt{E}}, \frac{X_v}{\sqrt{G}} \}$ (si $F=0$).
+    \end{enumerate}
+\end{itemize}
+\end{tcolorbox}
+
+\begin{proposicion}{Fórmula de la curvatura geodésica para coordenadas ortogonales}
+Sea $\alpha : I \longrightarrow S$ una curva regular, p.p.a., contenida en una superficie regular y orientada $S$, y sea $(U, X)$ una parametrización ortogonal ($F=0$) positivamente orientada tal que $\alpha(I) \subset X(U)$.
+Entonces, la curvatura geodésica viene dada por:
+\[
+k_g(s) = \theta'(s) + \frac{1}{2\sqrt{EG(s)}} \left[ -u'(s)E_v(s) + v'(s)G_u(s) \right],
+\]
+donde $\theta(s)$ es el ángulo que forma $\alpha'(s)$ con $X_u$.
+\end{proposicion}
+\begin{proof}
+    Lo demostramos en problemas. 
+\end{proof}
+
+\begin{teorema}{de Green}
+Sea $\alpha : [0, \ell] \longrightarrow \mathbb{R}^2$, $\alpha(s) = (u(s), v(s))$, una parametrización positivamente orientada de un polígono curvado en $\mathbb{R}^2$, y sea $\Omega$ el subconjunto abierto acotado por este. Sean ahora $P, Q : \text{cl}\,\Omega \longrightarrow \mathbb{R}$ funciones diferenciables, $P = P(u, v)$, $Q = Q(u, v)$. Entonces,
+\[
+\iint_{\Omega} \left( \frac{\partial Q}{\partial u}(u, v) - \frac{\partial P}{\partial v}(u, v) \right) \, du \, dv = \sum_{i=1}^{k} \int_{s_{i-1}}^{s_i} \left[ P(s)u'(s) + Q(s)v'(s) \right] \, ds,
+\]
+donde $0 = s_0 < s_1 < \dots < s_k = \ell$ es una partición de $[0, \ell]$ tal que $\alpha|_{[s_{i-1}, s_i]}$ es diferenciable para todo $i = 0, \dots, k$, y $P(s) = P(u(s), v(s))$, $Q(s) = Q(u(s), v(s))$.
+\end{teorema}
+
+\vspace{0.5cm}
+
+Si $\Gamma \subset S$ es un polígono curvado y $\alpha : [0, \ell] \longrightarrow \Gamma \subset S$ es una parametrización por la longitud de arco de $\Gamma$, positivamente orientada, representamos por
+\[
+\int_{\Gamma} k_g \, ds = \sum_{i=1}^{k} \int_{\alpha_i} k_g \, ds = \sum_{i=1}^{k} \int_{s_{i-1}}^{s_i} k_g(s) \, ds,
+\]
+donde $s$ es el parámetro arco y $0 = s_0 < s_1 < \dots < s_k = \ell$ es una partición de $[0, \ell]$ de forma que $\alpha_i = \alpha|_{[s_{i-1}, s_i]}$ es una curva regular.
+
+\begin{tcolorbox}[colback=yellow!10!white, colframe=orange!70!white, title=Nota, fonttitle=\bfseries]
+La expresión $\int_{\alpha_i} k_g \, ds$ es una \textbf{integral de línea}. Habría que multiplicar por $|\alpha'|$, pero si la curva está parametrizada por el arco (p.p.a.), entonces evidentemente $|\alpha'|=1$ y no aparece explícitamente.
+\end{tcolorbox}
+
+% Definición de Región
+\begin{definicion}{Región de una superficie}
+Una \textbf{región} $R$ de una superficie regular $S$ es un subconjunto relativamente compacto (su clausura es compacta) cuya frontera $\text{bd}(R)$ cumple que cada componente conexa es una curva regular a trozos, cerrada y simple (sin agujeros que se toquen, etc.). O sea, que cada componente conexa sea homeomorfa a $\mathbb{S}^1$
+\end{definicion}
+
+\begin{teorema}{Teorema de Gauss-Bonnet (Versión Local)}
+Sea $R \subset S$ una \textbf{región simple} de una superficie regular y orientada $S$, de modo que $R \subset X(U)$, siendo $(U, X)$ una parametrización ortogonal de $S$. Entonces:
+\[
+\int_R K \, dA + \int_{\text{bd } R} k_g \, ds + \sum_{i=1}^k \epsilon_i = 2\pi,
+\]
+donde $\epsilon_i$ representan los ángulos externos en los vértices del polígono curvado $\text{bd } R$.
+\end{teorema}
+
+\begin{proof}
+Partimos de la fórmula de la curvatura geodésica para coordenadas ortogonales:
+\[
+k_g(s) = \frac{1}{2\sqrt{EG}}[-u'E_v + v'G_u] + \theta'(s).
+\]
+Integramos $k_g$ a lo largo de la frontera $\alpha$ (suma de integrales en cada tramo regular $\alpha_i$):
+\[
+\int_{\alpha} k_g \, ds = \sum_{i=1}^k \int_{s_{i-1}}^{s_i} k_g(s) \, ds.
+\]
+Sustituyendo la expresión de $k_g$:
+\[
+= \sum_{i=1}^k \int_{s_{i-1}}^{s_i} \left( \frac{-E_v u' + G_u v'}{2\sqrt{EG}} \right) ds + \sum_{i=1}^k \int_{s_{i-1}}^{s_i} \theta_i'(s) \, ds.
+\]
+Analizamos el segundo sumando (el de los ángulos $\theta$). Por el Teorema fundamental del cálculo en cada tramo:
+\[
+\sum_{i=1}^k (\theta_i(s_i) - \theta_i(s_{i-1})).
+\]
+Por el \textbf{Teorema de rotación de las tangentes}, sabemos que esta suma más la suma de los ángulos externos es $2\pi$ (ya que la curva es simple y positiva):
+\[
+\sum (\Delta \theta_i) = 2\pi - \sum_{i=1}^k \epsilon_i.
+\]
+Ahora analizamos el primer sumando. Identificamos $P = \frac{G_u}{2\sqrt{EG}}$ no, perdón, identificamos los términos para aplicar Green:
+Consideramos el integrando $\frac{-E_v}{2\sqrt{EG}} u' + \frac{G_u}{2\sqrt{EG}} v'$.
+Tomamos $P = \frac{-E_v}{2\sqrt{EG}}$ y $Q = \frac{G_u}{2\sqrt{EG}}$.
+Aplicamos el \textbf{Teorema de Green} en el dominio plano $X^{-1}(R)$:
+\[
+\sum \int (P u' + Q v') ds = \iint_{X^{-1}(R)} \left( \frac{\partial Q}{\partial u} - \frac{\partial P}{\partial v} \right) du \, dv.
+\]
+Calculamos las derivadas parciales (recordando la fórmula de la curvatura de Gauss para $F=0$):
+\[
+\frac{\partial Q}{\partial u} - \frac{\partial P}{\partial v} = \left( \frac{G_u}{2\sqrt{EG}} \right)_u - \left( \frac{-E_v}{2\sqrt{EG}} \right)_v = \left( \frac{G_u}{2\sqrt{EG}} \right)_u + \left( \frac{E_v}{2\sqrt{EG}} \right)_v.
+\]
+Sabemos que la curvatura de Gauss es $K = -\frac{1}{2\sqrt{EG}} \left[ \left( \frac{E_v}{\sqrt{EG}} \right)_v + \left( \frac{G_u}{\sqrt{EG}} \right)_u \right]$.
+Por tanto, la integral doble es exactamente:
+\[
+\iint_{X^{-1}(R)} -K \sqrt{EG} \, du \, dv = -\int_R K \, dA.
+\]
+Reuniendo todo:
+\[
+\int_{\text{bd } R} k_g \, ds = -\int_R K \, dA + 2\pi - \sum \epsilon_i.
+\]
+Reordenando los términos obtenemos la fórmula buscada:
+\[
+\int_R K \, dA + \int_{\text{bd } R} k_g \, ds + \sum \epsilon_i = 2\pi.
+\]
+\end{proof}
+
+
+% ----------------------------------------------------------------------
+% SECCIÓN 2: VERSIÓN GLOBAL
+% ----------------------------------------------------------------------
+\section{Versión global del teorema de Gauss-Bonnet}
+Dada una región $R$, cada polígono curvado $\Gamma_i$ que delimita su frontera se puede parametrizar mediante una curva $\alpha_i : [0, \ell_i] \longrightarrow \Gamma_i$ p.p.a., regular a trozos, y \textbf{positivamente orientada} ($J\alpha'_i(s)$ apunta al interior de $R$).
+% --- TRIANGULACIONES Y CARACTERÍSTICA DE EULER ---
+
+\begin{definicion}{Conceptos de triangulación}
+\begin{enumerate}[label=\roman*)]
+    \item Dado un polígono curvado parametrizado por una curva $\alpha$ regular a trozos (p.p.a.), con \textbf{\textcolor{mainred}{vértices}} $\alpha(s_0), \dots, \alpha(s_k)$, llamamos \textbf{\textcolor{mainred}{aristas}} del polígono a cada uno de los trozos $\alpha_i := \alpha|_{[s_{i-1}, s_i]}$ donde $\alpha$ es regular.
+    \item Un \textbf{\textcolor{mainred}{triángulo}} en una superficie regular $S$ es una región simple $R \subset S$ tal que $\text{bd } R$ es un polígono curvado con tres vértices.
+    \item Una \textbf{\textcolor{mainred}{triangulación}} $\mathfrak{T} = \{\tau_1, \dots, \tau_n\}$ de una región $R$ es una colección finita de triángulos $\tau_i$ tal que:
+    \begin{itemize}
+        \item[iii.a)] $\text{cl } R = \bigcup_{i=1}^n \text{cl } \tau_i;$
+        \item[iii.b)] si $i \neq j$ entonces, o bien $\text{cl } \tau_i \cap \text{cl } \tau_j = \emptyset$, o bien $\text{cl } \tau_i \cap \text{cl } \tau_j$ es una arista común (completa), o bien es un vértice común.
+    \end{itemize}
+    \item Dada una triangulación $\mathfrak{T}$ de una región $R$, se denominan \textbf{\textcolor{mainred}{caras}} de $\mathfrak{T}$ a cada uno de los triángulos $\tau_i$ que la componen.
+    \item Dada una triangulación $\mathfrak{T}$ de una región $R$, se define la \textbf{\textcolor{mainred}{característica de Euler-Poincaré}} como:
+    \[ \chi(R) = C - A + V. \]
+\end{enumerate}
+\end{definicion}
+
+\begin{tcolorbox}[colback=maingreen!5!white, colframe=maingreen!75!black, title=Propiedades de la Triangulación]
+\begin{itemize}
+    \item La característica de Euler-Poincaré de una región $R$ no depende de la triangulación elegida (es un \textbf{invariante topológico}).
+    \item Toda región de una superficie $S$ admite una triangulación.
+    \item Toda superficie regular $S$ puede cubrirse con parametrizaciones ortogonales $(U_i, X_i)$ compatibles con la orientación de $S$. Además, existe una triangulación $\mathfrak{T}$ de $R$ tal que cada $\tau \in \mathfrak{T}$ está contenido en algún entorno coordenado $X_i(U_i)$.
+    \item Al orientar los triángulos de $\mathfrak{T}$ positivamente, cada dos triángulos adyacentes determinan orientaciones \textbf{opuestas} en la arista común.
+\end{itemize}
+\end{tcolorbox}
+
+\begin{lema}{Relación entre caras y aristas}
+Sea $R$ una región de una superficie regular sobre la que se efectúa una triangulación $\mathfrak{T}$. Entonces:
+\[ 3C = 2A_{int} + A_{ext}, \]
+donde $A_{ext}$ y $A_{int}$ son, respectivamente, el número de aristas exteriores (pertenecen a la frontera de $R$) e interiores de $\mathfrak{T}$.
+\end{lema}
+\begin{proof}
+    Se demuestra en la hoja de problemas. 
+\end{proof}
+
+\begin{teorema}{Clasificación de superficies compactas}
+Sea $S$ una superficie regular, conexa, orientable y compacta. Entonces:
+\[ \chi(S) \in \{ 2, 0, -2, -4, \dots, -2n, \dots \}. \]
+\textit{Nota manuscrita: En una región simple (homeomorfa al disco), $\chi(R) = 1$. En la esfera, $\chi(S) = 2$.}
+\end{teorema}
+
+\begin{teorema}{Teorema de Gauss-Bonnet (Versión Global)}
+Sea $R \subset S$ una región de una superficie regular y orientada, y sean $\Gamma_1, \dots, \Gamma_n$ los polígonos curvados que determinan su frontera, positivamente orientados. Sea $\{\epsilon_1, \dots, \epsilon_p\}$ el conjunto total de ángulos externos. Entonces:
+\[
+\int_R K \, dA + \sum_{i=1}^n \int_{\Gamma_i} k_g \, ds + \sum_{j=1}^p \epsilon_j = 2\pi \chi(R).
+\]
+\end{teorema}
+
+\begin{tcolorbox}[title=Consecuencias importantes]
+\begin{itemize}
+    \item Si $S$ es una superficie compacta ($\chi(S)$):
+    \[
+    \int_S K \, dA = 2\pi \chi(S).
+    \]
+    \item Si $S$ es compacta con $K > 0$, entonces $\chi(S) > 0 \implies \chi(S)=2 \implies S$ es homeomorfa a la esfera.(El recíproco no es cierto). 
+    \item Si $S$ es compacta con $K > 0$, dos geodésicas cerradas simples cualesquiera se cortan.
+\end{itemize}
+\end{tcolorbox}
+
+\begin{proof}
+Tomamos una triangulación $\mathfrak{T} = \{ \tau_1, \dots, \tau_C \}$ de la región $R$ tal que cada triángulo esté contenido en un entorno coordenado.
+Cada triángulo $\tau_i$ tiene 3 aristas y 3 vértices, con ángulos externos $\epsilon^i_1, \epsilon^i_2, \epsilon^i_3$.
+
+Aplicamos el \textbf{Teorema de Gauss-Bonnet Local} a cada triángulo $\tau_i$:
+\[
+\int_{\tau_i} K \, dA + \int_{\partial \tau_i} k_g \, ds + \sum_{j=1}^3 \epsilon^i_j = 2\pi.
+\]
+Sumamos esta igualdad para los $C$ triángulos ($i=1, \dots, C$):
+\[
+\sum_{i=1}^C \int_{\tau_i} K \, dA + \sum_{i=1}^C \int_{\partial \tau_i} k_g \, ds + \sum_{i=1}^C \sum_{j=1}^3 \epsilon^i_j = 2\pi C.
+\]
+Analizamos cada término por separado:
+
+\textbf{1. Integral de la Curvatura:}
+\[
+\sum \int_{\tau_i} K \, dA = \int_R K \, dA.
+\]
+
+\textbf{2. Integral de la Curvatura Geodésica:}
+Separamos las aristas en interiores y exteriores.
+\[
+\sum \int_{\partial \tau_i} k_g \, ds = \sum_{\text{Aristas int}} \int k_g \, ds + \sum_{\text{Aristas ext}} \int k_g \, ds.
+\]
+Las aristas interiores se recorren dos veces (una por cada triángulo adyacente) en sentidos opuestos. Como la orientación cambia el signo de $k_g ds$, la suma sobre aristas interiores es \textbf{cero}.
+Solo quedan las exteriores, que forman la frontera de $R$:
+\[
+= \int_{\partial R} k_g \, ds.
+\]
+
+\textbf{3. Suma de Ángulos:}
+Usamos que el ángulo externo es $\epsilon = \pi - \phi$ (donde $\phi$ es el ángulo interno).
+\[
+\sum_{i,j} \epsilon^i_j = \sum_{i,j} (\pi - \phi^i_j) = 3\pi C - \sum \phi^i_j.
+\]
+Separamos la suma de ángulos internos según el tipo de vértice en la triangulación:
+\begin{itemize}
+    \item \textbf{Vértices interiores ($V_{int}$):} La suma de los ángulos alrededor de un vértice interior es $2\pi$.
+    \item \textbf{Vértices frontera ($V_{ext}$):}
+        \begin{itemize}
+            \item Vértices originales del polígono ($\alpha(s_k)$): La suma es el ángulo interior del polígono $\pi - \epsilon_k$.
+            \item Vértices falsos o añadidos por la triangulación en los bordes ($V_{ext, B}$): La suma es $\pi$.
+        \end{itemize}
+\end{itemize}
+Entonces:
+\[
+\sum \phi = 2\pi V_{int} + \sum_{k=1}^p (\pi - \epsilon_k) + \pi V_{ext, B}.
+\]
+Sustituyendo esto en la expresión de los $\epsilon$:
+\[
+\sum \epsilon_{totales} = 3\pi C - \left[ 2\pi V_{int} + p\pi - \sum \epsilon_k + \pi V_{ext, B} \right].
+\]
+Usamos el Lema $3C = 2A_{int} + A_{ext}$ y relaciones combinatorias para simplificar.
+Sabemos que $2\pi C - \sum \epsilon_{totales}$ debe ser igual a $2\pi \chi(R)$ tras operar con $C-A+V$.
+
+\textit{(Simplificación final según notas):}
+La ecuación original queda:
+\[
+\int_R K + \int_{\partial R} k_g + (2\pi A + \sum \epsilon_k - 2\pi V) = 2\pi C.
+\]
+Reagrupando $2\pi (C - A + V) = 2\pi \chi(R)$.
+Finalmente:
+\[
+\int_R K \, dA + \int_{\partial R} k_g \, ds + \sum \epsilon_k = 2\pi \chi(R).
+\]
+\end{proof}

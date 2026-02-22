@@ -1,0 +1,70 @@
+\chapter*{Anexo: Ecuaciones Diferenciales}
+\addcontentsline{toc}{chapter}{Anexo: Ecuaciones Diferenciales}
+
+
+\section*{Ecuación lineal orden $n$ con coeficientes constantes}
+
+Consideremos la EDO lineal homogénea de orden $n$ con coeficientes constantes,
+\begin{equation}
+    x^{n)} + a_{n-1}x^{n-1)} + \cdots + a_1 x' + a_0 x = 0, 
+\end{equation}
+con $a_{n-1}, \dots, a_0 \in \mathbb{R}$.
+
+\begin{definicion}{Polinomio característico}
+Dada la EDO lineal homogénea de orden $n$ se define su \textbf{polinomio característico} como el polinomio
+\begin{equation}
+    p(\lambda) = a_0 + a_1\lambda + a_2\lambda^2 + \cdots + a_{n-2}\lambda^{n-2} + a_{n-1}\lambda^{n-1} + \lambda^n. \tag{3.23}
+\end{equation}
+
+\end{definicion}
+
+
+\begin{teorema}{Sistema fundamental de soluciones}
+Un sistema fundamental de soluciones de (3.21) está formado por
+\begin{equation}
+    \{ t^k e^{at} \cos(bt), \, t^k e^{at} \sin(bt) \}, \tag{3.24}
+\end{equation}
+con $a+bi$, $b \ge 0$, recorriendo el conjunto de los valores propios y siendo $k = 0, \dots, m_a(\lambda) - 1$.
+
+\end{teorema}
+
+
+\subsection*{Ecuación lineal completa de orden $n$ con coeficientes constantes}
+
+Queda sólo pendiente considerar de forma particular la EDO no homogénea
+\begin{equation}
+    x^{n)} + a_{n-1}x^{n-1)} + \cdots + a_1 x' + a_0 x = b(t). 
+\end{equation}
+
+
+\begin{teorema}{Método de coeficientes indeterminados}
+Supongamos $b(t) = e^{at}(p(t)\cos(bt) + q(t)\sin(bt))$, donde $p, q$ son polinomios de grado a lo sumo $k \ge 0$. Sea $\lambda = a + bi$.
+
+\begin{enumerate}
+    \item Si $\lambda$ \textbf{no es raíz} del polinomio característico (3.23), entonces (3.25) tiene una solución particular de la forma
+    \[
+    e^{at}(r(t)\cos(bt) + s(t)\sin(bt)),
+    \]
+    con $r, s$ polinomios de grado a lo sumo $k$.
+
+    \item Si $\lambda$ \textbf{es raíz} del polinomio característico (3.23) de multiplicidad $l$, entonces (3.25) tiene una solución particular de la forma
+    \[
+    t^l e^{at}(r(t)\cos(bt) + s(t)\sin(bt)),
+    \]
+    con $r, s$ polinomios de grado a lo sumo $k$.
+\end{enumerate}
+
+\end{teorema}
+
+\begin{teorema}{Principio de superposición para EDOs}
+Consideremos la EDO
+\begin{equation}
+    x^{n)} + a_{n-1}(t)x^{n-1)} + \cdots + a_1(t)x' + a_0(t)x = b_1(t) + b_2(t) + \cdots + b_r(t), \tag{3}
+\end{equation}
+con $b_1, \dots, b_r : I \subset \mathbb{R} \to \mathbb{R}$ continuas. Para cada $k = 1, \dots, r$, sea $x_k$ solución particular de
+\[
+    x^{n)} + a_{n-1}(t)x^{n-1)} + \cdots + a_1(t)x' + a_0(t)x = b_k(t).
+\]
+Entonces, $x_p = x_1 + \cdots + x_r$ es solución particular de (3).
+
+\end{teorema}

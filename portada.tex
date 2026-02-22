@@ -1,0 +1,46 @@
+% Archivo: portada.tex
+
+\begin{titlepage}
+    \centering
+    \vspace*{1cm}
+    
+    % --- ENCADOZADO: UNIVERSIDAD / GRADO ---
+    {\scshape\LARGE Universidad de Murcia \par} % O tu universidad
+    \vspace{0.3cm}
+    {\scshape\Large Grado en Matemáticas \par}
+    
+    \vspace{1cm}
+    
+    % --- TÍTULO CON CAJA DE COLOR ---
+    % Usamos tcolorbox para un acabado profesional que combina con tus apuntes
+    \begin{tcolorbox}[
+        colback=mainblue!10!white,    % Fondo azul muy suave
+        colframe=mainblue!80!black,   % Borde azul oscuro
+        arc=2mm,                      % Bordes ligeramente redondeados
+        boxrule=1.5mm,                % Grosor del borde
+        halign=center,                % Texto centrado
+        width=0.9\textwidth,          % Ancho de la caja
+        top=1cm, bottom=1cm           % Espacio vertical interno
+    ]
+        {\Huge\bfseries\textcolor{mainblue!80!black}{Geometría Global de Superficies}} \\[0.5cm]
+        {\Large\itshape Notas de Clase}
+    \end{tcolorbox}
+    
+    \vspace{1cm}
+    
+    % --- SUBTÍTULO O DESCRIPCIÓN ---
+    {\large Basado en las clases de Mª Ángeles Hernández Cifre \par}
+    
+    \vspace{1cm}
+    
+    % --- ESPACIO PARA LOGO 
+    \includegraphics[width=0.7\textwidth]{Imagenes/logo.jpg}
+
+    % --- PIE DE PÁGINA: AUTOR Y FECHA ---
+    \rule{0.6\textwidth}{0.4pt} \\ % Línea horizontal fina
+    %\vspace{0.2cm}
+    {\Large\bfseries Laura Fernández Sánchez \par}
+    \vspace{0.1cm}
+    {\large Curso 2025 -- 2026 \par}
+    
+\end{titlepage}

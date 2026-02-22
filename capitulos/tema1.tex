@@ -1,0 +1,1635 @@
+
+% -------------------------------------------------------------------------
+\section{Campos de vectores a lo largo de una curva}
+
+Sea $S$ una superficie regular orientada con aplicación de Gauss $N:S \longrightarrow \mathbb{S}^2$ y sea $\alpha: I \longrightarrow S$ una curva diferenciable.
+
+\begin{definicion}{Campo de vectores a lo largo de una curva}
+Sea $S$ una superficie y $N:S\to \mathbb{S}^2$ su aplicación de Gauss. Para una curva $\alpha:I\to S$ diferenciable, \textbf{un campo de vectores a lo largo de $\alpha$} es una aplicación $V: I \longrightarrow \mathbb{R}^3$ tal que
+\[
+V(t) \in \mathbb{R}^3 = T_{\alpha(t)}S \oplus \text{span}\{N(t)\}.
+\]
+Se dice que $V$ es \textbf{diferenciable} si lo es como aplicación de $I$ a $\mathbb{R}^3$, es decir, $V \in C^\infty(I, \mathbb{R}^3)$.
+
+Además, diremos que $V$ es \textbf{tangente} en $S$ a lo largo de $\alpha$ si $V(t) \in T_{\alpha(t)}S$ para todo $t \in I$. Denotaremos a la familia de campos tangentes y diferenciables a lo largo de $\alpha$ como $\Xfrak(\alpha)$.
+\end{definicion}
+
+\textbf{Observación:} Dado un campo de vectores $V$ cualquiera a lo largo de $\alpha$, siempre podemos descomponerlo en su parte tangencial y normal:
+\[
+V(t) = V(t)^\top + V(t)^\perp = V(t)^\top + \inner{V(t)}{N(t)}N(t).
+\]
+Por tanto, la componente tangencial viene dada por $V^\top = V - \inner{V}{N}N \in \Xfrak(\alpha)$.
+
+% -------------------------------------------------------------------------
+\section{La derivada covariante}
+Si proyectamos la derivada usual de $\mathbb{R}^3$ sobre el plano tangente, obtenemos la derivada covariante. 
+
+\begin{definicion}{Derivada Covariante}
+Sea $V \in \Xfrak(\alpha)$ un campo tangente y diferenciable. Se define la derivada covariante (o intrínseca) de $V$ como la parte tangente de la derivada usual $V'(t)$:
+\[
+\frac{DV}{dt}(t) := V'(t)^\top = V'(t) - \inner{V'(t)}{N(t)}N(t) \in \Xfrak(\alpha).
+\]
+\end{definicion}
+
+\begin{proposicion}{Carácter intrínseco}
+$\frac{DV}{dt}$ es un concepto intrínseco; solo depende de la primera forma fundamental de $S$.
+\end{proposicion}
+
+\begin{proof}
+Sea $\mathbf{X}: U \subset \mathbb{R}^2 \longrightarrow S$ una parametrización de la superficie y sea $\alpha: I \to S$ una curva tal que $\alpha(I) \subset \mathbf{X}(U)$. Podemos expresar la curva en coordenadas como $\alpha(t) = \mathbf{X}(u(t), v(t))$.
+
+Sea $V \in \mathfrak{X}(\alpha)$ un campo tangente a lo largo de $\alpha$. Podemos expresarlo en la base del plano tangente $\{ \mathbf{X}_u, \mathbf{X}_v \}$ como:
+\[
+V(t) = a(t)\mathbf{X}_u(u(t), v(t)) + b(t)\mathbf{X}_v(u(t), v(t)).
+\]
+Para calcular la derivada covariante, primero calculamos la derivada usual $V'(t)$ usando la regla de la cadena y la regla del producto:
+\[
+V'(t) = a'\mathbf{X}_u + a(\mathbf{X}_{uu}u' + \mathbf{X}_{uv}v') + b'\mathbf{X}_v + b(\mathbf{X}_{vu}u' + \mathbf{X}_{vv}v').
+\]
+Ahora utilizamos las \textbf{Fórmulas de Gauss} para descomponer las segundas derivadas de la parametrización en sus partes tangencial y normal. Recordamos que:
+\begin{align*}
+\mathbf{X}_{uu} &= \Gamma_{11}^1 \mathbf{X}_u + \Gamma_{11}^2 \mathbf{X}_v + eN, \\
+\mathbf{X}_{uv} &= \Gamma_{12}^1 \mathbf{X}_u + \Gamma_{12}^2 \mathbf{X}_v + fN, \\
+\mathbf{X}_{vv} &= \Gamma_{22}^1 \mathbf{X}_u + \Gamma_{22}^2 \mathbf{X}_v + gN.
+\end{align*}
+Sustituyendo estas expresiones en la ecuación de $V'(t)$:
+\begin{align*}
+V'(t) &= a'\mathbf{X}_u + a \left[ u'(\Gamma_{11}^1 \mathbf{X}_u + \Gamma_{11}^2 \mathbf{X}_v + eN) + v'(\Gamma_{12}^1 \mathbf{X}_u + \Gamma_{12}^2 \mathbf{X}_v + fN) \right] \\
+&\quad + b'\mathbf{X}_v + b \left[ u'(\Gamma_{12}^1 \mathbf{X}_u + \Gamma_{12}^2 \mathbf{X}_v + fN) + v'(\Gamma_{22}^1 \mathbf{X}_u + \Gamma_{22}^2 \mathbf{X}_v + gN) \right].
+\end{align*}
+Agrupando los términos tangenciales (coeficientes de $\mathbf{X}_u$ y $\mathbf{X}_v$) y los normales (coeficientes de $N$), obtenemos:
+\begin{align*}
+V'(t) &= \left[ a' + a u' \Gamma_{11}^1 + a v' \Gamma_{12}^1 + b u' \Gamma_{12}^1 + b v' \Gamma_{22}^1 \right] \mathbf{X}_u \\
+&\quad + \left[ b' + a u' \Gamma_{11}^2 + a v' \Gamma_{12}^2 + b u' \Gamma_{12}^2 + b v' \Gamma_{22}^2 \right] \mathbf{X}_v \\
+&\quad + \left[ a u' e + a v' f + b u' f + b v' g \right] N.
+\end{align*}
+Por definición, la derivada covariante $\frac{DV}{dt}$ es la proyección ortogonal de $V'(t)$ sobre el plano tangente $T_{\alpha(t)}S$. Por tanto, descartamos la componente en $N$ y nos queda:
+\[
+\frac{DV}{dt} = (\dots)\mathbf{X}_u + (\dots)\mathbf{X}_v.
+\]
+Observamos que esta expresión depende exclusivamente de $a, b, u, v$, sus primeras derivadas, y los \textbf{Símbolos de Christoffel} $\Gamma_{ij}^k$.
+
+Como sabemos que los símbolos de Christoffel dependen únicamente de los coeficientes de la primera forma fundamental ($E, F, G$) y sus derivadas, concluimos que $\frac{DV}{dt}$ es un concepto intrínseco.
+\end{proof}
+
+\begin{proposicion}{Propiedades de la derivada covariante}
+Sean $V, W \in \Xfrak(\alpha)$ y sea $f \in C^\infty(I, \mathbb{R})$. Entonces:
+\begin{enumerate}
+    \item $\displaystyle \frac{D}{dt}(V+W) = \frac{DV}{dt} + \frac{DW}{dt}$.
+    
+    \item $\displaystyle \frac{D}{dt}(fV) = f'V + f\frac{DV}{dt}$.
+    
+    \item $\displaystyle \inner{V}{W}' = \inner{\frac{DV}{dt}}{W} + \inner{V}{\frac{DW}{dt}}$.
+\end{enumerate}
+\end{proposicion}
+\begin{proof}[Demostración]
+
+ \textbf{ii Derivada del producto por una función:} \\
+Por definición, $\frac{D}{dt}(fV)$ es la componente tangencial de la derivada usual $(fV)'$. Aplicando la regla de la cadena usual:
+\[
+\frac{D}{dt}(fV) = \left[ (fV)' \right]^\top = \left[ f'V + fV' \right]^\top.
+\]
+Usando la linealidad de la proyección tangencial:
+\[
+= (f'V)^\top + (fV')^\top.
+\]
+Como $V$ es un campo tangente, el vector $f'V$ es tangente a la superficie, por lo que su proyección es él mismo: $(f'V)^\top = f'V$. Por otro lado, $(fV')^\top = f(V')^\top = f\frac{DV}{dt}$.
+Concluimos que:
+\[
+\frac{D}{dt}(fV) = f'V + f\frac{DV}{dt}.
+\]
+
+\textbf{iii Derivada del producto escalar:} \\
+Calculamos la derivada del producto escalar usual en $\mathbb{R}^3$:
+\[
+\inner{V}{W}' = \inner{V'}{W} + \inner{V}{W'}.
+\]
+Para analizar el primer término, descomponemos $V'$ en su parte tangencial (la derivada covariante) y su parte normal:
+\[
+V' = \frac{DV}{dt} + (V')^\perp.
+\]
+Sustituyendo esto en el producto escalar:
+\[
+\inner{V'}{W} = \inner{\frac{DV}{dt} + (V')^\perp}{W} = \inner{\frac{DV}{dt}}{W} + \inner{(V')^\perp}{W}.
+\]
+Dado que $W$ es un campo tangente y $(V')^\perp$ es normal a la superficie (paralelo a $N$), son ortogonales, por lo que $\inner{(V')^\perp}{W} = 0$. Así obtenemos:
+\[
+\inner{V'}{W} = \inner{\frac{DV}{dt}}{W}.
+\]
+Aplicando un razonamiento análogo para el segundo término ($\inner{V}{W'} = \inner{V}{\frac{DW}{dt}}$), llegamos al resultado final:
+\[
+\inner{V}{W}' = \inner{\frac{DV}{dt}}{W} + \inner{V}{\frac{DW}{dt}}.
+\]
+\end{proof}
+
+% -------------------------------------------------------------------------
+\section{Campos paralelos y Transporte Paralelo}
+\subsection{Campos paralelos}
+\begin{definicion}{Campo paralelo}
+Se dice que un campo de vectores $V \in \Xfrak(\alpha)$ es \textbf{paralelo} a lo largo de $\alpha$ si su derivada covariante es nula:
+\[
+\frac{DV}{dt} = 0.
+\]
+\end{definicion}
+
+\begin{ejemplo}{El plano y la esfera}
+\begin{itemize}
+    \item En un plano $\Pi$, como el normal $N$ es constante, un campo es paralelo si y solo si $V$ es constante en el sentido usual (vectores paralelos euclídeos).
+    \item En la esfera, a lo largo del ecuador $\alpha(t)=(\cos t, \sin t, 0)$, el campo $V_0(t)=(0,0,1)$ es paralelo. Además, el campo velocidad de cualquier circunferencia máxima es paralelo.
+\end{itemize}
+\end{ejemplo}
+
+
+\begin{proposicion}{Propiedades de campos paralelos}
+Sean $V, W \in \Xfrak(\alpha)$ campos paralelos.
+\begin{enumerate}
+    \item Si $a, b \in \mathbb{R}$, entonces $aV + bW$ es un campo paralelo (el espacio de campos paralelos es un espacio vectorial).
+    \item El producto escalar $\inner{V}{W}$ es constante. En particular, la norma $|V|$ y el ángulo entre $V$ y $W$ son constantes a lo largo de la curva.
+\end{enumerate}
+\end{proposicion}
+
+\begin{proof}
+\mbox{} \\ % <--- Esto fuerza el salto de línea
+\textbf{I.}
+$\frac{D}{dt}(aV+bW)=[aV'+bW']^\top=a\frac{DV}{dt}+b\frac{DW}{dt}=0$\\
+\\
+\textbf{II.}
+ $\inner{V}{W}'=\inner{\frac{DV}{dt}}{W} + \inner{V}{\frac{DW}{dt}} = 0 \implies \inner{V}{W} = c$
+
+    
+\end{proof}
+
+\begin{teorema}{Existencia y unicidad de campos paralelos}
+Sea $\alpha: I \longrightarrow S$ una curva diferenciable y sea $V_0 \in T_{\alpha(t_0)}S$ para cierto $t_0 \in I$. Entonces, existe un \textbf{único} campo paralelo $V \in \Xfrak(\alpha)$ tal que $V(t_0) = V_0$.
+\end{teorema}
+\begin{proof}
+Consideremos una parametrización $\mathbf{X}(u,v)$ alrededor de la traza de la curva. Fijamos el vector inicial $V_0 \in T_{\alpha(t_0)}S$.
+
+Queremos encontrar funciones escalares $a(t), b(t)$ tales que el campo $V(t) = a(t)\mathbf{X}_u + b(t)\mathbf{X}_v$ verifique:
+\begin{enumerate}
+    \item Condición inicial: $V(t_0) = V_0$, lo cual determina unívocamente $a(t_0)$ y $b(t_0)$.
+    \item Condición de paralelismo: $\frac{DV}{dt} = 0$.
+\end{enumerate}
+
+Desarrollando la derivada covariante (utilizando la fórmula de la derivada de un campo en coordenadas que vimos anteriormente), la condición $\frac{DV}{dt} = 0$ implica que las componentes tangenciales deben anularse. Como $\{\mathbf{X}_u, \mathbf{X}_v\}$ es una base, sus coeficientes deben ser cero.
+
+Esto nos lleva al siguiente \textbf{sistema de ecuaciones diferenciales ordinarias (EDO)} lineales de primer orden para las incógnitas $a(t)$ y $b(t)$:
+
+\[
+\begin{cases}
+a' + a(u'\Gamma_{11}^1 + v'\Gamma_{12}^1) + b(u'\Gamma_{12}^1 + v'\Gamma_{22}^1) = 0, \\[0.5em]
+b' + a(u'\Gamma_{11}^2 + v'\Gamma_{12}^2) + b(u'\Gamma_{12}^2 + v'\Gamma_{22}^2) = 0.
+\end{cases}
+\]
+
+Este es un sistema lineal de la forma $Y'(t) = A(t)Y(t)$. Por el \textbf{Teorema de Existencia y Unicidad de soluciones para EDOs} (Picard-Lindelöf), dado que los coeficientes (que dependen de los símbolos de Christoffel y la curva) son diferenciables, existe una \textbf{única solución} $(a(t), b(t))$ definida en todo el intervalo $I$ que satisface las condiciones iniciales dadas por $V_0$.
+
+Por tanto, existe un único campo paralelo $V$ a lo largo de $\alpha$.
+\end{proof}
+
+
+\subsection{El transporte paralelo}
+
+\begin{definicion}{Transporte paralelo}
+Dados $t_0, t_1 \in I$ con $\alpha(t_0)=p$ y $\alpha(t_1)=q$. Para cada $V_0 \in T_pS$, definimos el transporte paralelo de $V_0$ a lo largo de $\alpha$ hasta $q$ como la imagen por la aplicación $P_{t_0}^{t_1}(\alpha): T_pS \longrightarrow T_qS$ 
+\[
+P_{t_0}^{t_1}(\alpha)(V_0) = V(t_1) \in T_qS,
+\]
+donde $V$ es el único campo paralelo a lo largo de $\alpha$ con $V(t_0)=V_0$.
+\end{definicion}
+
+\begin{proposicion}{Isometría}
+La aplicación $P_{t_0}^{t_1}(\alpha): T_pS \longrightarrow T_qS$ es una \textbf{isometría lineal}.
+\end{proposicion}
+\begin{proof}
+Sean $v_0, w_0 \in T_{\alpha(t_0)}S$. Queremos probar dos propiedades: linealidad y conservación del producto escalar.
+
+\textbf{1. Linealidad:}
+Queremos demostrar que $P_{t_0}^{t_1}(\alpha)(v_0 + w_0) = P_{t_0}^{t_1}(\alpha)(v_0) + P_{t_0}^{t_1}(\alpha)(w_0)$.
+
+Por el Teorema de Existencia y Unicidad de campos paralelos:
+\begin{itemize}
+    \item Existe un único campo $V \in \mathfrak{X}(\alpha)$ paralelo tal que $V(t_0) = v_0$.
+    \item Existe un único campo $W \in \mathfrak{X}(\alpha)$ paralelo tal que $W(t_0) = w_0$.
+    \item Existe un único campo $U \in \mathfrak{X}(\alpha)$ paralelo tal que $U(t_0) = v_0 + w_0$.
+\end{itemize}
+Por definición de transporte paralelo, tenemos que:
+\[ P_{t_0}^{t_1}(\alpha)(v_0) = V(t_1), \quad P_{t_0}^{t_1}(\alpha)(w_0) = W(t_1), \quad P_{t_0}^{t_1}(\alpha)(v_0+w_0) = U(t_1). \]
+
+Consideremos ahora el campo suma $V+W$. Sabemos por las propiedades de los campos paralelos que la suma de dos campos paralelos es también un campo paralelo.
+Evaluamos este campo en $t_0$:
+\[ (V+W)(t_0) = V(t_0) + W(t_0) = v_0 + w_0. \]
+Observamos que el campo $V+W$ es paralelo y cumple la misma condición inicial que $U$. Por la \textbf{unicidad} del teorema de campos paralelos, deducimos que $U = V+W$.
+
+Evaluando en $t_1$:
+\[ U(t_1) = V(t_1) + W(t_1) \implies P(v_0 + w_0) = P(v_0) + P(w_0). \]
+
+\textbf{2. Isometría:}
+Queremos ver que se conserva el producto escalar:
+\[ \inner{P_{t_0}^{t_1}(\alpha)(v_0)}{P_{t_0}^{t_1}(\alpha)(w_0)} \stackrel{?}{=} \inner{v_0}{w_0}. \]
+Sustituyendo por los campos definidos anteriormente:
+\[ \inner{V(t_1)}{W(t_1)} \stackrel{?}{=} \inner{V(t_0)}{W(t_0)}. \]
+Sabemos, por una propiedad anterior, que el producto escalar de dos campos paralelos es constante a lo largo de la curva. Por tanto:
+\[ \inner{V(t_1)}{W(t_1)} = \inner{V(t_0)}{W(t_0)}. \]
+Esto demuestra que la aplicación conserva el producto escalar y, por tanto, conserva normas y ángulos (es una isometría).
+\end{proof}
+
+\begin{proposicion}{Otras propiedades}
+    \begin{itemize}
+        \item El transporte paralelo a lo largo de una curva $\alpha:I\to S$ no depende de la parametrización de la curva.
+        \item Si $S_1,S_2$ son dos superficies regulares que son \textbf{tangentes} a lo largo de una curva, entonces el transporte paralelo a lo largo de esa curva es independiente de la superficie en la que se calcule.
+    \end{itemize}
+\end{proposicion}
+
+
+% -------------------------------------------------------------------------
+\section{Las Geodésicas}
+Cuando trabajamos con superficies buscamos trabajar con curvas que sean "buenas" en el sentido de que se aproximen a las propiedades de las rectas lo mejor posible. Estas son las geodésicas. 
+
+\begin{definicion}{Geodésica}
+Una curva $\gamma: I \longrightarrow S$ es una geodésica de $S$ si su campo velocidad $\gamma'$ es paralelo a lo largo de la curva, es decir:
+\[
+\frac{D\gamma'}{dt} = 0.
+\]
+\end{definicion}
+Con la siguiente proposición vamos a buscar que se aproximen a las propiedades de la recta como hemos comentado. 
+\begin{proposicion}{Propiedades de las geodésicas}
+Sea $\gamma$ una geodésica no constante:
+\begin{enumerate}
+    \item $|\gamma'(t)|$ es constante. Luego $\gamma$ es una curva regular. 
+    \item Si $\gamma$ no está parametrizada por el arco, al menos está parametrizada proporcionalmente al arco.
+    \item Las geodésicas son invariantes por isometrías locales.
+    \item Una geodésica puede admitir intersecciones.
+    \item Si $h:J\to I$ es un cambio de parámetro, $\beta=\gamma \circ h$ es geodésica si y solo si el cambio es afín: $h(s) = as+b$.
+    \item Si $\gamma$ está p.p.a. y $\gamma''\neq 0$, es geodésica si y solo si su vector normal principal $n_\gamma$ es paralelo a la normal de la superficie $N$.
+\end{enumerate}
+\end{proposicion}
+
+\begin{proof}[Demostración de las propiedades]
+\mbox{} 
+\begin{enumerate}
+    \item \textbf{La rapidez es constante:} \\
+    Como $\gamma$ es una geodésica, su campo velocidad $\gamma'$ es paralelo, es decir, $\frac{D\gamma'}{dt} = 0$.
+    Sabemos que el transporte paralelo conserva el producto escalar y, por tanto, la norma. Así, $|\gamma'(t)| = |\gamma'(t_0)| = c$ (constante).
+    Veamos que $c\neq0$: Si existiera $t_0$ tal que $\gamma'(t_0) = 0$, por la unicidad del campo paralelo (con condición inicial 0), tendríamos $\gamma'(t) \equiv 0$, lo que implicaría que la curva es constante (caso excluido).
+
+    \item \textbf{Parametrización proporcional al arco:} \\
+    Supongamos que $\gamma$ no está p.p.a. La longitud de arco se define como $s(t) = \int_{t_0}^t |\gamma'(u)| du$.
+    Por el apartado anterior, sabemos que $|\gamma'(u)| = c$. Entonces:
+    \[
+    s(t) = \int_{0}^t c \, du = ct.
+    \]
+    Esto muestra que el parámetro $t$ es proporcional a la longitud de arco $s$ (relación lineal).
+
+    \item \textbf{Cambio de parámetro afín:} \\
+    Sea $\beta(s) = \gamma(h(s))$. Calculamos su aceleración derivando dos veces:
+    \[
+    \beta'(s) = \gamma'(h(s)) h'(s) \implies \beta''(s) = \gamma''(h(s)) (h'(s))^2 + \gamma'(h(s)) h''(s).
+    \]
+    Tomamos la derivada covariante (proyección tangencial $[\cdot]^\top$):
+    \[
+    \frac{D\beta'}{ds} = (\beta''(s))^\top = \underbrace{\left[ \gamma''(h(s)) \right]^\top}_{=0} (h'(s))^2 + \underbrace{\left[ \gamma'(h(s)) \right]^\top}_{\gamma'} h''(s).
+    \]
+    (El primer término es nulo porque $\gamma$ es geodésica). Nos queda $\frac{D\beta'}{ds} = \gamma'(h(s)) h''(s)$.
+    Para que $\beta$ sea geodésica, necesitamos $\frac{D\beta'}{ds} = 0$. Como $\gamma' \neq 0$, esto equivale a $h''(s) = 0$, lo que implica $h(s) = as + b$.
+
+    \item \textbf{Relación con la normal (Frenet):} \\
+    Supongamos $\gamma$ p.p.a. y $\gamma'' \neq 0$. Por las fórmulas de Frenet, $\gamma''(s) = k n_\gamma$.
+    Descomponemos la aceleración en componentes intrínsecas:
+    \[
+    \gamma''(s) = \frac{D\gamma'}{ds} + (\gamma''(s))^\perp.
+    \]
+    Al ser geodésica, $\frac{D\gamma'}{ds} = 0$, luego $\gamma''(s)$ es puramente normal a la superficie (paralelo a $N$).
+    Como $\gamma''$ es paralelo a $n_\gamma$ y a $N$ simultáneamente, concluimos que $n_\gamma(s) = \pm N(s)$.
+\end{enumerate}
+\end{proof}
+
+\begin{ejemplo}{Geodésicas en superficies elementales}
+    \begin{itemize}
+        \item Las geodésicas del plano son las rectas. 
+        \item Las geodésicas de la esfera son las circunferencias máximas. 
+        \item Las geodésicas del cilindro son las rectas, circunferencias y hélices.
+    \end{itemize}
+\end{ejemplo}
+
+% -------------------------------------------------------------------------
+% EJEMPLOS DE CÁLCULO DE GEODÉSICAS
+% -------------------------------------------------------------------------
+De la definición de geodésica, podemos deducir que $S$ es una geodésica sii $\gamma''+<\gamma',N'>N=0$. A partir de esta expresión, vamos a calcular las geodésicas en los ejemplos. 
+\begin{proof} [Cálculo de geodésicas en el Plano]
+Sea el plano $S = \{ p \in \mathbb{R}^3 : \inner{p}{\vec{a}} = c \}$ con vector normal constante $N(p) = \vec{a}$ (unitario).
+Sea $\gamma: I \to S$ una geodésica. La condición de geodésica es que su aceleración $\gamma''$ sea normal a la superficie:
+\[
+\gamma'' = \frac{D\gamma'}{dt} + (\gamma'')^\perp = 0 + \inner{\gamma''}{N}N.
+\]
+\textbf{Truco:} Sabemos que $\inner{\gamma'}{N} = 0$ (la velocidad es tangente). Derivamos esta expresión:
+\[
+\inner{\gamma''}{N} + \inner{\gamma'}{N'} = 0.
+\]
+Como el plano tiene normal constante, $N' = 0$. Por tanto, $\inner{\gamma''}{N} = 0$.
+Sustituyendo arriba:
+\[
+\gamma'' = 0 \cdot N = 0 \implies \gamma(t) = p + t\vec{v}.
+\]
+\textbf{Conclusión:} Las geodésicas del plano son las \textbf{rectas}.
+\end{proof}
+
+\begin{proof}[Cálculo de geodésicas en la Esfera $\mathbb{S}^2(r)$]
+Sea $p \in \mathbb{S}^2(r)$ y $\vec{v} \in T_p\mathbb{S}^2(r)$ con $|\vec{v}|=c$.
+Sabemos que $|\gamma'(t)| = c$ constante por estar considerando una geodésica (propiedades de las geodésicas). El vector normal es $N(t) = \frac{1}{r}\gamma(t)$.
+La condición de geodésica es:
+\[
+\frac{D\gamma'}{dt} = \gamma'' - \inner{\gamma''}{N}N = 0 \implies \gamma'' = \inner{\gamma''}{N}N.
+\]
+Para calcular el término $\inner{\gamma''}{N}$, derivamos la condición de tangencia $\inner{\gamma'}{N}=0$:
+\[
+\inner{\gamma''}{N} + \inner{\gamma'}{N'} = 0 \implies \inner{\gamma''}{N} = - \inner{\gamma'}{N'}.
+\]
+Como $N(t) = \frac{1}{r}\gamma(t)$ (el vector posición), entonces $N'(t) = \frac{1}{r}\gamma'(t)$. Así:
+\[
+\inner{\gamma''}{N} = - \inner{\gamma'}{\frac{1}{r}\gamma'} = -\frac{1}{r}|\gamma'|^2 = -\frac{c^2}{r}.
+\]
+La ecuación diferencial queda:
+\[
+\gamma'' = -\frac{c^2}{r} N = -\frac{c^2}{r} \left( \frac{1}{r}\gamma \right) \implies \gamma'' + \frac{c^2}{r^2}\gamma = 0.
+\]
+Esta es la ecuación de un oscilador armónico ($\gamma'' + k^2\gamma = 0$). \\
+\textit{Ver Anexo de ecuaciones diferenciales}
+\\
+Su solución general con condiciones iniciales $\gamma(0)=p, \gamma'(0)=\vec{v}$ es:
+\[
+\gamma(t) = \cos\left( \frac{c}{r}t \right)p + \frac{r}{c}\sin\left( \frac{c}{r}t \right)\vec{v}.
+\]
+\textbf{Conclusión:} Como la curva está contenida en el plano generado por $p$ y $\vec{v}$ que pasa por el origen, las geodésicas son \textbf{circunferencias máximas} (círculos grandes).
+\end{proof}
+
+\begin{proof}[Cálculo de geodésicas en el Cilindro]
+Sea el cilindro $C$ de radio $r$ con eje $z$. Un punto es $\gamma(t) = (\gamma_1, \gamma_2, \gamma_3)$.
+El normal es $N(\gamma(t)) = (\frac{\gamma_1}{r}, \frac{\gamma_2}{r}, 0)$, por lo que $N' = (\frac{\gamma_1'}{r}, \frac{\gamma_2'}{r}, 0)$.
+La condición de geodésica $\gamma'' \perp S$ implica $\gamma'' = \lambda N$, es decir:
+\[
+(\gamma_1'', \gamma_2'', \gamma_3'') = \lambda \left( \frac{\gamma_1}{r}, \frac{\gamma_2}{r}, 0 \right).
+\]
+De la tercera componente obtenemos inmediatamente:
+\[
+\gamma_3'' = 0 \implies \gamma_3(t) = p_3 + t v_3 \quad \text{(Movimiento rectilíneo uniforme en el eje z)}.
+\]
+Para las otras componentes, usamos que la rapidez $|\gamma'|=c$ es constante:
+\[
+c^2 = |\gamma'|^2 = (\gamma_1')^2 + (\gamma_2')^2 + (\gamma_3')^2.
+\]
+Como $\gamma_3' = v_3$ (constante), tenemos que la velocidad horizontal al cuadrado es $(\gamma_1')^2 + (\gamma_2')^2 = c^2 - v_3^2$.
+Esto reduce el problema a encontrar geodésicas en un círculo de radio $r$ con velocidad constante $\sqrt{c^2-v_3^2}$. La solución es un movimiento circular uniforme:
+\[
+\gamma_{1,2}(t) = \left( r \cos(\omega t), r \sin(\omega t) \right), \quad \text{con } \omega = \frac{\sqrt{c^2-v_3^2}}{r}.
+\]
+Combinando todo, la solución general es:
+\[
+\gamma(t) = \left( r \cos(At+B), r \sin(At+B), Ct+D \right).
+\]
+\textbf{Conclusión:} Las geodésicas del cilindro son \textbf{hélices} (si $v_3 \neq 0$ y rotación $\neq 0$), \textbf{circunferencias} (si $v_3=0$) o \textbf{rectas verticales} (si no hay rotación).
+\end{proof}
+
+\subsection{Ecuaciones diferenciales}
+\noindent En su momento, cuando vimos si un campo era paralelo, $\forall V \in \mathfrak{X}(\alpha)$, con $\alpha(t) = X(u(t), v(t))$,
+\[
+V(t) = a(t)X_u(u(t), v(t)) + b(t)X_v(u(t), v(t)) \text{ es paralelo } \Leftrightarrow
+\]
+\[
+\begin{cases}
+a' + a(u'\Gamma_{11}^1 + v'\Gamma_{12}^1) + b(u'\Gamma_{12}^1 + v'\Gamma_{22}^1) = 0, \\[0.5em]
+b' + a(u'\Gamma_{11}^2 + v'\Gamma_{12}^2) + b(u'\Gamma_{12}^2 + v'\Gamma_{22}^2) = 0.
+\end{cases}
+\]
+
+\noindent Entonces, $\gamma: I \to S$ es geodésica $\Leftrightarrow \gamma'$ es paralelo.
+\[
+\gamma(t) = X(u(t), v(t)), \quad \gamma'(t) \in \mathfrak{X}(\gamma) \rightarrow \text{coordenadas } (\underbrace{u'(t)}_{a}, \underbrace{v'(t)}_{b})
+\]
+ Sustituyo en la ecuación anterior y me queda lo siguiente:
+
+Sea $(U, \mathbf{X})$ una parametrización de $S$ y $\gamma(t) = \mathbf{X}(u(t), v(t))$. La condición de geodésica se traduce en el siguiente sistema de ecuaciones diferenciales de segundo orden (usando los símbolos de Christoffel $\Gamma_{ij}^k$):
+
+\[
+\begin{cases}
+u'' + (u')^2\Gamma_{11}^1 + 2u'v'\Gamma_{12}^1 + (v')^2\Gamma_{22}^1 = 0, \\
+v'' + (u')^2\Gamma_{11}^2 + 2u'v'\Gamma_{12}^2 + (v')^2\Gamma_{22}^2 = 0.
+\end{cases}
+\]
+
+\begin{teorema}{Existencia y unicidad de geodésicas maximales}
+Sea $S$ una superficie regular, $p \in S$ y $v \in T_pS$, existe una única geodésica  $\gamma_v: I_v \longrightarrow S$ (con $I_v$ abierto conteniendo al 0) tal que:
+\begin{itemize}
+    \item $\gamma_v(0) = p \quad \text{y} \quad \gamma_v'(0) = v.$
+    \item Si $\alpha:J\to S$ es otra geodésica con $\alpha(0)= p $ y $\alpha'(0)= v$, entonces $J \subset I_v$ y $\alpha = \gamma_v|_J$
+\end{itemize}
+
+\end{teorema}
+\begin{proof}[Idea de la demostración]
+Sea $p \in S, \vec{v} \in T_pS$. Definimos el conjunto:
+\[
+\mathcal{J}_{p,\vec{v}} = \{ \gamma : I \to S \mid 0 \in I, \gamma(0)=p, \gamma'(0)=\vec{v} \}.
+\]
+Veamos que $\mathcal{J}_{p,\vec{v}} \neq \emptyset$ (vamos a usar las EDOs de las geodésicas).
+Cogemos una parametrización de la superficie que contenga a $p$.
+Sea $(U, X)$ parametrización con $p \in X(U) \implies p = X(u_0, v_0)$.
+Expresamos el vector en la base coordenada:
+\[
+\vec{v} = a X_u(u_0, v_0) + b X_v(u_0, v_0).
+\]
+Por el \textbf{Teorema de Existencia y Unicidad de sistemas de EDOs}, existe una \textbf{única} solución $(u(t), v(t))$ al sistema de ecuaciones de las geodésicas tal que:
+\[
+\begin{cases}
+u(0) = u_0, & v(0) = v_0 \\
+u'(0) = a, & v'(0) = b
+\end{cases}
+\]
+Defino $\gamma(t) = X(u(t), v(t))$. Esta curva cumple las condiciones iniciales y el sistema, por tanto es geodésica (y es única).
+\[
+\implies \mathcal{J}_{p,\vec{v}} \neq \emptyset.
+\]
+
+\vspace{0.5cm}
+
+\begin{tcolorbox}[colback=red!5!white, colframe=red!75!black, title=¡OJO!]
+Esto no acaba la demostración. Esta geodésica la he encontrado en $V = X(U)$ (en la parametrización).
+¿Qué ocurre en la superficie? Esto es un resultado \textbf{local}, no global como lo está diciendo en el enunciado.
+\end{tcolorbox}
+
+\textbf{Técnica que usaremos mucho (Unicidad):}
+
+Supongamos $\gamma_1 : I_1 \to S$ y $\gamma_2 : I_2 \to S$ con $\gamma_1(0) = \gamma_2(0) = p$ y $\gamma_1'(0) = \gamma_2'(0) = \vec{v}$.
+Sea el conjunto:
+\[
+A = \{ t \in \underbrace{I_1 \cap I_2}_{\text{conexo}} \mid \gamma_1(t) = \gamma_2(t) \text{ y } \gamma_1'(t) = \gamma_2'(t) \}.
+\]
+Sabemos que $A \neq \emptyset$ porque $0 \in A$.
+
+Vamos a ver que $A = I_1 \cap I_2$.
+(No lo vamos a hacer en detalle). Demostramos que $A$ es \textbf{cerrado} y \textbf{abierto} en el conexo $I_1 \cap I_2$.
+\[
+\implies A = I_1 \cap I_2.
+\]
+Así, en el trozo común tengo las mismas geodésicas.
+
+\textit{Para extenderlo a maximales creo que se va cogiendo intervalos y se extiende hasta donde se quiera.}
+\end{proof}
+
+\begin{definicion}{Geodésicamente completa}
+Una superficie $S$ es \textbf{geodésicamente completa en un punto} $p\in S$ si $I_v = \mathbb{R}$ para todo $v\in T_pS$. Se dice además que $S$ es \textbf{geodésicamente completa} cuando lo es en todos sus puntos.
+\end{definicion}
+Recordemos que en una superficie, para una curva $\alpha$ también podíamos definir una base (Triedro de Darboux): 
+$\alpha:I\to S$ p.p.a, $$\{\alpha', J\alpha', N\}$$ donde $N$ es el normal a la superficie y $J(\gamma)$ la rotación de $90º$. 
+
+\begin{definicion}{Curvatura geodésica}
+Sea $S$ una superficie regular. Para una curva \textbf{p.p.a}. $\alpha: I\to S$, la \textbf{curvatura geodésica} se define como:
+\[
+k_g(s) = \inner{\alpha''(s)}{J\alpha'(s)} = \inner{\alpha''(s)}{N(s) \wedge \alpha'(s)}.
+\]
+Una \textbf{pregeodésica} es una curva  que se puede reparametrizar para ser una geodésica.
+
+\end{definicion}
+
+En ejercicios demostraremos de dónde sale la siguiente definición: 
+\begin{definicion}{Curvatura geodésica para $\alpha$ \textbf{no p.p.a}}
+Sea $S$ una superficie regular.  $\alpha: I\to S$, la \textbf{curvatura geodésica} se define como:
+\[
+k_g(s)  = \frac{\inner{\alpha''(s)}{N(s) \wedge \alpha'(s)}}{|\alpha'|^3}.
+\]
+\end{definicion}
+
+\begin{proposicion}{Caracterización Geodésica}
+    Sea $\alpha: I \to S$ una curva \textbf{p.p.a.} en una superficie regular $S$. Entonces, $\alpha$ es ua geodésica si, y solo si, $k_g(s)=0 $ para todo $s\in I.$
+\end{proposicion}
+\begin{proof}[Demostración]
+    Sabemos que la curvatura geodésica es $k_g = \langle \alpha'', N \wedge \alpha' \rangle$.
+    Entonces:
+    \[
+    k_g = 0 \iff \langle \alpha'', N \wedge \alpha' \rangle = 0 \iff \alpha'' \perp (N \wedge \alpha') = \alpha'' \perp J\alpha'.
+    \]
+    Además, como $\alpha$ está parametrizada por el arco (p.p.a.), sabemos que $\langle \alpha', \alpha' \rangle = 1$. Derivando esta expresión:
+    \[
+    \langle \alpha'', \alpha' \rangle = 0 \iff \alpha'' \perp \alpha'.
+    \]
+    
+    Si el vector aceleración $\alpha''$ es perpendicular a $\alpha'$ y también a $J\alpha'$ (que forman una base del plano tangente), entonces $\alpha''$ es perpendicular a todo el plano tangente:
+    \[
+    \implies \alpha'' \perp T_{\alpha(t)}S \implies \alpha'' \parallel N(\alpha(t)).
+    \]
+    Esto es equivalente a decir que $\alpha$ es una \textbf{geodésica} (por la propiedad de que su aceleración es normal a la superficie).
+\end{proof}
+% -------------------------------------------------------------------------
+\section{La Aplicación Exponencial}
+
+La aplicación exponencial nos permite mapear el espacio tangente sobre la superficie siguiendo geodésicas.
+
+\begin{definicion}{Aplicación Exponencial}
+Sea $p \in S$ con $S$ una superficie regular y $D_p = \{ v \in T_pS : 1 \in I_v \}$. Se define la aplicación exponencial $\exp_p: D_p \subset T_pS \longrightarrow S$ como:
+\[
+\exp_p(v) = \gamma_v(1), \quad \text{con } \exp_p(0) = p.
+\]
+\end{definicion}
+\begin{observacion}{Dominio de la exponencial en superficies completas}
+Si una superficie regular $S$ es geodésicamente completa en $p \in S$, entonces el dominio de la aplicación exponencial $D_p \equiv T_pS$.
+\end{observacion}
+\begin{observacion}{Interpretación métrica de la exponencial}
+Otra forma de entender la aplicación exponencial es a través de la longitud de las curvas. Sea $\gamma_{\vec{v}}$ la geodésica radial definida por $\vec{v}$, es decir, con $\gamma_{\vec{v}}(0)=p$ y $\gamma_{\vec{v}}'(0)=\vec{v}$.
+
+Sabemos que el punto imagen es $\exp_p(\vec{v}) = \gamma_{\vec{v}}(1)$. Calculemos la longitud de este segmento de geodésica desde $t=0$ hasta $t=1$:
+\[
+L_p^{\exp_p(\vec{v})}(\gamma_{\vec{v}}) = L_0^1(\gamma_{\vec{v}}) = \int_0^1 |\gamma_{\vec{v}}'(t)| \, dt.
+\]
+Recordemos una propiedad fundamental de las geodésicas: tienen **rapidez constante**. Por tanto, $|\gamma_{\vec{v}}'(t)| = |\gamma_{\vec{v}}'(0)| = |\vec{v}|$ para todo $t$. La integral se simplifica inmediatamente:
+\[
+\int_0^1 |\gamma_{\vec{v}}'(t)| \, dt = \int_0^1 |\vec{v}| \, dt = |\vec{v}| \cdot (1-0) = |\vec{v}|.
+\]
+\textbf{Conclusión:} La norma del vector $|\vec{v}|$ en el espacio tangente $T_pS$ representa exactamente la \textbf{distancia geodésica} sobre la superficie desde el punto $p$ hasta el punto $\exp_p(\vec{v})$. Es decir, la exponencial enrolla el plano tangente sobre la superficie preservando las longitudes radiales.
+\end{observacion}
+\begin{lema}{de homogeneidad de las geodésicas}
+Sean $S$ una superficie regular, $p \in S$ y $\mathbf{v} \in T_pS$. Sea $\gamma_{\mathbf{v}} : I_{\mathbf{v}} \longrightarrow S$ la geodésica maximal con $\gamma_{\mathbf{v}}(0) = p$ y $\gamma_{\mathbf{v}}'(0) = \mathbf{v}$, y sea $\lambda > 0$. Si $(-\varepsilon_1, \varepsilon_2) \subset I_{\mathbf{v}}$, entonces $(-\varepsilon_1/\lambda, \varepsilon_2/\lambda) \subset I_{\lambda\mathbf{v}}$, y además $\gamma_{\lambda\mathbf{v}}(t) = \gamma_{\mathbf{v}}(\lambda t)$ para todo $t \in (-\varepsilon_1/\lambda, \varepsilon_2/\lambda)$, donde $\gamma_{\lambda\mathbf{v}} : I_{\lambda\mathbf{v}} \longrightarrow S$ es la única geodésica maximal con condiciones iniciales $\gamma_{\lambda\mathbf{v}}(0) = p$ y $\gamma_{\lambda\mathbf{v}}'(0) = \lambda\mathbf{v}$.
+\end{lema}
+Nosotros realmente usaremos: 
+\begin{tcolorbox}[colback=yellow!10!white, colframe=yellow!50!black, title=Lema de Homogeneidad]
+Si $\gamma_v$ es la geodésica con velocidad inicial $v$, entonces la geodésica con velocidad inicial $\lambda v$ es simplemente una reparametrización de la anterior:
+\[
+\gamma_{\lambda v}(t) = \gamma_v(\lambda t).
+\]
+Esto implica que $\exp_p(tv) = \gamma_v(t)$.
+\end{tcolorbox}
+\begin{proof}[Demostración del Lema de Homogeneidad]
+Sea $\gamma_v : I_v \longrightarrow S$ la geodésica maximal tal que $\gamma_v(0) = p$ y $\gamma_v'(0) = \mathbf{v}$.
+
+Definimos la curva auxiliar $\alpha : I_\alpha \longrightarrow S$, donde el intervalo es $I_\alpha = \{ t \in \mathbb{R} \mid \lambda t \in I_v \}$, dada por:
+\[
+\alpha(t) = \gamma_v(\lambda t).
+\]
+Comprobamos sus condiciones iniciales:
+\begin{itemize}
+    \item $\alpha(0) = \gamma_v(0) = p$.
+    \item $\alpha'(t) = \lambda \gamma_v'(\lambda t) \implies \alpha'(0) = \lambda \gamma_v'(0) = \lambda \mathbf{v}$.
+\end{itemize}
+
+Calculamos la derivada covariante de la velocidad para ver si es geodésica:
+\[
+\frac{D\alpha'}{dt} = \lambda^2 \frac{D\gamma_v'(\lambda t)}{dt} = 0 \quad \text{(pues } \gamma_v \text{ es geodésica)}.
+\]
+
+Por tanto, $\alpha$ es una geodésica que parte de $p$ con velocidad $\lambda \mathbf{v}$.
+Por el \textbf{Teorema de Existencia y Unicidad de geodésicas maximales}, $\alpha$ debe coincidir con $\gamma_{\lambda \mathbf{v}}$ en su dominio común.
+Como $\gamma_{\lambda \mathbf{v}}$ es maximal, tenemos que $I_\alpha \subset I_{\lambda \mathbf{v}}$ y:
+\[
+\gamma_{\lambda \mathbf{v}}(t) = \alpha(t) \text{ en } I_\alpha \implies \gamma_{\lambda \mathbf{v}}(t) = \gamma_v(\lambda t).
+\]
+
+\textbf{Veamos lo de los intervalos:}
+¿Se cumple que $\left( -\frac{\varepsilon_1}{\lambda}, \frac{\varepsilon_2}{\lambda} \right) \subset I_{\lambda \mathbf{v}}$?
+
+Vamos a ver que $\left( -\frac{\varepsilon_1}{\lambda}, \frac{\varepsilon_2}{\lambda} \right) \subset I_\alpha$. Como $I_\alpha \subset I_{\lambda \mathbf{v}}$, ya lo tendríamos.
+
+Sea $t \in \left( -\frac{\varepsilon_1}{\lambda}, \frac{\varepsilon_2}{\lambda} \right)$. Como $\lambda > 0$, multiplicando la desigualdad:
+\[
+-\varepsilon_1 < \lambda t < \varepsilon_2 \implies \lambda t \in (-\varepsilon_1, \varepsilon_2).
+\]
+Por hipótesis, $(-\varepsilon_1, \varepsilon_2) \subset I_v$, luego $\lambda t \in I_v$.
+Por cómo hemos definido $I_\alpha = \{ t \mid \lambda t \in I_v \}$, concluimos que $t \in I_\alpha$.
+
+Por tanto, el intervalo escalado está en el dominio y se cumple la fórmula de homogeneidad.
+\end{proof}
+\begin{observacion}{Observación del Teorema Anterior}
+    El mismo teorema vale para un $\lambda<0$ si el intervalo $(-\epsilon_1,\epsilon_2)$ es simétrico (o sea, $\epsilon_1 =\epsilon_2$). 
+\end{observacion}
+\begin{proof}
+    Basta aplicar la demostración anterior. La primera parte es idéntica y la parte de los intervalos es igual. Simplemente, al multiplicar por el $\lambda$, se intercambian las desigualdades, pero al ser el intervalo simétrico, también nos vale. 
+\end{proof}
+
+\begin{teorema}{Propiedades de la aplicación exponencial}
+Sean $S$ una superficie regular y $p \in S$. Entonces:
+\begin{enumerate}[label=\roman*)]
+    \item Para cualesquiera $\mathbf{v} \in T_pS$ y $t \in I_{\mathbf{v}}$ con $t > 0$, se tiene que $t\mathbf{v} \in D_p$. Además, $\exp_p(t\mathbf{v}) = \gamma_{\mathbf{v}}(t)$.
+    \begin{enumerate}[label=\roman{enumi}.\alph*)]
+        \item $D_p$ es estrellado respecto a $\mathbf{0}$.
+        \item Para todo $\mathbf{v} \in T_pS$, existe $\lambda > 0$ tal que $\lambda\mathbf{v} \in D_p$, es decir, \textit{todas las direcciones están en $D_p$}.
+    \end{enumerate}
+    \item El dominio de la exponencial $D_p$ es un abierto, y $\exp_p : D_p \longrightarrow S$ es una aplicación diferenciable.
+    \item La aplicación $\exp_p$ es un difeomorfismo local en $\mathbf{0}$.
+\end{enumerate}
+\end{teorema}
+\begin{proof}[Demostración]
+\textbf{(i)} Sea $t \in I_v$. Usaremos el lema de homogeneidad con $\lambda = t \implies \frac{t}{t} = 1 \in I_{tv} \implies t\vec{v} \in D_p$ por la propia definición del conjunto. 
+La otra parte se tiene también por el Lema de Homogeneidad de las geodésicas:
+\[
+\boxed{\exp_p(t\vec{v}) = \gamma_{tv}(1) \underset{\text{lema}}{=} \gamma_v(t)}
+\]
+
+\textbf{(i.a)}
+Se tiene como consecuencia de \textbf{i}:
+Sea $\vec{v}\in D_p$. ¿Se cumple que $[\vec{0},\vec{v}]\subset D_p$?. 
+Sí porque $[\vec{0},\vec{v}]=\{\lambda\vec{v} : \lambda\in[0,1]\}.$ Como $I_v$ es un intervalo y $1\in I_v$, entonces $[0,1]\subset I_v$.\\
+$$\lambda\in [0,1]\implies \lambda\in I_v \implies \gamma_v(\lambda) = exp_p(\lambda\vec{v}) \implies \lambda\vec{v}\in D_p$$. 
+
+\textbf{(i.b)}
+Como $0\in I_v$, al ser abierto $I_v$, $\exists\lambda>0$ tal que $\lambda \in I_v \implies \lambda\vec{v}\in D_p$. 
+
+\textbf{(ii)} María Ángeles no lo demuestra. 
+
+\textbf{(iii)} Consideramos la diferencial de la exponencial en el origen:
+\[
+\exp_p : D_p \subset T_pS \longrightarrow S \implies d(\exp_p)_{\vec{0}} : \underbrace{T_{\vec{0}}D_p}_{=T_pS} \longrightarrow \underbrace{T_{\exp_p(\vec{0})}S}_{=T_pS \leftarrow \exp_p(\vec{0})=p}
+\]
+\textit{Nota: En la diferencial ponemos el propio plano porque $D_p$ es un trozo de plano de $T_pS$, si le calculamos su plano tangente en un punto, obviamente saldrá todo $T_pS$}.
+
+Es decir, $d(\exp_p)_{\vec{0}} : T_pS \longrightarrow T_pS$ viene dada por:
+\[
+d(\exp_p)_{\vec{0}}(\vec{v}) = \frac{d}{dt}\Big|_{t=0} (\exp_p \circ \alpha)(t)
+\]
+siendo $\alpha : I \longrightarrow D_p$ una curva con $\alpha(0)=\vec{0}, \alpha'(0)=\vec{v}$.
+Como la elección de $\alpha$ puede ser cualquier curva con tal de que verifique las condiciones iniciales y, muy importante, esté en la superficie (en este caso $D_p$), pues cogeremos la más sencilla posible. Como $D_p$ es un plano, podremos entonces tomar la recta $\alpha(t) = \vec{v} \cdot t$.
+
+Tendremos entonces:
+\[
+d(\exp_p)_{\vec{0}}(\vec{v}) = \frac{d}{dt}\Big|_{t=0} \exp_p(t\vec{v}) = \frac{d}{dt}\Big|_{t=0} \gamma_v(t) = \gamma_v'(0) = \vec{v}
+\]
+Es decir: $d(\exp_p)_{\vec{0}} \equiv \mathbb{I}_d$ (la identidad) $\implies \exp_p$ es un \textbf{difeomorfismo en el origen} (por el Teorema de la Función Inversa).
+\end{proof}
+
+%Ejemplo Aplicación Exponencial en la Esfera
+\begin{ejemplo}{La aplicación exponencial en la esfera}
+Veamos la aplicación exponencial en la esfera.
+
+    % --- SOLUCIÓN: Usar center en lugar de figure ---
+    \begin{center}
+        \includegraphics[width=0.4\linewidth]{Imagenes/Exponencial Esfera.png}
+    \end{center}
+    % ------------------------------------------------
+
+    \begin{center}
+    \vspace{0.5cm} 
+    \textit{[Esfera $\mathbb{S}^2(r)$ con plano tangente $T_p\mathbb{S}^2(r)$ en el polo norte $p$. Mostrar vectores $\vec{v}$ y su imagen $\exp_p(\vec{v})$ sobre la esfera.]}
+    \end{center}
+
+Sabemos (ya la calculamos) que la fórmula es:
+\[
+\exp_p(\vec{v}) = \gamma_v(1) = \cos\left(\frac{|\vec{v}|}{r}\right)p + \frac{r}{|\vec{v}|}\sin\left(\frac{|\vec{v}|}{r}\right)\vec{v}
+\]
+Sea p el polo norte de la esfera. Entonces, el \textbf{ecuador} es: $\text{Ecuador} = \{ q \in \mathbb{S}^2(r) : \langle p, q \rangle = 0 \}$.
+
+\textbf{¿Cuándo se tiene $\exp_p(\vec{v}) \in \text{Ecuador}$?}
+\[
+\langle \exp_p(\vec{v}), p \rangle = 0 \iff \cos\left(\frac{|\vec{v}|}{r}\right)\langle p, p \rangle = 0
+\]
+(El término del seno se va porque $\langle \vec{v}, p \rangle = 0$, ya que $\vec{v} \in T_pS$).
+Como $p \neq 0$, entonces:
+\[
+\cos\left(\frac{|\vec{v}|}{r}\right) = 0 \iff \frac{|\vec{v}|}{r} = \frac{\pi}{2} \implies |\vec{v}| = \frac{\pi}{2}r.
+\]
+
+Es decir, si el vector $\vec{v}$ tiene módulo $|\vec{v}| = \frac{\pi}{2}r$, la exponencial llegará al ecuador. Pero si lo queremos en un \textbf{punto concreto} $p_0$ del ecuador, hay que marcar la dirección de $\vec{v}$, sustituyendo en $\exp_p(\vec{v})$ sabiendo que $|\vec{v}| = \frac{\pi}{2}r$ (lo que implica $\cos(\frac{\pi}{2})=0$):
+
+\[
+\exp_p(\vec{v}) = p_0 \iff p_0 = \frac{r}{|\vec{v}|}\sin\left(\frac{\pi}{2}\right)\vec{v} \implies \boxed{\vec{v} = \frac{|\vec{v}|}{r}p_0 = \frac{\pi}{2}p_0}
+\]
+
+Entonces la exponencial llegará a un punto $p_0$ del ecuador partiendo de $p$ cogiendo $\vec{v} = \frac{\pi}{2}p_0$.
+
+\textbf{¿Y si queremos llegar a la antípoda?} 
+
+    \begin{center}
+        \includegraphics[width=0.4\linewidth]{Imagenes/Antípoda Esfera.png }
+    \end{center}
+    % ------------------------------------------------
+Es decir, qué $\vec{v} \in T_pS$ tomamos para que $\exp_p(\vec{v}) = -p$.
+\[
+\underbrace{\cos\left(\frac{|\vec{v}|}{r}\right)}_{\text{deberá ser } -1} p + \underbrace{\frac{r}{|\vec{v}|}\sin\left(\frac{|\vec{v}|}{r}\right)}_{\text{deberá ser } 0} \vec{v} = -p \implies \frac{|\vec{v}|}{r} = \pi \implies |\vec{v}| = \pi r
+\]
+
+Pero entonces aquí tenemos \textbf{infinitos vectores} (toda una circunferencia $\mathbb{S}^1(\pi r)$ en el plano tangente) que llevan $\exp_p$ a $-p$.
+
+Entonces la exponencial ahí ya no puede ser inyectiva, pero en todo punto de $\mathbb{S}^2(r)$ quitando ese (la antípoda), habrá un entorno para el que la exponencial será un difeomorfismo.
+
+Adelantando la siguiente definición, el conjunto $U=\{\vec v\in T_p\mathbb{S}^2(r): |  v | < \pi r\}$ será un \textbf{entorno normal}.
+
+\end{ejemplo}
+
+
+% -------------------------------------------------------------------------
+\section{Entornos Normales}
+
+Gracias a que la exponencial es un difeomorfismo local en 0, podemos definir coordenadas locales basadas en geodésicas.
+
+\begin{definicion}{Entorno Normal}
+Un entorno $V$ \textbf{de $p \in S$} se llama \textbf{entorno normal} de $p$ si $V$ es la imagen por $\exp_p$ de un entorno $U$ de $0 \in T_pS$ tal que:
+\begin{enumerate}
+    \item $U$ es estrellado respecto a 0.
+    \item $\exp_p|_U: U \longrightarrow V$ es un difeomorfismo.
+\end{enumerate}
+\end{definicion}
+
+\textbf{Nota:} Se dice que un abierto es un \textit{entorno uniformemente normal} si es entorno normal de todos sus puntos. Siempre existen estos entornos.
+
+\begin{teorema}{Existencia y unicidad de geodésicas radiales}
+Sea $V$ un entorno normal de $p_0$. Entonces, para todo punto $p \in V$, existe un \textbf{único} segmento de geodésica radial $\gamma_p: [0,1] \longrightarrow V$ que une $p_0$ con $p$ y está totalmente contenido en $V$.
+\end{teorema}
+\begin{proof}
+Sea $V$ un entorno normal de $p_0$ y sea $p \in V$.
+Por ser $V$ un entorno normal, $\exists \mathcal{U} \subset D_{p_0}$ abierto, \textbf{estrellado} respecto del origen $\vec{0} \in \mathcal{U}$, tal que $\exp_{p_0}: \mathcal{U} \longrightarrow V$ es un \textbf{difeomorfismo}.
+
+Como $p \in V$ y $\exp_{p_0}: \mathcal{U} \longrightarrow V$ es un difeomorfismo \textcolor{blue}{\footnotesize (biyeccion)}, entonces:
+\[
+\exists! \vec{v} \in \mathcal{U} / \exp_{p_0}(\vec{v}) = p
+\]
+
+\noindent \textbf{\underline{-Existencia-}:} Construyamos la geodésica. \textcolor{blue}{\footnotesize (quiero ver $p = \exp_{p_0}(\vec{v}) = \gamma_v(1)$)}
+
+Sabemos que con las condiciones iniciales será:
+\[
+\gamma_v : I_v \longrightarrow S \ / \ \gamma_v(0) = p_0, \ \gamma_v'(0) = \vec{v}. \quad \text{\textcolor{blue}{\footnotesize (geodésica maximal)}}
+\]
+
+Definimos entonces: $\gamma_p := \gamma_v\big|_{[0,1]}$. Veamos que cumple el teorema:
+
+\begin{itemize}
+    \item $\gamma_p(0) = \gamma_v(0) = p_0$.
+    \item $\gamma_p(1) = \gamma_v(1) = \exp_{p_0}(\vec{v}) = p$
+\end{itemize}
+
+Faltaría ver que $\gamma_p$ ``no se sale'' de $V$, i.e., ¿$\gamma_p(t) \in V \ \forall t \in [0,1]$?
+
+Sea $t \in (0,1)$. Como $\vec{v} \in \mathcal{U}$ y $\mathcal{U}$ es estrellado, $t \cdot \vec{v} \in \mathcal{U} \implies \exp_{p_0}(t\vec{v}) \in V$.
+
+Pero:
+\[
+\exp_{p_0}(t\vec{v}) \underset{\text{\textcolor{blue}{\tiny Lema Homogeneidad Geodésicas}}}{=} \gamma_{tv}(1) = \gamma_v(t) \in V \quad \checkmark
+\]
+
+
+
+
+
+La idea es ver que existe una única geodésica que parte de $p_0$, llega a $p$ y \textbf{no se sale} de $V$.
+
+Como $V$ es un entorno normal de $p_0$, existe un abierto $U \subset D_{p_0} \subset T_{p_0}S$ que es \textbf{estrellado} respecto del origen, tal que la restricción de la exponencial $\exp_{p_0}: U \longrightarrow V$ es un difeomorfismo.
+Dado que $p \in V$ y la exponencial es biyectiva en $U$, existe un único vector $\vec{v} \in U$ tal que $\exp_{p_0}(\vec{v}) = p$.
+
+\noindent \textbf{\underline{Unicidad}:} Supongamos que existe otra $\alpha: [0,1] \longrightarrow V$ geodésica con $\alpha(0) = p_0, \alpha(1) = p$.
+
+Consideremos $\vec{w} = \alpha'(0)$, por la unicidad de geodésicas maximales se tiene que: $\alpha = \gamma_w|_{[0,1]}$.
+
+Se tiene $p = \alpha(1) = \gamma_w(1) = \exp_{p_0}(\vec{w})$. Entonces, como $\exp_{p_0}: \mathcal{U} \longrightarrow V$ es un difeomorfismo y $\exp_{p_0}(\vec{v}) = p$ (con $\vec{v} \in \mathcal{U}$), si $\vec{w} \in \mathcal{U}$, por la inyectividad se tendrá $\vec{v} = \vec{w}$ y habremos terminado.
+
+\vspace{0.3cm}
+
+\noindent Faltará entonces ver que $\vec{w} \in \mathcal{U}$.
+
+Se tiene que $\alpha([0,1])$ es compacto contenido en $V$ abierto \textcolor{blue}{\footnotesize (pq $\alpha$ es continua y $[0,1]$ compacto)}.
+Pero la frontera de $V$ es problemática, luego, gracias a que $\alpha([0,1])$ es compacto, $\exists V_0$ abierto tal que:
+\[
+\alpha([0,1]) \subset V_0 \subset \overline{V_0} \subset V
+\]
+
+Por el difeomorfismo $\exp_{p_0}$ se pasa todo a $T_{p_0}S$, sean:
+\[
+\begin{aligned}
+\tilde{\alpha} &= \exp_{p_0}^{-1}(\alpha) \\
+\mathcal{U}_0 &= \exp_{p_0}^{-1}(V_0)
+\end{aligned}
+\quad \Bigg\} \quad \tilde{\alpha}([0,1]) \subset \mathcal{U}_0 \subset \overline{\mathcal{U}_0} \subset \mathcal{U}
+\]
+
+% --- DIBUJO ESQUEMÁTICO ---
+\begin{center}
+    \includegraphics[width=0.3\textwidth]{Imagenes/Unicidad Exponencial Geodésica.png} 
+    \par \textit{\small Esquema del paso del entorno $V$ en $S$ al entorno $\mathcal{U}$ en $T_{p_0}S$ mediante $\exp_{p_0}^{-1}$.}
+\end{center}
+
+\noindent \textcolor{blue}{(veamos que $\vec{w} \in \mathcal{U}_0$ por red. abs.)}
+
+Si el vector $\vec{w} \notin \mathcal{U}_0$, lo queremos "contraer" para que esté en $\mathcal{U}$, pero siga sin estar en $\mathcal{U}_0$, i.e., que vaya a la frontera de $\mathcal{U}_0$, en $\overline{\mathcal{U}_0}$.
+
+Sea $t_0 \in (0,1)$ tal que $t_0 \cdot \vec{w} \in \mathcal{U} \setminus \mathcal{U}_0$, se tiene:
+\[
+\underbrace{\exp_{p_0}(t_0 \vec{w})}_{\in \mathcal{U}} = \gamma_{t_0\vec{w}}(1) = \gamma_w(t_0) = \alpha(t_0) = \underbrace{\exp_{p_0}(\tilde{\alpha}(t_0))}_{\in \mathcal{U}}
+\]
+
+Como $\exp_{p_0}(\mathcal{U})$ en $\mathcal{U}$ es un difeomorfismo, se tiene: $t_0 \cdot \vec{w} = \tilde{\alpha}(t_0)$ \quad \textbf{\Large} \quad porque $t_0 \cdot \vec{w} \notin \mathcal{U}_0$, pero $\tilde{\alpha}(t_0) \in \mathcal{U}_0$.
+
+\[
+(\exp_{p_0}(\vec{v}) = \exp_{p_0}(\vec{w}) \underset{\vec{v}, \vec{w} \in \mathcal{U}}{\implies} \vec{v} = \vec{w} \implies \gamma_v = \gamma_w)
+\]
+
+
+\end{proof}
+% -------------------------------------------------------------------------
+\section{El Lema de Gauss y Minimización}
+
+Este es uno de los resultados clave que relaciona la geometría métrica (distancias) con las geodésicas.
+
+\begin{observacion}{Identificación del espacio tangente}
+\textbf{Nota:} Sabemos que $\exp_p: D_p \longrightarrow S$ y, dado $\vec{v} \in D_p$, se tiene que:
+\[
+d(\exp_p)_{\vec{v}} : \underbrace{T_{\vec{v}}D_p}_{\equiv T_pS} \longrightarrow T_{\exp_p(\vec{v})}S,
+\]
+pero $T_{\vec{v}}D_p$ no es realmente igual a $T_pS$, pero se identifican, porque realmente cambia el origen, y si cambia el origen, cambia el punto de referencia desde el que se toma $\vec{v}$.
+
+\begin{center}
+\includegraphics[width=0.7\textwidth]{Imagenes/Observación Lema de Gauss.png}
+\end{center}
+\end{observacion}
+
+\begin{teorema}{Lema de Gauss}
+Sea $p \in S$, $v \in D_p \setminus \{0\}$ y $w \in T_v(T_pS) \cong T_pS$. (Excluimos el caso en el que $v=\vec{0}$ porque en este caso, $d(\exp_p)_{\vec{0}}=1_{T_pS}$).
+\begin{enumerate}
+    \item \textbf{Radial:} Si $w$ y $v$ son colineales, entonces $|d(\exp_p)_v(w)| = |w|$ (la exponencial preserva longitudes en dirección radial).
+    \item \textbf{Ortogonal:} Si $w \perp v$, entonces $d(\exp_p)_v(v) \perp d(\exp_p)_v(w)$ (la exponencial preserva la ortogonalidad con respecto a la dirección radial).
+\end{enumerate}
+\end{teorema}
+
+\begin{proof}[Demostración (del Lema de Gauss)]
+
+\textbf{(i)} Supongamos que $\vec{w}$ y $\vec{v}$ son colineales, i.e., $\vec{w} = \lambda\vec{v}$, entonces se tiene:
+
+\[
+d(\exp_p)_{\vec{v}}(\vec{w}) = \frac{d}{dt}\bigg|_{t=0} \exp_p(\alpha(t))
+\]
+
+Definimos la curva en el dominio $D_p$:
+\[
+\begin{cases}
+\alpha: I \longrightarrow D_p \subset T_pS \\
+\alpha(0)=\vec{v}, \ \alpha'(0)=\vec{w}
+\end{cases}
+\implies \alpha(t) = \vec{v} + t\vec{w} = \vec{v} + t\lambda\vec{v} = (1+t\lambda)\vec{v}
+\]
+\textit{\textcolor{blue}{\footnotesize (nota: porque $\exp_p: D_p \to S$)}}
+
+Sustituyendo en la diferencial:
+\[
+\frac{d}{dt}\bigg|_{t=0} \exp_p((1+t\lambda)\vec{v}) = \frac{d}{dt}\bigg|_{t=0} \gamma_v(1+t\lambda) = \gamma_v'(1+t\lambda)\bigg|_{t=0} \cdot \lambda = \gamma_v'(1) \cdot \lambda
+\]
+
+Luego, tomando módulos y usando que la norma de la velocidad es constante por ser geodésica ($|\gamma_v'(1)| = |\gamma_v'(0)|$):
+\[
+|d(\exp_p)_{\vec{v}}(\vec{w})| = |\lambda| \cdot |\gamma_v'(1)| = |\lambda| \cdot |\gamma_v'(0)| = |\lambda| \cdot |\vec{v}| = |\lambda\vec{v}| = |\vec{w}| \quad \square
+\]
+
+\vspace{0.5cm}
+
+\textbf{(ii)} Tenemos $\vec{w} \perp \vec{v}$. Llamamos $\alpha(t) = \vec{v} + t\vec{w}$.
+
+Definimos $\varphi(s,t) = \exp_p(s \cdot \alpha(t))$. Habría que determinar su dominio...
+
+\begin{center}
+    % Aquí puedes poner tu captura o dejar el espacio
+    \includegraphics[width=0.6\textwidth]{Imagenes/Demostración Lema de Gauss.png}
+    
+    \vspace{0.2cm}
+    \textit{\small Esquema del dominio $D_p$ y la construcción vectorial.}
+\end{center}
+
+\noindent \textbf{Notas sobre el diagrama:}
+\begin{itemize}
+    \item Sobre $\vec{w}$: \textit{\textcolor{blue}{Nada nos asegura que $\vec{w} \in D_p$ ($\vec{w} \in T_{\vec{v}}D_p \equiv T_pS$).}}
+    \item Sobre el vector resultante: \textit{\textcolor{blue}{Pero $s \cdot (\vec{v} + t\vec{w})$ sí lo queremos en $D_p$.}}
+    \item Sobre el punto de origen $\vec{v}$: \textit{En este punto estará el plano tangente a $D_p$, entonces los vectores se apoyan ahí, por eso está ahí $\vec{w}$.}
+\end{itemize}
+
+Entonces el dominio serán intervalos para $t$ y $s$ tales que $s(\vec{v} + t\vec{w}) \in D_p$ ($\varphi$ tendrá un dominio de la forma $\varphi:(-\epsilon',1+\epsilon')\times(-\epsilon,\epsilon) \to S$), pero como la demostración es muy tediosa (está en su libro), supondremos que tenemos esos dos abiertos que nos definen nuestro dominio de $\varphi$. Hecho eso...
+
+
+
+Calculamos las derivadas parciales de $\varphi(s,t)$ (llamamos $\alpha(t):=(\vec{v}+t\vec{w})$):
+\[
+\frac{\partial \varphi}{\partial t} = d(\exp_p)_{s\cdot \alpha(t)} (s\alpha'(t)) \implies \frac{\partial \varphi}{\partial t}(1,0) = d(\exp_p)_{\vec{v}}(\vec{w})
+\]
+\[
+\frac{\partial \varphi}{\partial s} = d(\exp_p)_{s\cdot \alpha(t)} (\alpha(t)) \implies \frac{\partial \varphi}{\partial s}(1,0) = d(\exp_p)_{\vec{v}}(\vec{v})
+\]
+
+Tenemos entonces que probar que $\frac{\partial \varphi}{\partial t}(1,0) \perp \frac{\partial \varphi}{\partial s}(1,0)$, pero más aún...
+\[
+\text{¿ } \left\langle \frac{\partial \varphi}{\partial t}(s,0), \frac{\partial \varphi}{\partial s}(s,0) \right\rangle = 0 \text{ ?}
+\]
+
+Sea $f(s) = \left\langle \frac{\partial \varphi}{\partial t}(s,0), \frac{\partial \varphi}{\partial s}(s,0) \right\rangle$. Si vemos que en un punto $f$ vale 0 y que $f'=0$, ya estará.
+
+$\to$ \textbf{Veamos lo que vale $f(0)$}. Se tiene que $\frac{\partial \varphi}{\partial t}(0,0) = d(\exp_p)_{\vec{0}}(\vec{0}) = d(\text{Id})_{\vec{0}}(\vec{0}) = \vec{0}$.
+\[
+\text{Luego } f(0) = \left\langle \frac{\partial \varphi}{\partial t}(0,0), \frac{\partial \varphi}{\partial s}(0,0) \right\rangle = \langle \vec{0}, \vec{v} \rangle = 0
+\]
+
+$\to$ \textbf{¿$f'(s)=0$?} Derivando el producto escalar:
+\[
+f'(s) = \underbrace{\left\langle \frac{\partial^2 \varphi}{\partial s \partial t}(s,0), \frac{\partial \varphi}{\partial s} \right\rangle}_{\text{\textcircled{1}}} + \underbrace{\left\langle \frac{\partial \varphi}{\partial t}, \frac{\partial^2 \varphi}{\partial s^2} \right\rangle}_{\text{\textcircled{2}}}
+\]
+Veamos cada uno por separado.
+
+\vspace{0.3cm}
+
+\textbf{Sobre \textcircled{2}:}
+\[
+\frac{\partial^2 \varphi}{\partial s^2}(s,0) = \frac{d^2}{ds^2}(\exp_p(s\cdot \vec{v})) = \gamma_v''(s)
+\]
+\textit{\textcolor{blue}{(es la $\varphi(s,t)$ en el $(s,0)$, y como $t$ no influye en la derivada, se puede evaluar antes de derivar, como si tuviéramos $\tilde{\varphi}(s) = \varphi(s,0)$)}}.
+Como $\gamma_v$ es geodésica, su aceleración $\gamma_v''$ va en la dirección del normal.
+
+Para $\frac{\partial \varphi}{\partial t}(s,0)$, si fijamos en $\varphi(s,t)$ la $s$, por ejemplo $s_0$, se nos queda que $\varphi(s_0,t) =:  \beta_{s_0}(t)$ es una curva en la superficie. Entonces $\frac{\partial \varphi}{\partial t}(s,0) = \beta_s'(0)$ es el vector velocidad de una curva en $S$, entonces es \textbf{tangente}.
+Como $\frac{\partial^2 \varphi}{\partial s^2}$ va en la dirección del normal, entonces son ortogonales:
+\[
+\implies \text{\textcircled{2}} = \left\langle \frac{\partial \varphi}{\partial t}, \frac{\partial^2 \varphi}{\partial s^2} \right\rangle = 0
+\]
+\textit{\textbf{Observemos que hasta ahora no hemos usado en ningún momento la ortogonalidad de $\vec{v}$ y $\vec{w}$. O sea, que estos argumentos y resultados que estamos sacando de aquí, realmente, nos valen para cualquier par de vectores.  }}
+\vspace{0.3cm}
+
+\textbf{Sobre \textcircled{1}:}
+\[
+\left\langle \frac{\partial^2 \varphi}{\partial s \partial t}(s,0), \frac{\partial \varphi}{\partial s}(s,0) \right\rangle = \left\langle \frac{d}{dt}\Big|_{t=0} \frac{\partial \varphi}{\partial s}(s,t), \frac{\partial \varphi}{\partial s}(s,t) \Big|_{t=0} \right\rangle = 
+\]
+\[
+= \frac{1}{2} \frac{d}{dt}\Big|_{t=0} \left\langle \frac{\partial \varphi}{\partial s}(s,t), \frac{\partial \varphi}{\partial s}(s,t) \right\rangle = \frac{1}{2} \frac{d}{dt}\Big|_{t=0} \left| \frac{\partial \varphi}{\partial s} \right|^2 = \circledast
+\]
+
+Pero se tiene que: $\frac{\partial \varphi}{\partial s} = \frac{d}{ds}(\exp_p(s \cdot \alpha(t))) = \frac{d}{ds}(\gamma_{\alpha(t)}(s)) = \gamma_{\alpha(t)}'(s)$.
+\textit{\textcolor{blue}{(la derivada no involucra a $t$, entonces $\alpha(t)$ es un vector ``constante'')}}
+
+Luego:
+\[
+\left| \frac{\partial \varphi}{\partial s} \right|^2 = |\gamma_{\alpha(t)}'(s)|^2 \underset{\uparrow}{=} |\gamma_{\alpha(t)}'(0)|^2 = |\alpha(t)|^2 = |\vec{v} + t\vec{w}|^2 = |\vec{v}|^2 + t^2|\vec{w}|^2 + 2t\langle \vec{v}, \vec{w} \rangle
+\]
+\textit{\textcolor{blue}{(es constante por ser geodésica)}}
+
+\vspace{0.3cm}
+
+\textbf{Entonces:}
+\[
+\circledast = \frac{1}{2} \cdot \frac{\partial}{\partial t}\Big|_{t=0} (|\vec{v}|^2 + t^2|\vec{w}|^2 + 2t\langle \vec{v}, \vec{w} \rangle) = \frac{1}{2} \cdot 2\langle \vec{v}, \vec{w} \rangle = \langle \vec{v}, \vec{w} \rangle = 0
+\]
+\textit{\textcolor{blue}{(por hip. $\vec{v} \perp \vec{w}$)}}
+
+Concluimos entonces que $f'(s) = \text{\textcircled{1}} + \text{\textcircled{2}} = 0$, como queríamos probar. 
+\end{proof}
+
+\begin{definicion}{Discos y circunferencias geodésicas}
+Sea $r > 0$ tal que $D(\vec{0}, r) \subset D_p$ ó $\mathbb{S}(\vec{0}, r) \subset D_p$. Definimos:
+\[
+\mathcal{D}(p, r) := \exp_p(D(\vec{0}, r)) = \text{\textbf{disco geodésico}}
+\]
+\textit{\textcolor{blue}{\footnotesize (como dejar caer el disco de $D_p$ sobre la superficie)}}
+
+\[
+\mathcal{S}(p, r) := \exp_p(\mathbb{S}(\vec{0}, r)) = \text{\textbf{circunferencia geodésica}}
+\]
+
+El \textbf{radio geodésico} que parte de $p$ es la imagen por $\exp_p$ de una semirrecta en $T_pS$ que parte de $\vec{0}$.
+\end{definicion}
+
+\begin{lema}{de Gauss (Versión geométrica)}
+En una superficie regular, las circunferencias geodésicas y los radios geodésicos se cortan \textbf{ortogonalmente}.
+\end{lema}
+
+\begin{proof}
+
+La primera versión (algebraica) nos decía que como $\vec{v} \perp \vec{w}$, entonces:
+\[
+d(\exp_p)_{\vec{v}}(\vec{v}) \perp d(\exp_p)_{\vec{v}}(\vec{w})
+\]
+
+Pero analicemos qué significa cada término geométricamente:
+\begin{center}
+    \includegraphics[width=0.4\textwidth]{Imagenes/Versión Geométrica Lema Gauss.png}
+    
+\end{center}
+
+\textbf{1. El vector radial:}
+Se tiene que:
+\[
+d(\exp_p)_{\vec{v}}(\vec{v}) = \frac{d}{dt}\Big|_{t=0} \exp_p(\alpha(t)) = (\exp_p \circ \alpha)'(0)
+\]
+donde $\alpha(t) = \vec{v} + t\vec{v}$ (recta radial en el tangente) con $\alpha(0)=\vec{v}, \alpha'(0)=\vec{v}$.
+\textit{Esto es el vector velocidad de la curva $\exp_p \circ \alpha$, que es un \textbf{Radio Geodésico}.}
+
+\textbf{2. El vector tangencial:}
+\[
+d(\exp_p)_{\vec{v}}(\vec{w}) = \frac{d}{dt}\Big|_{t=0} \exp_p(\beta(t)) = (\exp_p \circ \beta)'(0)
+\]
+donde $\beta(t)$ es la curva en el plano tangente (la circunferencia) tal que $\beta(0)=\vec{v}$ y $\beta'(0)=\vec{w}$ (tangente a la circunferencia en $T_pS$).
+\textit{Esto es el vector tangente a la imagen de la circunferencia, es decir, a la \textbf{circunferencia geodésica}.}
+
+\textbf{Conclusión:}
+Hemos probado entonces que los radios geodésicos cortan ortogonalmente a las circunferencias geodésicas.
+\end{proof}
+%% PROPIEDAD MINIMIZANTE DE LAS GEODÉSICAS %%
+
+\subsection{Propiedad Minimizante}
+\begin{teorema}{Propiedad minimizante de las geodésicas}
+Sea $S$ una superficie regular, $V$ un \underline{entorno normal} centrado en $p_0 \in S$ y $p \in V$.
+
+\begin{enumerate}[label=(\roman*)]
+    \item El segmento de la geodésica radial $\gamma_p: [0,1] \longrightarrow V$ que une $p_0 = \gamma_p(0)$ y $p = \gamma_p(1)$ es la única curva \textbf{contenida en $V$} de menor longitud uniendo $p_0$ y $p$. 
+   
+    Es decir, si $\alpha: [a,b] \longrightarrow V$ es otra curva diferenciable en $V$ con $\alpha(a)=p_0$ y $\alpha(b)=p$, entonces:
+    \[
+    L_0^1(\gamma_p) \le L_a^b(\alpha),
+    \]
+    dándose la igualdad si, y solo si, $\alpha$ es una reparametrización de $\gamma_p$.
+
+     \textbf{Importante:} Si no parto de este punto $p_0$, NO PUEDO ASEGURAR NADA. 
+    
+    \item Además, si $r>0$ es tal que $\mathcal{D}(p_0, r) \quad (\text{disco geodésico})\subset V(p_0)$, dado $p \in \mathcal{D}(p_0, r)$ se tiene que:
+    \[
+    L_0^1(\gamma_p) \le L_a^b(\alpha)
+    \]
+    \textbf{para toda curva $\alpha: [a,b] \longrightarrow S$ }verificando $\alpha(a)=p_0$ y $\alpha(b)=p$.
+\end{enumerate}
+\end{teorema}
+
+\begin{observacion}{Notas e interpretación geométrica}
+\begin{enumerate}[label=(\arabic*)]
+    \item Es muy importante que $V$ sea entorno normal.
+
+    \item La geodésica radial es la curva más corta uniendo esos puntos \textbf{DENTRO} del entorno $V$. Fuera de él no podemos asegurar nada.
+    Sin embargo, para el disco geodésico $\mathcal{D}(p_0, r) \subset V$ sí podemos asegurar que la geodésica radial que une el centro con cualquier otro punto del disco es la curva más corta que lo hace en \underline{\textbf{TODA}} la superficie.
+
+    \begin{center}
+        % Espacio para el dibujo de la superficie con el entorno V y la curva saliéndose
+        \includegraphics[width=0.4\textwidth]{Imagenes/Minimizante Geodésicas.png} 
+    \end{center}
+
+    \item \textbf{En el cilindro por ejemplo:}
+    
+    \begin{center}
+        % Espacio para el dibujo del cilindro y la franja
+        \includegraphics[width=0.4\textwidth]{Imagenes/Entorno Normal Cilindro.png}
+    \end{center}
+
+    La franja sombreada, $V$, es un entorno normal.
+    La curva $\alpha$ (la que da la vuelta por detrás)  valdría para el Teorema porque no se sale de $V$ ($\alpha \subset V$), pero no podemos asegurarlo para $\gamma_p \not\subset V$ (el segmento recto).
+\end{enumerate}
+\end{observacion}
+\begin{proof}[Demostración del Teorema (Apartado i)]
+
+\textbf{(i)} $V$ es un entorno normal de $p_0$, entonces $\exp_{p_0}: \mathcal{U} \longrightarrow V$ es un \textbf{difeomorfismo}, por lo que si tenemos $p \in V \implies \exists! \vec{v} \in \mathcal{U} / \exp_{p_0}(\vec{v}) = p$, y con ese vector $\vec{v}$ construimos la radial:
+\[
+\gamma_p := \gamma_v\big|_{[0,1]} \ / \ \gamma_p(0)=p_0, \ \gamma_p(1)=p, \ \gamma_p'(0)=\vec{v}
+\]
+
+Supongamos que tenemos otra curva $\alpha: [a,b] \longrightarrow V$ tal que $\alpha(a)=p_0$ y $\alpha(b)=p$.
+\[
+\text{¿ } L_a^b(\alpha) \ge L_0^1(\gamma_p) \text{ ?}
+\]
+Tenemos que:
+\[
+L_0^1(\gamma_p) = \int_0^1 |\gamma_p'(t)| \, dt = \int_0^1 |\gamma_p'(0)| \, dt = \int_0^1 |\vec{v}| \, dt = |\vec{v}|
+\]
+Tendremos entonces que ver... ¿$L_a^b(\alpha) \ge |\vec{v}|$?
+
+\begin{enumerate}
+    \item Si $p = p_0$: $\gamma_p \equiv p_0 \implies \vec{v} = \vec{0} \implies L_a^b(\alpha) \ge 0$ obviamente. \checkmark
+
+    \item Si $p \neq p_0$: Si la curva vuelve a pasar muchas veces por $p_0$, todo ese trozo nos da igual, nos quedamos con el trozo que no vuelve a pasar.
+
+    
+    Sea $t_0 \in (a,b)$ tal que $\forall t > t_0, \ \alpha(t) \neq p_0$ (y $\alpha(t_0)=p_0$).
+    Bastaría entonces probar que: $L_{t_0}^b(\alpha) \ge |\vec{v}|$.
+    
+    Reparametrizaremos $\alpha$ para que en vez de en $[t_0, b]$ esté en $[0,1]$ para ahorrarnos términos.
+    Es decir, $\alpha$ será tal que $\alpha: [0,1] \longrightarrow \textbf{V}$ y $\alpha(t) \neq p_0 \ \forall t> 0$. ¿$L_0^1(\alpha) \ge |\vec{v}|$?
+\end{enumerate}
+
+\noindent \textbf{Paso a polares en el tangente:}
+Observemos que $\tilde{\alpha}(t) \neq \vec{0} \ \forall t > 0$, porque (por reducción al absurdo) si $\exists t > 0 / \tilde{\alpha}(t) = \vec{0} \implies \alpha(t) = \exp_{p_0}(\tilde{\alpha}(t)) = p_0$ (hemos descartado este caso). 
+
+Definimos entonces:
+\[
+r(t) := \begin{cases} |\tilde{\alpha}(t)| & \text{si } t > 0 \\ 0 & \text{si } t = 0 \end{cases} \quad (\text{\textcolor{blue}{escalar}})
+\]
+\[
+V(t) := \frac{\tilde{\alpha}(t)}{|\tilde{\alpha}(t)|} = \frac{\tilde{\alpha}(t)}{r(t)}, \quad t > 0 \quad (\text{\textcolor{blue}{vectorial}, } V(0) \text{ ni se define})
+\]
+
+Intentemos expresar $\alpha$ tal que $\alpha'$ tenga una expresión algo más manejable para poder calcular la integral de $L_0^1(\alpha)$ y acotarla.
+Tenemos que $\alpha(t) = \exp_{p_0}(\tilde{\alpha}(t)) = \exp_{p_0}(r(t) \cdot V(t))$.
+
+\textit{Como aquí el vector depende de $t$, no nos ayudaría expresarlo como $\gamma_{V(t)}(r(t))$ porque eso tampoco sabemos derivarlo, así que hagámoslo a pelo:}
+
+Aplicamos la regla de la cadena diferencial:
+\[
+\alpha'(t) = d(\exp_{p_0})_{r \cdot V} (r'V + rV') = r' \cdot d(\exp_{p_0})_{r \cdot V}(V) + r \cdot d(\exp_{p_0})_{r \cdot V}(V')
+\]
+
+Elevamos al cuadrado la norma para usar el Lema de Gauss:
+\[
+|\alpha'(t)|^2 = (r')^2 \left| d(\exp_{p_0})_{rV}(V) \right|^2 + r^2 \left| d(\exp_{p_0})_{rV}(V') \right|^2 + 2rr' \underbrace{\left\langle d(\exp_{p_0})_{rV}(V), d(\exp_{p_0})_{rV}(V') \right\rangle}_{0}
+\]
+
+\textbf{Justificación del 0:}
+Como $\langle V, V \rangle = 1 \implies 2\langle V', V \rangle = 0 \implies V \perp V'$.
+Por el Lema de Gauss (versión geométrica/algebraica):
+\[
+d(\exp_{p_0})_{rV}(V) \perp d(\exp_{p_0})_{rV}(V')
+\]
+\textit{\textcolor{blue}{\footnotesize (no molesta que sea $rV$ en vez de $v$, pq $V \perp V' \implies rV \perp rV'$)}}
+
+\textbf{Simplificación de la norma:}
+Se tiene también: $\left| d(\exp_{p_0})_{rV}(V) \right|^2 = |V|^2 = 1$ (porque la exponencial preserva normas radiales / Lema de Gauss).
+
+Luego:
+\[
+|\alpha'(t)|^2 = (r')^2 + \underbrace{r^2 \left| d(\exp_{p_0})_{rV}(V') \right|^2}_{\ge 0 \quad \textcircled{1}} \ge (r')^2
+\]
+Tomando raíz cuadrada:
+\[
+|\alpha'(t)| \ge |r'| \ge r'\quad \textcircled{2}
+\]
+
+\textbf{Conclusión de la desigualdad:}
+Se tiene:
+\[
+L_0^1(\alpha) = \int_0^1 |\alpha'(t)| \, dt \ge \lim_{\varepsilon \to 0} \int_{\varepsilon}^1 r' \, dt =\lim_{\varepsilon \to 0} r(1) - r (\varepsilon) = r(1) - r(0) = |\tilde{\alpha}(1)| = |\exp_{p_0}^{-1}(\alpha(1))| =  |\exp_{p_0}^{-1}(p)|=|\vec{v}| \quad \checkmark
+\]
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
+
+\noindent \textbf{Falta ver la igualdad:}
+Supongamos que $L_0^1(\alpha) = |\vec{v}|$. Esto implica igualdad en \textcircled{1} y en \textcircled{2}.
+
+\begin{enumerate}[label=\textcircled{\arabic*}]
+    \setcounter{enumi}{1}
+    \item $|r'| = r' \iff r' > 0 \iff r$ es estrictamente creciente.
+    \item $|d(\exp_{p_0})_{rV}(V')|^2 = 0 \iff d(\exp_{p_0})_{rV}(V') = 0 \iff V' = 0 \iff V = \text{cte}\implies V(t)=V(1)=\frac{\vec{v}}{|\vec{v}|}$.
+\end{enumerate}
+En esta última cadena de igualdades estamos usando que $\alpha\subset V\implies \tilde{\alpha} \subset U\implies d(\exp_{p_0})_{rV}$ es un isomorfismo lineal.\\
+Si $V(t)$ es constante, digamos $V_0$, entonces:
+\[
+\alpha(t) = \exp_{p_0}(r(t)V(t)) = \exp_{p_0}\left( r(t) \frac{\vec{v}}{|\vec{v}|} \right) = \gamma_v\left( \frac{r(t)}{|\vec{v}|} \right) = \gamma_p\left( \frac{r(t)}{|\vec{v}|} \right)
+\]
+Y esto es una \textbf{reparametrización de $\gamma_p$}. \qed
+\end{proof}
+
+
+%%%% PARTE 2 %%%%%%
+\begin{proof}[Demostración (Apartado ii)]
+Sea $r > 0$ tal que $\mathcal{D}(p_0, r) \subset V$.
+Dado $p \in \mathcal{D}(p_0, r) \subset V \implies \exists! \vec{v} \in \mathcal{U} / \exp_{p_0}(\vec{v}) = p$.
+
+Sea $\gamma_p : [0,1] \longrightarrow V$ la geodésica radial con $\gamma_p(0) = p_0$ y $\gamma_p(1) = p$.
+Tomamos $\alpha$ otra curva que los une y la reparametrizamos $\alpha : [0,1] \longrightarrow S$. O sea, $\alpha(0)=p_0, \alpha(1)=p$.
+
+
+\noindent \textbf{\underline{Caso 1.-}} Si $\alpha|_{[0,1]} \subset \mathcal{D}(p_0, r) \subset V \implies$
+Por (i) se tiene $L_0^1(\gamma_p) \le L_0^1(\alpha)$, dándose la igualdad si $\alpha$ es una reparametrización de $\gamma_p$ (en general se cumple si $\alpha$ está en $V$, pero nos interesa que esté o no en el disco).
+
+\vspace{0.3cm}
+
+
+\begin{center}
+    % Espacio para el dibujo del Caso 2 (curva saliéndose del disco)
+    \includegraphics[width=0.5\textwidth]{Imagenes/Diagrama_Disco.png}
+    \par \textit{\small Esquema: La curva $\alpha$ se sale del disco $\mathcal{D}(p_0, r)$ y corta a la frontera del disco más pequeño en $p^*$.}
+\end{center}
+
+
+
+\noindent \textbf{\underline{Caso 2.-}} Supongamos que $\alpha \not\subset \mathcal{D}(p_0, r)$.
+
+Se tiene $p = \exp_{p_0}(\vec{v}) \in \mathcal{D}(p_0, r) = \exp_{p_0}(D(\vec{0}, r))$ y como $\exp_{p_0}$ es un difeomorfismo:
+\[
+\implies \vec{v} \in D(\vec{0}, r) \implies |\vec{v}| < r \quad \text{\small (podemos entonces encontrar un número en medio)}
+\]
+
+Sea $r^* > 0$ tal que $|\vec{v}| < r^* < r$, i.e., $\vec{v} \in D(\vec{0}, r^*) \subsetneq D(\vec{0}, r)$.
+\[
+\overset{\exp_{p_0}}{\implies} p \in \mathcal{D}(p_0, r^*) \subset \mathcal{D}(p_0, r)
+\]
+
+Sea $t_0 = \inf \{ t \in [0,1] : \alpha(t) \notin \mathcal{D}(p_0, r^*) \}$ (el primer valor para el que $\alpha$ se "sale" del disco pequeño).
+Luego $\alpha([0, t_0)) \subset \mathcal{D}(p_0, r^*)$ y trabajando ahí tenemos:
+
+Llamando $p^* = \alpha(t_0) \in \mathcal{S}(p_0, r^*) \subset \mathcal{D}(p_0, r) \subset V$ (está en la frontera). \textit{(Recordemos que denotamos a $\mathcal{S}$ como la frontera)}.\\
+Sea $\gamma_{p^*}$ la geodésica radial que une $\gamma_{p^*}(0)=p_0$ con $\gamma_{p^*}(1)=p^*$, entonces por (i) se tiene:
+
+\[
+L_0^1(\alpha) \ge \underbrace{L_0^{t_0}(\alpha)}_{\text{es un trozo de } \alpha} \ge L_0^1(\gamma_{p^*}) = \int_0^1 |\gamma_{p^*}'(t)| \, dt = \int_0^1 |\gamma_{p^*}'(0)| \, dt = |\gamma_{p^*}'(0)| = \circledast
+\]
+
+Definimos $\vec{w} := \gamma_{p^*}'(0)$ (esto no lo conocemos, pero $\gamma_{p^*}' (0) = \gamma_w'(0) = \vec{w}$).
+Sabemos que $p^* = \exp_{p_0}(\vec{w}) \in \exp_{p_0}(\mathcal{S}(\vec{0}, r^*)) \implies |\vec{w}| = r^*$.
+
+Entonces retomando $\circledast$:
+\[
+\circledast = r^* > |\vec{v}| = L_0^1(\gamma_p) \implies L_0^1(\alpha) \ge L_0^1(\gamma_p)
+\]
+\end{proof}
+
+% -------------------------------------------------------------------------
+
+\section{Coordenadas normales y geodésicas polares}
+\subsection{Sistema de coordenadas Normales}
+Sean $p_0 \in S$ un punto de una superficie regular $S$ y $V$ un entorno normal de $p_0$.
+Sea $\mathcal{U}$ el abierto estrellado para el cual $\exp_{p_0}: \mathcal{U} \longrightarrow V$ es un difeomorfismo.
+
+\noindent \textbf{¿Cómo podemos dar una \underline{parametrización} para $V$?}
+
+\begin{itemize}
+    \item Sea $\{\vec{e}_1, \vec{e}_2\}$ una base ortonormal de $T_{p_0}S$.
+    \item Sea $\phi: \mathbb{R}^2 \longrightarrow T_{p_0}S$ dada por $\phi(u,v) = u\cdot\vec{e}_1 + v\cdot\vec{e}_2$, para la cual $\phi(0,0) = \vec{0} \in \mathcal{U}$. \textit{(Nota: esto identifica $\mathbb{R}^2$ con $T_{p_0}S$)}.
+    \item Existe un entorno $\mathcal{U}_0 \subset \mathbb{R}^2$ del $(0,0)$ tal que $\phi: \mathcal{U}_0 \longrightarrow \mathcal{U}$ es un difeomorfismo (podemos identificar $\mathcal{U}_0 \equiv \mathcal{U}$).
+\end{itemize}
+
+\begin{definicion}{Sistema de coordenadas normales}
+La aplicación $X: \mathcal{U} \equiv \mathcal{U}_0 \subset \mathbb{R}^2 \longrightarrow V \subset S$, dada por:
+\[
+X(u,v) = \exp_{p_0}(\phi(u,v)) = \exp_{p_0}(u\cdot\vec{e}_1 + v\cdot\vec{e}_2)
+\]
+es una parametrización de $V$, llamada \textbf{\underline{sistema de coordenadas normales en $p_0$}}.
+\end{definicion}
+
+\noindent Si $p \in V$, sea $\vec{v} \in T_{p_0}S$ el único vector tal que $\exp_{p_0}(\vec{v}) = p$. Entonces $\vec{v} = v_1\cdot\vec{e}_1 + v_2\cdot\vec{e}_2$.
+El par $(v_1, v_2)$ recibe el nombre de \textbf{\underline{coordenadas normales del punto $p$}}.
+
+
+\textbf{Propiedades de la métrica en coordenadas normales:}
+En el punto $p_0$ (el origen de coordenadas $u=v=0$):
+\begin{itemize}
+    \item $E(0,0)=1, \quad F(0,0)=0, \quad G(0,0)=1$ (la métrica es la identidad).
+    \item Las derivadas primeras de los coeficientes métricos se anulan: $E_u = E_v = F_u = F_v = G_u = G_v = 0$.
+\end{itemize}
+
+\subsection{Coordenadas geodésicas polares}
+
+Sean $p_0 \in S$ un punto de una superficie regular $S$ y $V$ un entorno normal de $p_0$.
+Sea $\mathcal{U}$ el abierto estrellado para el cual $\exp_{p_0}: \mathcal{U} \longrightarrow V$ es un difeomorfismo.
+
+\noindent \textbf{¿Cómo podemos dar una parametrización para $V$?} (Versión polar)
+
+\begin{itemize}
+    \item Sea $\{\vec{e}_1, \vec{e}_2\}$ una base ortonormal de $T_{p_0}S$.
+    \item Dado $\vec{v} \in T_{p_0}S$, existe un par $(r, \theta)$ tal que $\vec{v} = r\cos\theta\vec{e}_1 + r\sen\theta\vec{e}_2$ (coordenadas polares).
+    \item Sea $L = \{ \lambda \cdot \vec{e}_1 : \lambda \ge 0 \}$ (semirrecta) y sea $\phi: (0, +\infty) \times (0, 2\pi) \longrightarrow T_{p_0}S \setminus L$ dada por:
+    \[
+    \phi(r, \theta) = r\cos\theta\vec{e}_1 + r\sen\theta\vec{e}_2, \quad \text{que es un difeomorfismo.}
+    \]
+    \item Esto es una parametrización del entorno $V$ pero no me cubre el punto $p_0$
+\end{itemize}
+
+\begin{definicion}{Sistema de coordenadas geodésicas polares}
+La aplicación $X: \mathcal{U}_0 := \phi^{-1}(\mathcal{U} \setminus L) \longrightarrow V_0 := \exp_{p_0}(\mathcal{U} \setminus L) \subset V$, dada por:
+\[
+X(r, \theta) = \exp_{p_0}(\phi(r, \theta)) = \exp_{p_0}(r\cos\theta\vec{e}_1 + r\sen\theta\vec{e}_2)
+\]
+es una parametrización de $V_0$, que se denomina \textbf{\underline{sistema de coordenadas geodésicas polares}} centradas en $p_0$.
+
+Si $p \in V$, sea $\vec{v} \in T_{p_0}S$ el único vector tal que $\exp_{p_0}(\vec{v}) = p$. El par $(r, \theta)$ tal que $\vec{v} = r\cos\theta\vec{e}_1 + r\sen\theta\vec{e}_2$ recibe el nombre de \textbf{\underline{coordenadas geodésicas polares del punto $p$}} centradas en $p_0$.
+\end{definicion}
+
+\begin{observacion}{Nota sobre el dominio}
+El problema de las coordenadas polares es que se dejan sin cubrir una recta del plano por ser el dominio de $\phi$ un abierto, que sería un radio geodésico en $S$. Además, la parametrización es en un entorno de un punto el cual no cubre a ese punto (el origen), pero esto lo resuelven las propiedades.
+\end{observacion}
+
+\begin{tcolorbox}[colback=yellow!10!white, colframe=yellow!50!black, title=Resumen escueto]
+\begin{itemize}
+    \item \textbf{Coords. normales:} $X(u,v) = \exp_{p_0}(u\cdot\vec{e}_1 + v\cdot\vec{e}_2)$
+    \item \textbf{Coords. polares:} $X(r,\theta) = \exp_{p_0}(r\cos\theta\cdot\vec{e}_1 + r\sen\theta\cdot\vec{e}_2)$
+\end{itemize}
+\begin{flushright}
+    \small $\left( \text{donde } \{\vec{e}_1, \vec{e}_2\} \text{ es una base ortonormal de } T_{p_0}S \right)$
+\end{flushright}
+\end{tcolorbox}
+
+\begin{proposicion}{Propiedades de las coordenadas normales}
+\begin{enumerate}[label=(\arabic*)]
+    \item Se pueden definir para ``superficies'' de dimensión $n \ge 2$.
+    \item $X(0,0) = \exp_{p_0}(\vec{0}) = p_0$.
+    \item $X_u(0,0) = \vec{e}_1$ y $X_v(0,0) = \vec{e}_2$.
+    \item $E(u,0) = 1$, $F(0,0) = 0$, $G(0,v) = 1$.
+    \item En el $(0,0)$: $E_u = E_v = F_u = F_v = G_u = G_v = 0$.
+\end{enumerate}
+\end{proposicion}
+
+\begin{proof}[Demostración de (3), (4) y (5)]
+\textit{(la (2) está ahí mismo)}.
+
+\textbf{1. Para las propiedades (3) y (4):}
+\[
+X(u,0) = \exp_{p_0}(u \cdot \vec{e}_1) = \gamma_{e_1}(u) \implies X_u(u,0) = \gamma_{e_1}'(u)
+\]
+\[
+X(0,v) = \gamma_{e_2}(v) \implies X_v(0,v) = \gamma_{e_2}'(v)
+\]
+Entonces, evaluando en el origen:
+\[
+X_u(0,0) = \gamma_{e_1}'(0) = \vec{e}_1 \quad \text{y} \quad X_v(0,0) = \gamma_{e_2}'(0) = \vec{e}_2
+\]
+Luego calculamos los coeficientes métricos:
+\[
+\begin{aligned}
+E(u,0) &= \langle X_u(u,0), X_u(u,0) \rangle = |\gamma_{e_1}'(u)|^2 = |\gamma_{e_1}'(0)|^2 = |\vec{e}_1|^2 = 1 \\
+G(0,v) &= \langle X_v, X_v \rangle (0,v) = |\vec{e}_2|^2 = 1 \\
+F(0,0) &= \langle X_u, X_v \rangle (0,0) = \langle \vec{e}_1, \vec{e}_2 \rangle = 0 \quad \text{\textcolor{gray}{(ortonormal)}}
+\end{aligned}
+\]
+\textit{\footnotesize (donde coinciden $X(u,0)$ y $X(0,v)$ es el $(0,0)$)}.
+
+\vspace{0.3cm}
+
+\textbf{2. Para la propiedad (5):}
+Si $\vec{v} = v_1\vec{e}_1 + v_2\vec{e}_2 \implies X(v_1, v_2) = \exp_{p_0}(v_1\vec{e}_1 + v_2\vec{e}_2) = \gamma_v(1)$.
+
+Consideramos la geodésica reescalada:
+\[
+\gamma_v(t) = \gamma_{tv}(1) = \exp_{p_0}(t\vec{v}) = \exp_{p_0}(t v_1 \vec{e}_1 + t v_2 \vec{e}_2) = X(tv_1, tv_2)
+\]
+En general, tenemos la curva en coordenadas: $\alpha(t) = X(\tilde{\alpha}(t)) = X(u(t), v(t)) \implies \begin{cases} u(t) = t \cdot v_1 \\ v(t) = t \cdot v_2 \end{cases}$.
+
+Si escribimos el sistema de ecuaciones diferenciales que cumplen las geodésicas (G) y se simplifica (teniendo en cuenta que $u' = v_1, v' = v_2$ y $u'' = v'' = 0$):
+
+\[
+\left\{
+\begin{aligned}
+u'' + (u')^2 \Gamma_{11}^1 + 2u'v' \Gamma_{12}^1 + (v')^2 \Gamma_{22}^1 &= 0 \\
+v'' + (u')^2 \Gamma_{11}^2 + 2u'v' \Gamma_{12}^2 + (v')^2 \Gamma_{22}^2 &= 0
+\end{aligned}
+\right\}
+\implies
+\left\{
+\begin{aligned}
+v_1^2 \Gamma_{11}^1 + 2v_1v_2 \Gamma_{12}^1 + v_2^2 \Gamma_{22}^1 &= 0 \\
+v_1^2 \Gamma_{11}^2 + 2v_1v_2 \Gamma_{12}^2 + v_2^2 \Gamma_{22}^2 &= 0
+\end{aligned}
+\right\}
+\]
+
+Como el sistema vale para \textbf{cualquier} $\vec{v}=(v_1, v_2)$, probamos con vectores específicos:
+\begin{itemize}
+    \item Si $\vec{v}=(1,0) \implies 1^2 \cdot \Gamma_{11}^k + 0 + 0 = 0 \implies \Gamma_{11}^1(0,0) = 0, \ \Gamma_{11}^2(0,0) = 0$.
+    \item Si $\vec{v}=(0,1) \implies 0 + 0 + 1^2 \cdot \Gamma_{22}^k = 0 \implies \Gamma_{22}^1(0,0) = 0, \ \Gamma_{22}^2(0,0) = 0$.
+    \item Si $\vec{v}=(1,1) \implies \Gamma_{11}^k + 2\Gamma_{12}^k + \Gamma_{22}^k = 0$. Como los extremos son 0, queda $2\Gamma_{12}^k = 0 \implies \Gamma_{12}^1 = 0, \Gamma_{12}^2 = 0$.
+\end{itemize}
+
+Como todos los $\Gamma_{ij}^k(0,0) = 0$, esto implica que todas las derivadas primeras de los coeficientes métricos se anulan:
+\[
+E_u = E_v = F_u = F_v = G_u = G_v = 0 \quad (\text{en el } (0,0)) \quad \qed
+\]
+\end{proof}
+
+\begin{proposicion}{Propiedades de las coordenadas polares}
+\begin{enumerate}[label=(\arabic*)]
+    \item Solo pueden definirse para superficies 2-dimensionales.
+    \item No cubre el propio punto $p_0$, pero...
+\end{enumerate}
+\end{proposicion}
+
+\begin{teorema}{Propiedades métricas de las coordenadas polares}
+Sea $X(r, \theta)$ el sistema de coordenadas geodésicas polares centradas en $p_0$. Entonces se verifica:
+\begin{enumerate}[label=\textbullet]
+    \item $E(r, \theta) = 1$, $F(r, \theta) = 0$, $G(r, \theta) > 0$ (para $r>0$).
+    \item $\lim_{r \to 0} G(r, \theta) = 0$, $\lim_{r \to 0} (\sqrt{G})_r(r, \theta) = 1$.
+\end{enumerate}
+\end{teorema}
+
+\noindent \textbf{\underline{Notación}:} $\vec{v}_{r\theta} := r \cdot \vec{v}_{\theta} := r \cdot \cos\theta \cdot \vec{e}_1 + r \cdot \sen\theta \cdot \vec{e}_2$.
+
+\begin{proof}[Demostración]
+Se tiene por definición: $X(r, \theta) = \exp_{p_0}(r \cdot \vec{v}_{\theta})$. Luego, derivando:
+\[
+\begin{cases}
+X_r(r, \theta) = d(\exp_{p_0})_{r \cdot \vec{v}_{\theta}}(\vec{v}_{\theta}) \\
+X_\theta(r, \theta) = d(\exp_{p_0})_{r \cdot \vec{v}_{\theta}}(r \cdot \vec{v}_{\theta}')
+\end{cases}
+\]
+Entonces se tiene:
+
+\textbf{1. Cálculo de E:}
+\[
+E = |X_r|^2 = |d(\exp_{p_0})_{r\vec{v}_{\theta}}(\vec{v}_{\theta})|^2 \underset{\text{\textcolor{blue}{\tiny Lema de Gauss}}}{=} |\vec{v}_{\theta}|^2 = 1
+\]
+\textit{\textcolor{blue}{\footnotesize (vectores proporcionales / radiales se conservan)}}
+
+\textbf{2. Cálculo de F:}
+\[
+F = \langle X_r, X_\theta \rangle = \langle d(\exp_{p_0})_{r\vec{v}_{\theta}}(\vec{v}_{\theta}), d(\exp_{p_0})_{r\vec{v}_{\theta}}(r \cdot \vec{v}_{\theta}') \rangle = 0
+\]
+\textit{\textcolor{blue}{\footnotesize (Por Lema de Gauss, ya que $\vec{v}_{\theta}' = -\sen\theta\vec{e}_1 + \cos\theta\vec{e}_2 \implies \langle \vec{v}_{\theta}, \vec{v}_{\theta}' \rangle = 0$)}}
+
+\textbf{3. Cálculo de G y sus límites:}
+\[
+G = \langle X_\theta, X_\theta \rangle = |d(\exp_{p_0})_{r\vec{v}_{\theta}}(r \cdot \vec{v}_{\theta}')|^2 = r^2 |d(\exp_{p_0})_{r\vec{v}_{\theta}}(\vec{v}_{\theta}')|^2 > 0
+\]
+\[
+\implies \lim_{r \to 0} G = \lim_{r \to 0} r^2 \cdot \underbrace{|\dots|^2}_{\text{acotado}} = 0
+\]
+\textit{\textcolor{blue}{\footnotesize (esto tiene que ser acotado, pero tiende a $|\vec{v}_\theta'|^2=1$)}}
+
+\textit{Esta demostración Maria Ángeles no lo demuestra en clase pero está bien saberlo}\\
+Para $\lim_{r \to 0} (\sqrt{G})_r$:
+Sabemos que $\sqrt{G} = r |d(\exp_{p_0})_{r\vec{v}_{\theta}}(\vec{v}_{\theta}')|$. Derivando respecto a $r$:
+\[
+(\sqrt{G})_r = |d(\exp_{p_0})_{r\vec{v}_{\theta}}(\vec{v}_{\theta}')| + r \cdot \frac{\partial}{\partial r}\Big( |d(\exp_{p_0})_{r\vec{v}_{\theta}}(\vec{v}_{\theta}')| \Big)
+\]
+Tomando el límite cuando $r \to 0$:
+\[
+\lim_{r \to 0} (\sqrt{G})_r = \underbrace{|d(\exp_{p_0})_{\vec{0}}(\vec{v}_{\theta}')|}_{|\vec{v}_{\theta}'|=1} + \underbrace{0 \cdot (\dots)}_{\to 0} = 1 \quad \square
+\]
+\textit{\textcolor{blue}{\footnotesize (el término de la derivada debe ser acotado, y lo es)}}
+\end{proof}
+
+
+\begin{observacion}{Interpretación geométrica de las variables polares}
+¿Qué ocurre si fijamos alguna de las variables en las coordenadas polares?
+
+\[
+X(r, \theta) = \exp_{p_0}(r\cos\theta\vec{e}_1 + r\sen\theta\vec{e}_2) = \exp_{p_0}(r(\underbrace{\cos\theta\vec{e}_1 + \sen\theta\vec{e}_2}_{\vec{V}_\theta}))
+\]
+
+\textbf{Fijo $\theta_0$}:
+\[
+X(r, \theta_0) = \exp_{p_0}(r \cdot \vec{V}_{\theta_0}) = \text{\textbf{radio geodésico}}
+\]
+
+\textbf{Fijo $r_0$}:
+\[
+X(r_0, \theta) = \exp_{p_0}(\underbrace{r_0\cos\theta\vec{e}_1 + r_0\sen\theta\vec{e}_2}_{\partial D(\vec{0}, r_0)}) = \text{\textbf{circunferencia geodésica}}
+\]
+\end{observacion}
+
+
+
+
+\begin{observacion}{Curvatura de Gauss en coordenadas polares}
+Las coordenadas geodésicas polares tienen $E=1, F=0$, i.e., son parametrizaciones ortogonales. Entonces se puede calcular la curvatura de Gauss como:
+\[
+K = \frac{-1}{2\sqrt{EG}} \left[ \left(\frac{E_\theta}{\sqrt{EG}}\right)_\theta + \left(\frac{G_r}{\sqrt{EG}}\right)_r \right]
+\]
+Como $E=1 \implies E_\theta=0$ y $\sqrt{EG} = \sqrt{G}$:
+\[
+K = \frac{-1}{2\sqrt{G}} \left( \frac{G_r}{\sqrt{G}} \right)_r = \frac{-1}{\sqrt{G}} \left( \frac{G_r}{2\sqrt{G}} \right)_r = \frac{-1}{\sqrt{G}} (\sqrt{G})_{rr}
+\]
+\textit{\textcolor{blue}{\footnotesize (usando que $(\sqrt{G})_r = \frac{G_r}{2\sqrt{G}}$)}}
+
+Es decir, en una parametrización por coordenadas geodésicas polares, la curvatura de Gauss cumple la relación con $G$:
+\[
+\boxed{\sqrt{G} \cdot K + (\sqrt{G})_{rr} = 0}
+\]
+\end{observacion}
+
+
+\noindent Esto se suele utilizar para calcular $G$ cuando esta es difícil y $K$ es ``sencillo''.
+De hecho, si $K \equiv \text{cte}$, se resuelve la EDP y sale:
+\[
+G = \begin{cases} 
+r^2 & \text{si } K=0 \\
+\frac{1}{K}\sen^2(\sqrt{K}\cdot r) & \text{si } K>0 \\
+\frac{-1}{K}\sinh^2(\sqrt{-K}\cdot r) & \text{si } K<0 
+\end{cases}
+\]
+\begin{proof}[Resolución de la ecuación de Jacobi para $K$ cte.]
+Consideramos la relación fundamental que liga la curvatura de Gauss con el coeficiente métrico $G$ en coordenadas geodésicas polares:
+\[
+\sqrt{G} \cdot K + (\sqrt{G})_{rr} = 0
+\]
+Definimos la función $f(r) = \sqrt{G}(r, \theta)$. La ecuación se reescribe como una EDO lineal de segundo orden con coeficientes constantes:
+\[
+f''(r) + K f(r) = 0
+\]
+Para resolver este problema de valores iniciales, utilizamos las propiedades métricas en el origen ($r \to 0$):
+\begin{itemize}
+    \item $f(0) = \lim_{r \to 0} \sqrt{G} = 0$.
+    \item $f'(0) = \lim_{r \to 0} (\sqrt{G})_r = 1$.
+\end{itemize}
+
+Analizamos la solución según el signo de la curvatura $K$:
+
+\textbf{Caso 1: $K = 0$ (Plano)}
+La ecuación es $f''(r) = 0$. Integrando dos veces obtenemos $f(r) = Ar + B$. 
+Imponiendo las condiciones iniciales:
+\[ f(0) = 0 \implies B = 0; \quad f'(0) = 1 \implies A = 1 \]
+Por tanto, $f(r) = r \implies \boxed{G(r, \theta) = r^2}$.
+
+\textbf{Caso 2: $K > 0$ (Esfera)}
+La solución general de $f''(r) + K f(r) = 0$ es $f(r) = A \cos(\sqrt{K}r) + B \sen(\sqrt{K}r)$.
+Imponiendo las condiciones iniciales:
+\[ f(0) = 0 \implies A = 0; \quad f'(r) = B\sqrt{K}\cos(\sqrt{K}r) \implies f'(0) = B\sqrt{K} = 1 \implies B = \frac{1}{\sqrt{K}} \]
+Por tanto, $f(r) = \frac{1}{\sqrt{K}}\sen(\sqrt{K}r) \implies \boxed{G(r, \theta) = \frac{1}{K}\sen^2(\sqrt{K}r)}$.
+
+\textbf{Caso 3: $K < 0$ (Plano hiperbólico)}
+La solución general de $f''(r) - |K| f(r) = 0$ es $f(r) = A \cosh(\sqrt{-K}r) + B \senh(\sqrt{-K}r)$.
+Imponiendo las condiciones iniciales:
+\[ f(0) = 0 \implies A = 0; \quad f'(0) = B\sqrt{-K} = 1 \implies B = \frac{1}{\sqrt{-K}} \]
+Por tanto, $f(r) = \frac{1}{\sqrt{-K}}\senh(\sqrt{-K}r) \implies \boxed{G(r, \theta) = -\frac{1}{K}\senh^2(\sqrt{-K}r)}$.
+\end{proof}
+
+
+\section{Teorema de Minding}
+\begin{lema}{Isometrías locales y coeficientes métricos}
+
+
+Sea $\phi: S_1 \to S_2$ una isometría local entre superficies regulares. Entonces, para todo $p \in S_1$, existen parametrizaciones $X: U \to S_1$ (cubriendo $p$) y $\overline{X}: U \to S_2$ (cubriendo $\phi(p)$) definidas sobre el \textbf{mismo abierto} $U \subset \mathbb{R}^2$ tales que los coeficientes de sus primeras formas fundamentales coinciden:
+\[
+    E = \overline{E}, \quad F = \overline{F}, \quad G = \overline{G}.
+\]
+\end{lema}
+
+\begin{lema}{Recíproco del lema anterior}
+Sean $X: U \to S_1$ y $\overline{X}: U \to S_2$ parametrizaciones tales que $E = \overline{E}$, $F = \overline{F}$ y $G = \overline{G}$ en todo $U$. Entonces, la aplicación composición:
+\[
+    \phi = \overline{X} \circ X^{-1} : X(U) \to \overline{X}(U)
+\]
+es una isometría (global) entre los abiertos $X(U)$ y $\overline{X}(U)$. 
+\end{lema}
+
+
+
+
+\begin{teorema}{Teorema de Minding}
+(Recíproco del Teorema Egregium de Gauss para cuando $K \equiv \text{cte}$).
+
+Sean $S$ y $\bar{S}$ dos superficies regulares con igual curvatura de Gauss \textbf{\underline{CONSTANTE}}. Entonces, $S$ y $\bar{S}$ son localmente isométricas.
+\end{teorema}
+
+\begin{proof}[Demostración]
+
+
+
+Tenemos $S$ y $\bar{S}$ con $K = \bar{K}$ constante. Queremos ver que son isométricas.
+Sean $p \in S, \bar{p} \in \bar{S}$, ¿$\exists V(p), \bar{V}(\bar{p})$ y $\varphi: V \longrightarrow \bar{V}$ isometría?
+Para ello, fijamos bases ortonormales $\{\vec{e}_1, \vec{e}_2\}$ de $T_pS$ y $\{\vec{f}_1, \vec{f}_2\}$ de $T_{\bar{p}}\bar{S}$, y definimos la isometría lineal entre los planos tangentes:
+\[
+\tilde{\varphi}: T_pS \longrightarrow T_{\bar{p}}\bar{S} \quad / \quad \tilde{\varphi}(u\vec{e}_1 + v\vec{e}_2) = u\vec{f}_1 + v\vec{f}_2
+\]
+Definimos entonces la aplicación:
+\[
+\varphi = \exp_{\bar{p}} \circ \, \tilde{\varphi} \circ \exp_p^{-1}
+\]
+Para facilitarlo, hagamos todo con $T_pS$, $T_{\bar{p}}\bar{S}$ y luego ``pasemos'' todo usando la exponencial.
+Construyamos la siguiente isometría lineal:
+\[
+\tilde{\varphi}: T_pS \longrightarrow T_{\bar{p}}\bar{S}, \quad \{\vec{e}_1, \vec{e}_2\} \text{ base ortonormal de } T_pS \text{ y } \{\vec{f}_1, \vec{f}_2\} \text{ base ortonormal de } T_{\bar{p}}\bar{S}.
+\]
+\[
+u\cdot\vec{e}_1 + v\cdot\vec{e}_2 \longmapsto u\cdot\vec{f}_1 + v\cdot\vec{f}_2
+\]
+
+Tenemos el siguiente esquema:
+
+\begin{center}
+    % ESPACIO PARA EL ESQUEMA GRANDE DE LOS PLANOS Y SUPERFICIES
+    \includegraphics[width=0.8\textwidth]{Imagenes/Esquema-Minding.png}
+    
+    \vspace{0.3cm}
+    \textit{\small Esquema de la construcción: Paso de los entornos en los planos tangentes (donde $\tilde{\varphi}$ es isometría) a las superficies mediante la exponencial.}
+\end{center}
+
+Definimos la aplicación $\varphi = \exp_{\bar{p}} \circ \, \tilde{\varphi} \circ \exp_p^{-1}$.
+En los entornos contorneados se puede mover libremente (todo es biyectivo), por lo que se ve clara la biyectividad.
+
+\textbf{1. Relación con las coordenadas geodésicas polares:}
+Consideremos las parametrizaciones $X(r, \theta) = \exp_p(\phi(r, \theta))$ y $\bar{X}(r, \theta) = \exp_{\bar{p}}(\bar{\phi}(r, \theta))$.
+Verifiquemos que el diagrama conmuta, es decir, $(\varphi \circ X)(r, \theta) = \bar{X}(r, \theta)$:
+\[
+\begin{aligned}
+(\varphi \circ X)(r, \theta) &= (\varphi \circ \exp_p \circ \phi)(r, \theta) \\
+&= (\exp_{\bar{p}} \circ \tilde{\varphi} \circ \underbrace{\exp_p^{-1} \circ \exp_p}_{Id} \circ \phi)(r, \theta) \\
+&= (\exp_{\bar{p}} \circ \tilde{\varphi})(r\cos\theta\vec{e}_1 + r\sen\theta\vec{e}_2) \\
+&= \exp_{\bar{p}}(r\cos\theta\vec{f}_1 + r\sen\theta\vec{f}_2) \\
+&= \exp_{\bar{p}}(\bar{\phi}(r, \theta)) = \bar{X}(r, \theta) \quad \checkmark
+\end{aligned}
+\]
+
+\textbf{2. Verificación de la isometría vía coeficientes métricos:}
+Como el diagrama conmuta ($\bar{X} = \varphi \circ X$), basta ver que $E=\bar{E}$, $F=\bar{F}$ y $G=\bar{G}$:
+\begin{itemize}
+    \item Por ser coordenadas geodésicas polares: $E = \bar{E} = 1$ y $F = \bar{F} = 0$.
+    \item Como $K = \bar{K}$ es constante, la resolución de la EDP $\sqrt{G}_{rr} + K\sqrt{G} = 0$ con las condiciones iniciales en el origen nos da la misma función $G(r, \theta) = \bar{G}(r, \theta)$ para ambos casos (según el signo de $K$).
+\end{itemize}
+Al coincidir los coeficientes métricos, $\varphi$ es una isometría.
+
+
+\textbf{3. Cálculo de la diferencial en el origen:}
+Probemos que $d\varphi_p = \tilde{\varphi}$. Usando la regla de la cadena:
+\[
+d\varphi_p = d(\exp_{\bar{p}} \circ \, \tilde{\varphi} \circ \exp_p^{-1})_p = d(\exp_{\bar{p}})_{\tilde{\varphi}(\exp_p^{-1}(p))} \circ d(\tilde{\varphi})_{\exp_p^{-1}(p)} \circ d(\exp_p^{-1})_p
+\]
+Como $\exp_p^{-1}(p) = \vec{0}$ y $\tilde{\varphi}(\vec{0}) = \vec{0}$, y sabiendo que $d(\exp)_{\vec{0}} = Id$ y $d(\tilde{\varphi}) = \tilde{\varphi}$ por ser lineal:
+\[
+d\varphi_p = d(\exp_{\bar{p}})_{\vec{0}} \circ \tilde{\varphi} \circ (d\exp_p)_{\vec{0}}^{-1} = Id \circ \tilde{\varphi} \circ Id = \tilde{\varphi} \quad \checkmark
+\]
+
+\textbf{4. Conclusión:}
+Para nuestro caso, cogemos $X$ y $\bar{X}$ como las \textbf{coordenadas geodésicas polares} de cada superficie.
+
+\begin{itemize}
+    \item Se ve que conmutan (por construcción de $\varphi$ a través de las exponenciales y la isometría lineal).
+    \item Se sabe que $E = \bar{E} = 1$ y $F = \bar{F} = 0$.
+    \item Para ver que $G = \bar{G}$, se distinguen los 3 casos de la observación anterior para $K \equiv \text{cte}$. Como $K = \bar{K}$, las fórmulas darán el mismo resultado para $G$ y $\bar{G}$.
+\end{itemize}
+
+Sale todo y se tiene que $\varphi$ es isometría.
+
+\end{proof}
+
+
+
+
+
+
+

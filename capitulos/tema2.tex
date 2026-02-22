@@ -1,0 +1,344 @@
+% Archivo: capitulos/tema2.tex
+
+% -------------------------------------------------------------------------
+\section{Curvas regulares a trozos y Variaciones}
+
+Para estudiar las propiedades minimizantes de las geodésicas (que son las curvas más cortas localmente), necesitamos ampliar el espacio de curvas admisibles para permitir "esquinas".
+
+\begin{definicion}{Curva regular a trozos}
+Una curva regular a trozos es una aplicación continua $\alpha: [a,b] \longrightarrow \mathbb{R}^n$ para la cual existe una partición $a=t_0 < t_1 < \dots < t_k = b$ tal que, para cada $i=1, \dots, k$, la restricción $\alpha_i := \alpha|_{[t_{i-1}, t_i]}$ es una curva regular diferenciable.
+\end{definicion}
+
+\textbf{Notación y Vértices:}
+Denotaremos los límites laterales de la derivada en los puntos de la partición como:
+\[
+\alpha'_{-}(t_i) = \lim_{t \to t_i^{-}} \alpha'(t)=\alpha'_i(t_i), \quad \alpha'_{+}(t_i) = \lim_{t \to t_i^{+}} \alpha'(t)=\alpha'_{i+1}(t_i).
+\]
+Diremos que $\alpha(t_i)$ es un \textbf{vértice} de $\alpha$ si $\alpha'_{-}(t_i) \neq \alpha'_{+}(t_i)$.
+\\
+\textit{Observación:} Toda curva regular a trozos puede reparametrizarse por el arco (p.p.a.). Y en $t=a$ y $t=b$ solo existe una derivada, excepto si la curva es cerrada (y podría haber un vértice o cerrarse regularmente).
+
+\subsection{El concepto de Variación}
+\begin{definicion}{Variación de una curva}
+Sean $\alpha : [a, b] \longrightarrow S$ una curva regular a trozos en una superficie regular $S$ y $a = s_0 < s_1 < \dots < s_k = b$ una partición de $[a, b]$ tal que, para cada $i = 1, \dots, k$, $\alpha_i := \alpha|_{[s_{i-1}, s_i]}$ es una curva regular.
+
+Una \textbf{variación} de $\alpha$ es una aplicación continua $\phi : [a, b] \times (-\varepsilon, \varepsilon) \longrightarrow S$, que es diferenciable en cada uno de los rectángulos $[s_{i-1}, s_i] \times (-\varepsilon, \varepsilon)$, y tal que:
+\begin{enumerate}[label=\roman*)]
+    \item $\phi(s, 0) = \phi_0(s) = \alpha(s)$ para todo $s \in [a, b]$;
+    \item para todo $t \in (-\varepsilon, \varepsilon)$, $\alpha_t = \phi(\cdot, t) : [a, b] \longrightarrow S$ es una curva parametrizada regular a trozos, llamada \textbf{curva de la variación}.
+\end{enumerate}
+
+Además, se dice que $\phi$ es una \textbf{variación propia} (o con \textbf{extremos fijos}) cuando $\alpha_t(a) = \phi(a, t) = \alpha(a)$ y $\alpha_t(b) = \phi(b, t) = \alpha(b)$ para todo $t \in (-\varepsilon, \varepsilon)$.
+\end{definicion}
+\begin{definicion}{Campo Variacional}
+Sea $\phi$ una variación de una curva regular a trozos $\alpha$. Se define el \textbf{campo variacional} de $\phi$ como:
+\[
+Z(s) = \frac{\partial \phi}{\partial t}(s, 0) \in \mathfrak{X}(\alpha).
+\]
+\end{definicion}
+
+\textbf{Tipos de variaciones:}
+\begin{itemize}
+    \item \textbf{Variación propia (extremos fijos):} Si $\alpha_t(a) = \alpha(a)$ y $\alpha_t(b) = \alpha(b)$ para todo $t$. Esto implica que $Z(a)=0$ y $Z(b)=0$.
+    \item \textbf{Variación normal:} Si el campo variacional es ortogonal a la curva, $\inner{Z(s)}{\alpha'(s)} = 0$.
+\end{itemize}
+
+% -------------------------------------------------------------------------
+\section{Fórmulas de Variación de la Longitud}
+Una variación $\phi$ de $\alpha$ genera una familia uniparamétrica $\{\alpha_t\}_{t\in (-\epsilon,\epsilon)}$ de curvas en la superficie, cuya longitud es el llamado \textbf{funcional longitud:}
+\[
+L(t) := L_{a}^{b}(\alpha_{t}) = \sum_{i=1}^{k} L_{s_{i-1}}^{s_{i}}(\alpha_{t}) = \sum_{i=1}^{k} \int_{s_{i-1}}^{s_{i}} |\alpha_{t}^{\prime}(s)| \, ds.
+\]
+
+
+\begin{teorema}{Primera fórmula de variación}
+Sea $\alpha: [0,l] \longrightarrow S$ una curva regular a trozos p.p.a. y sea $Z$ el campo variacional de una variación $\phi$. Entonces:
+\[
+L'(0) = \left[ \inner{Z(s)}{\alpha'(s)} \right]_0^l - \sum_{i=1}^{k-1} \inner{Z(s_i)}{\Delta_i \alpha'} - \int_0^l \inner{Z(s)}{\frac{D\alpha'}{ds}(s)} ds,
+\]
+donde $\Delta_i \alpha' = \alpha'_{+}(s_i) - \alpha'_{-}(s_i)$ es el "salto" de velocidad en los vértices.
+\end{teorema}
+
+Si la variación es \textbf{propia} (extremos fijos), los términos de frontera desaparecen:
+\[
+L'(0) = - \sum_{i=1}^{k-1} \inner{Z(s_i)}{\Delta_i \alpha'} - \int_0^l \inner{Z(s)}{\frac{D\alpha'}{ds}(s)} ds.
+\]
+
+\begin{teorema}{Caracterización variacional de las geodésicas}
+Una curva regular a trozos p.p.a. $\alpha$ es un segmento de geodésica si, y solo si, $L'(0) = 0$ para toda variación propia de $\alpha$.
+\end{teorema}
+Esto implica que las geodésicas son los "puntos críticos"  del funcional longitud.
+\begin{proposicion}{Existencia de variaciones para un campo dado}
+Sean $\alpha : [0, \ell] \longrightarrow S$ una curva regular a trozos p.p.a. en una superficie regular $S$ y $0 = s_0 < s_1 < \dots < s_k = \ell$ una partición de $[0, \ell]$ tal que $\alpha|_{[s_{i-1}, s_i]}$ es regular para cada $i = 1, \dots, k$. Sea $Z$ un campo de vectores tangente a lo largo de $\alpha$, continuo en $[0, \ell]$ y diferenciable en cada subintervalo $[s_{i-1}, s_i]$.
+\begin{enumerate}[label=\roman*)]
+    \item Entonces existe una variación $\phi$ de $\alpha$ cuyo campo variacional es $Z$.
+    \item Si $Z(0) = \mathbf{0}$ y $Z(\ell) = \mathbf{0}$, se puede elegir $\phi$ de forma que sea variación propia.
+\end{enumerate}
+\end{proposicion}
+
+\begin{definicion}{Variación normal}
+Sea $\alpha : [0, \ell] \longrightarrow S$ una curva regular a trozos en una superficie regular $S$. Una variación de $\alpha$ se dice \textbf{normal} si su campo variacional $Z$ es normal a $\alpha$, esto es, $\langle Z(s), \alpha'(s) \rangle = 0$.
+\end{definicion}
+
+
+\begin{proposicion}{Corolario}
+Sea $\alpha : [a, b] \longrightarrow S$ una curva regular p.p.a. en una superficie regular $S$. Entonces $\alpha$ es un segmento de geodésica de $S$ si, y solo si, $L'(0) = 0$ para toda variación \textbf{normal} $\phi$ de la curva $\alpha$.
+\end{proposicion}
+
+\begin{teorema}{Segunda fórmula de variación}
+Sea $\gamma: [0,l] \longrightarrow S$ una geodésica p.p.a. (por tanto, $L'(0)=0$). Para una variación propia y normal con campo $Z$, la segunda derivada de la longitud es:
+\[
+L''(0) = \int_0^l \left[ \left| \frac{DZ}{ds} \right|^2 - K(\gamma(s)) |Z(s)|^2 \right] ds.
+\]
+\end{teorema}
+\textit{Nota:} Aquí aparece explícitamente la curvatura de Gauss $K$. Si $K < 0$, entonces $L''(0) > 0$, lo que sugiere que en superficies de curvatura negativa las geodésicas minimizan la longitud (son mínimos locales estables).
+
+% -------------------------------------------------------------------------
+% --- SECCIÓN: INTEGRACIÓN EN SUPERFICIES ---
+
+\section{Integración en superficies}
+
+\begin{definicion}{Elemento de área}
+Sea $S \subset \mathbb{R}^{3}$ una superficie regular y orientada, con aplicación de Gauss $N$. Se denomina \textbf{\textcolor{mainred}{elemento de área}} de $S$ en un punto $p \in S$ a la aplicación $dA(p) : T_{p}S \times T_{p}S \longrightarrow \mathbb{R}$ dada por $dA(p)(\mathbf{v}, \mathbf{w}) = \det(\mathbf{v}, \mathbf{w}, N(p))$.
+\end{definicion}
+
+\begin{tcolorbox}[colback=maingreen!5!white, colframe=maingreen!75!black, title=Observaciones]
+\begin{itemize}
+    \item \textbf{\textcolor{red}{¡OJO!}} No confundir con una diferencial o con el operador forma (Operador Weingarten).
+    \item $dA(p)$ es una forma bilineal antisimétrica.
+    \item $dA(p)(X_{u}(q), X_{v}(q)) = \sqrt{EG - F^{2}}(q)$.
+\end{itemize}
+\end{tcolorbox}
+
+\begin{definicion}{Área de una región}
+El área de una región $R \subset S$ viene dada por la expresión
+\[
+A(R) = \iint_{X^{-1}(R)} \sqrt{EG - F^{2}} \, du \, dv,
+\]
+donde $(U, X)$ es cualquier parametrización tal que $X(U)$ contiene a $R$.
+\end{definicion}
+
+\begin{definicion}{Soporte de una función}
+Sea $f : S \longrightarrow \mathbb{R}$ una función real definida sobre una superficie regular orientada $S$. El \textbf{\textcolor{mainred}{soporte}} (compacto) de $f$ es el conjunto
+\[
+\text{sop}(f) = \text{cl}\{p \in S : f(p) \neq 0\}.
+\]
+\end{definicion}
+
+\begin{definicion}{Integral de $f$ en $S$ (Caso Local)}
+Sea $f : S \longrightarrow \mathbb{R}$ una función con soporte compacto, definida sobre una superficie regular orientada $S$, tal que existe una parametrización $(U, X)$ de $S$ de forma que $\text{sop}(f) \subset X(U)$. Se define la \textbf{\textcolor{mainred}{integral de $f$ en $S$}} como
+\[
+\int_{S} f \, dA := \iint_{U} (f \circ X)(u, v) \sqrt{EG - F^{2}}(u, v) \, du \, dv
+\]
+(siempre y cuando la integral sobre $U \subset \mathbb{R}^{2}$ esté definida).
+\end{definicion}
+
+\textit{¿Y si el soporte de $f$ no está contenido en un entorno coordenado?}
+
+\begin{definicion}{Partición de la unidad}
+Una \textbf{\textcolor{mainred}{partición}} (diferenciable) \textbf{\textcolor{mainred}{de la unidad}} en una superficie regular $S$ es una colección de funciones (diferenciables) $f_{i} : S \longrightarrow \mathbb{R}$, $i = 1, \dots, n$, tales que $0 \le f_{i} \le 1$, $i = 1, \dots, n$ y $\sum_{i=1}^{n} f_{i} \equiv 1$. La partición $\{f_{i}\}_{i=1}^{n}$ está \textbf{subordinada a un cubrimiento abierto} de $S$, $\{V_{1}, \dots, V_{n}\}$, si $\text{sop}(f_{i}) \subset V_{i}$, $i = 1, \dots, n$.\\
+Recordemos que un \textbf{cubrimiento} de una superficie es coger un  montón de parametrizaciones de forma que al final los entornos coordenados (imagen de cada una de nuestras parametrizaciones) me lo cubran todo.
+\end{definicion}
+
+\begin{tcolorbox}[colback=maingreen!5!white, colframe=maingreen!75!black, title=Observaciones]
+\begin{itemize}
+    \item Dado un cubrimiento finito $\{V_{1}, \dots, V_{n}\}$ por abiertos de $S$, siempre existe una partición (diferenciable) de la unidad subordinada a éste.
+    \item Sea $\{g, g_{1}, \dots, g_{n}\}$ una partición de la unidad subordinada al cubrimiento $\{S \setminus \text{sop}(f), X_{1}(U_{1}), \dots, X_{n}(U_{n})\}$ y sea $f_{i} := f g_{i}$. Entonces $f = \sum_{i=1}^{n} f_{i}$ y $\text{sop}(f_{i}) \subset X_{i}(U_{i})$ para todo $i = 1, \dots, n$.
+\end{itemize}
+\end{tcolorbox}
+
+\begin{definicion}{Integral de $f$ en $S$ (Caso Global)}
+Se define la \textbf{\textcolor{mainred}{integral de $f$ en $S$}} como
+\[
+\int_{S} f \, dA := \sum_{i=1}^{n} \int_{S} f_{i} \, dA.
+\]
+\end{definicion}
+
+% --- OBSERVACIONES SOBRE EL CÁLCULO DE ÁREAS ---
+
+\begin{tcolorbox}[colback=maingreen!5!white, colframe=maingreen!75!black, title=Observaciones sobre la extensión del área]
+Es importante notar que, por definición, no podemos calcular directamente el área de superficies enteras que no estén acotadas (como el cilindro o el cono) utilizando una sola región $R$. 
+
+\begin{itemize}
+    \item \textbf{Superficies compactas:} En estos casos, las superficies son regiones $R$ en sí mismas, lo que facilita el cálculo global del área.
+    \item \textbf{Casos especiales:} Existen superficies no acotadas, como la \textbf{pseudoesfera}, donde el cálculo del área sí es posible, aunque constituye un caso excepcional.
+    \item \textbf{Estrategia de cálculo:} Lo ideal es emplear parametrizaciones que cubran la superficie salvo un conjunto de \textbf{medida nula}. De esta forma, evitamos la necesidad de recurrir explícitamente a particiones de la unidad muy complejas.
+\end{itemize}
+\end{tcolorbox}
+
+% --- EJEMPLO: ÁREA DE LA ESFERA ---
+
+\begin{ejemplo}{Cálculo del área de la esfera $\mathbb{S}^2$}
+Queremos calcular el área total de la esfera de radio $r$. Para ello, integramos la función constante $f \equiv 1$ sobre toda la superficie:
+\[
+A(\mathbb{S}^2) = \int_{\mathbb{S}^2} 1 \, dA.
+\]
+Como $sop(1) = \mathbb{S}^2$, necesitaríamos una parametrización que cubra toda la esfera. Dado que esto es topológicamente imposible con una sola carta, utilizamos una parametrización que deje fuera únicamente un conjunto de medida nula (los meridianos/polos):
+
+Sea la parametrización en coordenadas geográficas:
+\[
+X(\theta, \varphi) = (r \cos\theta \sin\varphi, \, r \sin\theta \sin\varphi, \, r \cos\varphi)
+\]
+con $(\theta, \varphi) \in (0, 2\pi) \times (0, \pi)$. 
+
+Calculando los coeficientes de la primera forma fundamental, obtenemos el elemento de área:
+\[
+\sqrt{EG - F^2} = r^2 \sin\varphi.
+\]
+*(Nota: En tus apuntes aparece $\sin\theta$, dependiendo de la asignación de ángulos en la parametrización)*.
+
+Finalmente, el área resulta:
+\[
+A(\mathbb{S}^2) = \int_{0}^{\pi} \int_{0}^{2\pi} r^2 \sin\varphi \, d\theta \, d\varphi = 4\pi r^2.
+\]
+\end{ejemplo}
+
+\begin{teorema}{Teorema del cambio de variable}
+Sean $S_{1}$ y $S_{2}$ dos superficies regulares, conexas y orientadas, cuyos elementos de área representamos por $dA_{1}$ y $dA_{2}$, respectivamente. Sea $f : S_{2} \longrightarrow \mathbb{R}$ una función con soporte compacto. Si $\phi : S_{1} \longrightarrow S_{2}$ es un difeomorfismo, entonces
+\[
+\int_{S_{2}} f \, dA_{2} = \int_{S_{1}} (f \circ \phi) \, |\det(d\phi)| \, dA_{1}.
+\]
+\end{teorema}
+\begin{proof}
+    No hay demostración
+\end{proof}
+\begin{proposicion}{Corolario}
+Sea $S$ una superficie regular orientada, $N$ su aplicación de Gauss y $p \in S$ con $K(p) \neq 0$. Si $V \subset S$ es un entorno de $p$ donde $N|_{V} : V \longrightarrow N(V)$ es un difeomorfismo, entonces
+\[
+A(N(V)) = \int_{V} |K| \, dA,
+\]
+siempre y cuando esta integral tome un valor finito.
+\end{proposicion}
+
+\textit{Observación: Si $K(p) \neq 0$, siempre puedo encontrar el entorno de $p$ donde tengo el difeomorfismo.}
+
+
+% --- SECCIÓN: VARIACIONES DEL ÁREA ---
+
+\section{Variaciones del área. Las superficies minimales}
+
+\begin{definicion}{Variación normal de una superficie}
+Sean $U \subset \mathbb{R}^{2}$ un abierto y $X : U \longrightarrow \mathbb{R}^{3}$ una aplicación tales que $X(U)$ es una superficie regular. Si $D \subset \mathbb{R}^{2}$ es un disco abierto cuya clausura $\text{cl } D \subset U$, entonces $X(D)$ es una superficie regular para la cual $X|_{D}$ es una parametrización.
+
+Sea $h : \text{cl } D \longrightarrow \mathbb{R}$ una función diferenciable que se anula en la frontera de $D$. Se llama \textbf{\textcolor{mainred}{variación normal}} de $X(D)$ determinada por $h$ a la aplicación $\phi : \text{cl } D \times (-\varepsilon, \varepsilon) \longrightarrow \mathbb{R}^{3}$ definida por
+\[
+\phi(u, v, t) = X(u, v) + t h(u, v) N(X(u, v)),
+\]
+donde $N$ es el vector normal unitario y $\varepsilon > 0$ es suficientemente pequeño para que la aplicación $X^{t} : D \longrightarrow \mathbb{R}^{3}$ dada por $X^{t}(u, v) = \phi(u, v, t)$ sea una parametrización de la superficie regular $X^{t}(D)$ para todo $t \in (-\varepsilon, \varepsilon)$.
+\end{definicion}
+
+
+Una variación $\phi$ de $X(D)$ genera una familia uniparamétrica $\{X^{t}(D)\}_{t \in (-\varepsilon, \varepsilon)}$ de superficies regulares. El área de estas superficies da lugar al llamado \textbf{\textcolor{mainred}{funcional área}}:
+\[
+A(t) = A(X^{t}(D)).
+\]
+
+
+% --- DEFINICIONES DE SUPERFICIES MINIMALES ---
+
+\begin{definicion}{Caracterización Variacional (I)}
+Una superficie regular $S$ es \textbf{\textcolor{mainred}{minimal}} si, para cada punto de la misma, existe un entorno $\Omega$ tal que éste es la superficie de menor área entre todas aquellas que tienen como frontera la frontera de $\Omega$.
+\end{definicion}
+
+\begin{definicion}{Ecuación en Derivadas Parciales (II)}
+Una superficie es \textbf{\textcolor{mainred}{minimal}} si la función diferenciable $f$ que determina su gráfica verifica la \textbf{ecuación de Euler-Lagrange}:
+\[
+f_{xx}(1+f_{y}^{2}) - 2f_{xy}f_{x}f_{y} + f_{yy}(1+f_{x}^{2}) = 0.
+\]
+\end{definicion}
+
+\begin{definicion}{Curvatura Media (III)}
+Una superficie es \textbf{\textcolor{mainred}{minimal}} si su \textbf{curvatura media} se anula en todo punto, esto es, si $H \equiv 0$.
+\end{definicion}
+
+\begin{definicion}{Aplicación de Gauss (IV)}
+Se llama \textbf{\textcolor{mainred}{superficie minimal}} a aquella cuya aplicación de Gauss es \textbf{conforme}\footnote{conserva ángulos.} y no es una esfera.
+\end{definicion}
+
+\begin{definicion}{Parametrización Isoterma (V)}
+La superficie determinada por una parametrización \textbf{\textcolor{mainred}{isoterma}} $X(u,v) = (x(u,v), y(u,v), z(u,v))$ (es decir, tal que $E=G$ y $F=0$) es \textbf{\textcolor{mainred}{minimal}} si las funciones coordenadas son \textbf{armónicas}, esto es, si:
+\[
+\Delta x = \Delta y = \Delta z = 0.
+\]
+\end{definicion}
+
+\begin{definicion}{Membrana Jabonosa (VI)}
+Se denomina \textbf{\textcolor{mainred}{superficie minimal}} aquella que se puede reproducir mediante una \textbf{membrana jabonosa}.
+\end{definicion}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{ejemplo}{Ejemplos clásicos}
+\begin{itemize}
+    \item \textbf{El Plano:} La solución trivial ($K=H=0$).
+    \item \textbf{El Catenoide:} Generada al rotar una catenaria. (Euler, 1740: única minimal de revolución).
+    \item \textbf{El Helicoide:} Superficie reglada generada por una recta que rota y sube (escalera de caracol). (Meusnier, 1770).
+    \item \textbf{Superficies de Scherk:} Definidas implícitamente, por ejemplo, $e^z \cos x - \cos y = 0$.
+\end{itemize}
+Es interesante notar que el helicoide puede deformarse isométricamente en un catenoide pasando por una familia continua de superficies minimales.
+\end{ejemplo}
+\subsubsection{Superficies minimales como puntos críticos del área}
+
+\begin{proposicion}{Existencia de funciones meseta}
+Sean $D$ un disco abierto de $\mathbb{R}^2$ y $q \in D$. Entonces, para todo $\varepsilon > 0$ tal que $D(q, \varepsilon) \subset D$, existe una función diferenciable $\tilde{h} : D \longrightarrow \mathbb{R}$, llamada \textbf{\textcolor{mainred}{función meseta}}, verificando que:
+\begin{itemize}
+    \item $\text{sop}(\tilde{h}) \subset D(q, \varepsilon)$,
+    \item $0 \le \tilde{h} \le 1$,
+    \item $\tilde{h} \equiv 1$ en el disco $D(q, \varepsilon/2)$.
+\end{itemize}
+\end{proposicion}
+
+\begin{teorema}{Superficies minimales como puntos críticos del área}
+Sean $U \subset \mathbb{R}^2$ un abierto y $X : U \longrightarrow \mathbb{R}^3$ una aplicación tal que $X(U)$ es una superficie regular. Sea $D$ un disco abierto en $\mathbb{R}^2$ cuya clausura $\text{cl } D \subset U$. Entonces, $X(D)$ es una superficie minimal si, y solo si, $A'(0) = 0$ para cualquier variación normal $\phi$ de $X(D)$.
+\end{teorema}
+
+
+\begin{proof}
+Dada la variación normal $\phi(u, v, t) = X(u, v) + t h(u, v) N(u, v)$, el funcional área es:
+\[
+A(t) = \iint_{D} \sqrt{E_t G_t - F_t^2} \, du \, dv.
+\]
+Para calcular $A'(0)$, primero aproximamos los coeficientes de la primera forma fundamental de la variación $X^t$. Tras omitir términos de orden $t^2$ que desaparecerán al derivar y evaluar en $t=0$, obtenemos:
+\begin{align*}
+E_t &= E - 2th e + t^2 R_1, \\
+F_t &= F - 2th f + t^2 R_2, \\
+G_t &= G - 2th g + t^2 R_3.
+\end{align*}
+Sustituyendo en el discriminante y utilizando la definición de curvatura media $H = \frac{gE + eG - 2fF}{2(EG - F^2)}$, se llega a:
+\[
+\sqrt{E_t G_t - F_t^2} = \sqrt{EG - F^2} \sqrt{1 - 4thH + t^2 \tilde{R}}.
+\]
+Derivando bajo el signo integral y evaluando en $t=0$:
+\[
+A'(0) = -2 \iint_{D} h H \sqrt{EG - F^2} \, du \, dv = -2 \int_{X(D)} h H \, dA.
+\]
+
+\textbf{($\implies$)} Si $X(D)$ es minimal, $H \equiv 0$, por lo que $A'(0) = 0$ para toda variación.
+
+\textbf{($\impliedby$)} Supongamos que $A'(0) = 0$ para toda $h$, pero existe un punto $p = X(q)$ tal que $H(p) \neq 0$ (p.ej. $H(p) > 0$). Por continuidad, $H > 0$ en un entorno $D(q, r)$. 
+Tomamos como función de la variación una \textbf{función meseta} $\tilde{h}$ con soporte en dicho disco. Entonces:
+\[
+A'(0) = -2 \iint_{D(q,r)} \tilde{h} H \sqrt{EG - F^2} \, du \, dv.
+\]
+Separando la integral en $D(q, r) \setminus D(q, r')$ y $D(q, r')$, donde $\tilde{h} \equiv 1$:
+\begin{itemize}
+    \item En la zona exterior, la integral es $\le 0$ (ya que $\tilde{h}, H, \sqrt{\dots}$ son $\ge 0$).
+    \item En la zona interior, la integral es estrictamente $< 0$ (pues $H > 0$ y $\tilde{h} = 1$).
+\end{itemize}
+Esto implica $A'(0) < 0$, lo cual contradice la hipótesis $A'(0) = 0$. Por tanto, $H$ debe ser cero en todo punto.
+\end{proof}
+

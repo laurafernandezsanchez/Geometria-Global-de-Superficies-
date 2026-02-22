@@ -1,0 +1,349 @@
+
+% ----------------------------------------------------------------------
+% SECCIÓN 1: DISTANCIA INTRÍNSECA
+% ----------------------------------------------------------------------
+\section{Distancia intrínseca en una superficie}
+
+\begin{definicion}{Distancia intrínseca}
+Dados dos puntos $p, q \in S$ (supondremos siempre $S$ conexa), se define el conjunto de curvas que los unen:
+\[
+\Omega(p,q) = \{ \alpha : [a,b] \longrightarrow S : \alpha \text{ regular a trozos}, \alpha(a)=p, \alpha(b)=q \} \cup 
+\]
+\[
+\{ \alpha :\{a\}\to S: \alpha(a)=p \quad \text{si}\quad  p=q \}.
+\]
+Se define la \textbf{\textcolor{mainred}{distancia intrínseca}} en la superficie $S$ como la aplicación $d : S \times S \longrightarrow \mathbb{R}$ dada por:
+\[
+d(p,q) := \inf \{ L_a^b(\alpha) : \alpha \in \Omega(p,q) \}.
+\]
+\end{definicion}
+
+\begin{tcolorbox}[colback=maingreen!5!white, colframe=maingreen!75!black, title=Observaciones]
+La función está bien definida y es, de hecho, una distancia:
+\begin{enumerate}[label=\alph*)]
+    \item $\Omega(p,q) \neq \emptyset$, esto es, cualesquiera dos puntos de $S$ pueden unirse mediante una curva regular a trozos.
+    \item Existe el ínfimo de la definición de distancia (ya que las longitudes son no negativas).
+    \item La distancia intrínseca cumple las propiedades de distancia (positiva, simétrica, desigualdad triangular).
+\end{enumerate}
+\end{tcolorbox}
+
+\begin{proof}[Justificación de a) Conexión por caminos]
+Fijamos $p \in S$. Sea $$A = \{ q \in S : \exists \alpha \text{ regular a trozos uniendo } p \text{ y } q \}$$
+Queremos ver que $A = S$. Como $S$ es conexa, basta ver que $A \neq \emptyset$, es abierto y es cerrado.
+
+1. \textbf{$A \neq \emptyset$:} $p \in A$ (trivialmente, curva de un punto).
+
+2. \textbf{$A$ es abierto:}
+   Sea $q \in A$. Por definición de superficie, existe un entorno de $q$ que es un disco geodésico $\mathcal{D}(q, \epsilon)$ (imagen por la exponencial de un disco en el plano tangente).
+   Propiedad: Si tomo un punto $q' \in \mathcal{D}(q, \epsilon)$, existe una \textbf{geodésica radial} $\gamma$ que une $q$ y $q'$.
+   Como $q \in A$, existe $\alpha$ que une $p$ con $q$.
+   Definimos la curva unión $\alpha \cup \gamma$, que es regular a trozos y une $p$ con $q'$.
+   Por tanto, $q' \in A$. Esto implica que $\mathcal{D}(q, \epsilon) \subset A$.
+
+3. \textbf{$A$ es cerrado:}
+   Veamos que $S \setminus A$ es abierto. Sea $q \in S \setminus A$ (es decir, $q$ no se puede unir con $p$).
+   Tomamos un disco normal $\mathcal{D}(q, \epsilon)$. ¿$\mathcal{D}(q, \epsilon) \subset S \setminus A$?
+   Supongamos que no. Entonces $\mathcal{D}(q, \epsilon) \cap A \neq \emptyset$. Sea $q' \in \mathcal{D}(q, \epsilon) \cap A$.
+   \begin{itemize}
+       \item Como $q' \in A$, existe $\alpha$ que une $p$ con $q'$.
+       \item Como $q' \in \mathcal{D}(q, \epsilon)$, existe $\gamma$ geodésica radial que une $q'$ con $q$.
+       \item La unión $\alpha \cup \gamma$ uniría $p$ con $q$, lo que implicaría $q \in A$. ¡Contradicción!
+   \end{itemize}
+   Por tanto, $\mathcal{D}(q, \epsilon) \cap A = \emptyset$, luego $A$ es cerrado.
+\end{proof}
+\begin{observacion}{Bola en la distancia intrínseca}
+Ahora podemos considerar la \textbf{bola} (abierta) en la \textbf{distancia intrínseca} de centro $p$ y radio $r$:
+\[
+B_d(p, r) = \{ q \in S : d(p, q) < r \}.
+\]
+
+\begin{enumerate}[label=\roman*)]
+    \item Dado $p_0 \in S$, siempre se verifica que $\mathcal{D}(p_0, r) \subset B_d(p_0, r)$.
+    
+    \item Dados $p_0 \in S$ y $R > 0$, existe $r > 0$ tal que $B_d(p_0, r) \subset \mathcal{D}(p_0, R)$.
+    
+    \item Sean $p_0 \in S$ y $R > 0$ tales que $\mathcal{D}(p_0, R)$ es entorno normal de $p_0$. Entonces, para todo $r > 0$ tal que $B_d(p_0, r) \subset \mathcal{D}(p_0, R)$, se tiene que 
+    \[
+    \mathcal{D}(p_0, r) = B_d(p_0, r).
+    \]
+    
+    \item Además, sobre el conjunto $S$, las topologías $\tau_u$ (usual) y $\tau_d$ (métrica) coinciden.
+\end{enumerate}
+\end{observacion}
+
+
+\begin{proof}[Justificación de i): $\mathcal{D}(p_0, r) \subset B_d(p_0, r)$]
+    Sea $p \in \mathcal{D}(p_0, r)$. Por definición del disco geodésico, esto implica que $p = \exp_{p_0}(\vec{v})$ para algún vector $\vec{v} \in T_{p_0}S$ con norma $|\vec{v}| < r$.
+    
+    Consideramos la geodésica radial $\gamma_v(t) = \exp_{p_0}(t\vec{v})$ definida para $t \in [0,1]$. Esta curva une $p_0$ con $p$. Calculamos su longitud:
+    \[
+    L_0^1(\gamma_v) = \int_0^1 |\gamma_v'(t)| \, dt = \int_0^1 |\vec{v}| \, dt = |\vec{v}|.
+    \]
+    Por definición, la distancia intrínseca es el ínfimo de las longitudes de todas las curvas que unen los puntos, por lo que:
+    \[
+    d(p_0, p) \le L(\gamma_v) = |\vec{v}| < r.
+    \]
+    Como $d(p_0, p) < r$, concluimos que $p \in B_d(p_0, r)$.
+    \textit{(Nota: La geodésica radial nos asegura que la distancia es menor que $r$, colocándolo dentro de la bola métrica).}
+\end{proof}
+
+\begin{proof}[Justificación de iii): Igualdad en entornos normales]
+    Supongamos que $\mathcal{D}(p_0, R)$ es un entorno normal y tomamos $r$ tal que $B_d(p_0, r) \subset \mathcal{D}(p_0, R)$. Queremos probar la igualdad.
+    
+    Ya sabemos por (i) que $\mathcal{D}(p_0, r) \subset B_d(p_0, r)$. Veamos la otra inclusión: $\supseteq$.
+    
+    Sea $p \in B_d(p_0, r)$. Esto significa que $d(p_0, p) < r$.
+    Como $p$ está dentro del entorno normal $\mathcal{D}(p_0, R)$, existe una \textbf{única geodésica radial} $\gamma_p: [0,1] \to S$ que une $p_0$ con $p$ y se mantiene dentro del entorno.
+    
+    Sea $\vec{v} = \gamma_p'(0)$. Por las propiedades de minimización de las geodésicas en entornos normales (consecuencia del Lema de Gauss), sabemos que la geodésica radial realiza la distancia:
+    \[
+    d(p_0, p) = L(\gamma_p) = |\vec{v}|.
+    \]
+    Como $d(p_0, p) < r$, entonces $|\vec{v}| < r$. Esto implica que el vector tangente está en el disco $D(\vec{0}, r) \subset T_{p_0}S$.
+    Finalmente, como $p = \exp_{p_0}(\vec{v})$ y $|\vec{v}| < r$, concluimos que $p \in \mathcal{D}(p_0, r)$.
+\end{proof}
+
+\begin{ejemplo}{Plano Agujereado. ¿Por qué no coinciden siempre?}
+    Si no estamos en un entorno normal (o si $r$ es muy grande), las topologías difieren.
+    Consideremos el plano agujereado y un radio $r$ tal que la geodésica recta chocaría con el agujero.
+    \begin{itemize}
+        \item El disco geodésico $\mathcal{D}(p, r)$ \textbf{no está definido} en esa dirección (la exponencial no existe).
+        \item La bola métrica $B_d(p, r)$ sí incluye puntos al otro lado del agujero, ya que el ínfimo de la distancia esquiva el agujero rodeándolo.
+    \end{itemize}
+    \end{ejemplo}
+
+
+% ----------------------------------------------------------------------
+% SECCIÓN 2: TEOREMA DE HOPF-RINOW
+% ----------------------------------------------------------------------
+\section{El Teorema de Hopf-Rinow}
+
+\begin{definicion}{Curva minimizante}
+Se dice que una curva $\alpha \in \Omega(p,q)$ es \textbf{\textcolor{mainred}{minimizante}} si minimiza la longitud entre todas las curvas que unen $p$ y $q$. En este caso diremos que \textbf{\textcolor{mainred}{$\alpha$ realiza la distancia}} entre esos dos puntos. 
+En tal caso, $d(p,q) = L(\alpha)$.
+\end{definicion}
+
+
+\begin{lema}{1 (Regularidad de la curva minimizante)}
+Sean $S$ una superficie regular y $\alpha : [a, b] \longrightarrow S$ una curva regular a trozos uniendo $p = \alpha(a)$ con $q = \alpha(b)$. Si $\alpha$ es minimizante, entonces $\alpha$ es un segmento de geodésica (salvo reparametrizaciones). En particular, $\alpha$ es diferenciable en todos sus puntos, esto es, no tiene vértices.
+\end{lema}
+
+\begin{proof}[Demostración Lema 1]
+Sea $\alpha : [0, \ell] \longrightarrow S$ regular a trozos uniendo $p$ y $q$.
+Sea $\phi : [0, \ell] \times (-\varepsilon, \varepsilon) \longrightarrow S$ una variación propia de $\alpha$.
+Todas las curvas de la variación $\alpha_t$ unen $p$ y $q$.
+Como $\alpha$ es minimizante, la función longitud $L(t) = L(\alpha_t)$ tiene un mínimo en $t=0$.
+Esto implica que $L'(0) = 0$.
+Por la caracterización variacional de las geodésicas, concluimos que $\alpha$ es una geodésica.
+\end{proof}
+
+\begin{lema}{2 (Existencia local de minimizantes)}
+Sean $p_0 \in S$ un punto de una superficie regular $S$ y $r > 0$ de forma que la aplicación $\exp_{p_0}$ está definida en $D(0, r) \subset T_{p_0}S$. Entonces, todo punto $p \in \mathcal{D}(p_0, r)$ puede unirse con $p_0$ mediante (al menos) un segmento de geodésica minimizante.
+\end{lema}
+
+\begin{observacion}{Importante; Lema 2}
+Fijamos $p_0 \in S$.
+\begin{enumerate}
+    \item Sea $V(p_0)$ un entorno normal de $p_0$. Para todo $p \in V$, la geodésica radial $\gamma_p$ es la curva más corta \textbf{entre las curvas de $V$} (es única). \textit{Nota: Y para que sea minimizante global tiene que ser la más corta en toda la superficie.}
+    
+    \item Sea $\mathcal{D}(p_0, r)$ un disco centrado en el centro del entorno normal. Si $\mathcal{D}(p_0, r) \subset V(p_0)$ (tienen que ser el mismo centro), entonces para $p \in \mathcal{D}(p_0, r)$, la radial $\gamma_p$ minimiza (es única). \textit{Nota: Y eso solo vale si parto de $p_0$ (centro del entorno normal).}
+    
+    \item \textbf{¡Esta es la situación del Lema 2!}
+\end{enumerate}
+\end{observacion}
+
+% ----------------------------------------------------------------------
+% TEOREMA DE HOPF-RINOW
+% ----------------------------------------------------------------------
+\subsection{El Teorema de Hopf-Rinow}
+
+\begin{teorema}{de Hopf-Rinow}
+Sea $S$ una superficie regular conexa. Las siguientes propiedades son equivalentes:
+\begin{enumerate}[label=\roman*)]
+    \item El espacio métrico $(S, d)$ es \textbf{completo}.
+    \item $S$ es \textbf{geodésicamente completa}.
+    \item $S$ es geodésicamente completa en un punto.
+    \item Se verifica el teorema de \textbf{Heine-Borel}: los conjuntos cerrados (en $S$) y acotados (en la distancia intrínseca $d$) son compactos.
+\end{enumerate}
+
+Si se cumple una de las condiciones anteriores (y por tanto, todas ellas), diremos simplemente que la superficie $S$ es \textbf{completa}.
+
+En tal caso, dos puntos cualesquiera de $S$ pueden unirse mediante un segmento de \textbf{geodésica minimizante}.
+\end{teorema}
+
+\begin{proof}
+\textbf{i) $\implies$ ii)}
+Supongamos que $(S, d)$ es completo.
+Supongamos por reducción al absurdo que $S$ \textbf{no} es geodésicamente completa.
+Entonces, existe un vector $\vec{v} \in T_pS$ tal que la geodésica $\gamma_v$ no está definida en todo $\mathbb{R}$.
+Supongamos, por ejemplo, que $\gamma_v : [0, 1) \longrightarrow S$ y que no está definida en $t=1$.
+
+Tomamos una sucesión $\{t_n\}_{n \in \mathbb{N}} \subset [0, 1)$ tal que $t_n \to 1$.
+En particular, es una sucesión de Cauchy en $\mathbb{R}$. Dado $\varepsilon > 0$, existe $N$ tal que para $n, m \ge N$, $|t_n - t_m| < \varepsilon$.
+Vamos a llevarnos esto a la superficie usando la distancia intrínseca.
+Para $n, m \ge N$ (supongamos $t_m < t_n$):
+\[
+d(\gamma_v(t_n), \gamma_v(t_m)) \le L_{t_m}^{t_n}(\gamma_v) = \int_{t_m}^{t_n} |\gamma_v'(t)| \, dt = |\vec{v}|(t_n - t_m) < |\vec{v}|\varepsilon.
+\]
+Luego la sucesión $\{\gamma_v(t_n)\}_n$ es de \textbf{Cauchy} en $(S, d)$.
+Como $(S, d)$ es un espacio métrico completo (por hipótesis), la sucesión es convergente:
+\[
+\exists p \in S \text{ tal que } \lim_{n \to \infty} \gamma_v(t_n) = p \quad (*).
+\]
+Por eso podemos extenderla. No perdamos de vista que queremos extender la geodésica al 1 para llegar a la contradicción.
+Nos interesa que exista $\lim_{t \to 1} \gamma_v(t)$. Está bastante ligado a lo anterior. Lo único que necesitamos es que se cumpla $(*)$ para cualquier sucesión.
+Basta con cambiar $t_n$ por otra sucesión cualquiera, por ejemplo $s_n \in [0, 1)$ con $s_n \to 1$, y repetir el mismo argumento.
+\[
+\exists p' \in S \text{ tal que } \lim_{n \to \infty} \gamma_v(s_n) = p'.
+\]
+Veamos que $p = p'$ (al estar en un espacio métrico esto ocurrirá si $d(p, p') = 0$).
+\[
+d(\gamma_v(t_n), \gamma_v(s_n)) \le L_{s_n}^{t_n}(\gamma_v) = |\vec{v}||t_n - s_n| \xrightarrow[n \to \infty]{} 0.
+\]
+Por tanto, $d(p, p') = 0 \implies p = p'$.
+Consecuentemente, existe $\lim_{t \to 1} \gamma_v(t) = p$ y, por tanto, podemos definir de forma continua $\gamma_v(1) = p$.
+
+\textit{¡Cuidado, no hemos terminado! Hemos extendido la curva a $t=1$ de forma continua, pero necesitamos extenderla como \textbf{geodésica} para tener la contradicción.}
+
+Veamos que además es geodésica en $t=1$:
+Sea $W$ un entorno uniformemente normal de $p = \gamma_v(1)$ (existe un resultado que asegura su existencia).
+Sea $a < 1$ tal que $\gamma_v(a) \in W$ (cerca de 1). Como $W$ es entorno uniformemente normal de $p$, en particular será entorno normal de $\gamma_v(a)$.
+Por tanto, por el teorema de existencia de geodésicas radiales, tenemos una \textbf{única} geodésica que parte de $\gamma_v(a)$ y llega a $p$, lo que demuestra que $\gamma_v$ es geodésica en $t=1$ y se puede extender más allá. \textbf{Contradicción} con que no estaba definida en 1.
+
+\vspace{0.3cm}
+
+\textbf{ii) $\implies$ iii)}
+Trivial (si vale para todos los puntos, vale para uno).
+
+\vspace{0.3cm}
+
+\textbf{iii) $\implies$ iv)}
+Sabemos que en cualquier espacio métrico, compacto implica cerrado y acotado. Luego, en particular, en $(S, d)$ también se cumple.
+Comprobemos el recíproco: Sea $A \subset S$ cerrado y $d$-acotado.
+Sabemos por hipótesis que existe $p_0 \in S$ tal que $S$ es geodésicamente completa en $p_0$. Esto implica que $\exp_{p_0} : T_{p_0}S \longrightarrow S$ está definida en todo el tangente.
+Por tanto, para todo $p \in S$, existe una geodésica minimizante $\gamma_v$ uniendo $p_0 = \gamma_v(0)$ y $p = \gamma_v(1)$.
+\textit{(Nota: Esto es porque la exponencial está definida en todo el tangente y los discos geodésicos cubren toda la superficie).}
+
+Como $A$ es acotado, existe $M > 0$ tal que $A \subset B_d(p_0, M)$.
+Sea $p \in A$. Existe $\gamma_v$ minimizante con $\gamma_v(0) = p_0$ y $\gamma_v(1) = p$.
+Entonces $d(p_0, p) = |\vec{v}|$.
+Como $p \in A \subset B_d(p_0, M)$, entonces $d(p_0, p) < M$, de donde $|\vec{v}| < M$.
+Esto implica que el vector $\vec{v}$ pertenece al disco cerrado $\overline{D(\vec{0}, M)}$ del plano tangente. Y ahí sí se tiene que es compacto (en $\mathbb{R}^2$).
+\[
+p = \exp_{p_0}(\vec{v}) \in \exp_{p_0}(\overline{D(\vec{0}, M)}).
+\]
+El conjunto $\exp_{p_0}(\overline{D(\vec{0}, M)})$ es \textbf{compacto} por ser la imagen por una aplicación continua ($\exp_{p_0}$) de un compacto.
+Como he cogido cualquier punto de $A$ y está en ese compacto, entonces $A$ está contenido en un compacto.
+Como $A$ es cerrado (por hipótesis) y subconjunto de un compacto $\implies A$ es \textbf{compacto}.
+
+\vspace{0.3cm}
+
+\textbf{iv) $\implies$ i)}
+¿Es $(S, d)$ completo? (Clase del 09/04)
+Sea $\{p_n\}_n \subset (S, d)$ una sucesión de Cauchy.
+Sea $A = \{p_n : n \in \mathbb{N}\}$. Como $\{p_n\}$ es de Cauchy, es acotada: dado $\varepsilon > 0$, existe $N$ tal que distancias pequeñas... fijamos $N$, acotamos los primeros $N$ términos (finitos) y el resto por la condición de Cauchy.
+Entonces existe $r$ tal que $A \subset B_d(p_0, r)$.
+Esto implica que $A$ es $d$-acotado.
+Entonces su clausura $\overline{A}$ es $d$-acotada y cerrada.
+Por hipótesis (Heine-Borel), $\overline{A}$ es \textbf{compacto}.
+Toda sucesión en un compacto tiene una subsucesión convergente.
+Consecuencia: Una sucesión de Cauchy con una subsucesión convergente es \textbf{convergente}.
+Por tanto, $(S, d)$ es completo.
+\end{proof}
+
+\begin{corolario}{Consecuencias importantes}
+\begin{itemize}
+    \item Toda superficie regular y cerrada en $\mathbb{R}^3$ es completa.
+    \item Toda superficie regular y compacta es completa.
+\end{itemize}
+\end{corolario}
+
+\begin{proof}[Demostración de la primera consecuencia (Cerrada en $\mathbb{R}^3$)]
+Supongamos que $S$ es cerrada en $\mathbb{R}^3$. Queremos ver que es completa.
+Usamos la equivalencia (i): ver que el espacio métrico $(S, d)$ es completo.
+Sea $\{p_n\}_n$ una sucesión de Cauchy en $(S, d)$.
+Usamos el "truco" de comparar distancias: la distancia intrínseca es un ínfimo de longitudes sobre la superficie. La distancia euclídea (la cuerda) siempre es menor o igual que la intrínseca:
+\[
+|p_n - p_m|_{\mathbb{R}^3} \le d_S(p_n, p_m).
+\]
+Como $\{p_n\}$ es de Cauchy en $(S, d)$, entonces $\{p_n\}$ es de Cauchy en $(\mathbb{R}^3, |\cdot|)$.
+Como $\mathbb{R}^3$ es completo, la sucesión es convergente en $\mathbb{R}^3$:
+\[
+\exists p \in \mathbb{R}^3 \text{ tal que } \lim_{n \to \infty} p_n = p.
+\]
+Como $S$ es un conjunto \textbf{cerrado} en $\mathbb{R}^3$, el límite $p$ debe pertenecer a $S$.
+Finalmente, como sobre $S$ la topología usual y la intrínseca coinciden ($(S, \tau_u) = (S, \tau_d)$), la convergencia se da también en la métrica intrínseca.
+Por tanto, $(S, d)$ es completo.
+\end{proof}
+
+
+
+
+% ----------------------------------------------------------------------
+% SECCIÓN 3: TEOREMA DE BONNET
+% ----------------------------------------------------------------------
+\section{El Teorema de Bonnet}
+
+\begin{definicion}{Diámetro}
+Se define el diámetro intrínseco de una superficie regular y compacta $S$ como:
+\[
+D(S) := \max \{ d(p,q) : p, q \in S \}.
+\]
+\end{definicion}
+
+\begin{teorema}{de Bonnet}
+Sea $S$ una superficie regular y completa, tal que su curvatura de Gauss $K$ satisface la condición $K(p) \ge \delta > 0$ para todo $p \in S$.
+Entonces $S$ es \textbf{compacta} y su diámetro verifica:
+\[
+D(S) \le \frac{\pi}{\sqrt{\delta}}.
+\]
+\end{teorema}
+
+\begin{proof}[Demostración Álex]
+Procedemos por reducción al absurdo. Supongamos que $D(S) > \frac{\pi}{\sqrt{\delta}}$.
+Entonces existen $p_1, p_2 \in S$ tales que $d(p_1, p_2) = l > \frac{\pi}{\sqrt{\delta}}$.
+Como $S$ es completa (Hopf-Rinow), existe una geodésica minimizante $\gamma : [0, l] \longrightarrow S$ uniendo $p_1$ y $p_2$.
+
+Vamos a construir una variación que nos dé una contradicción (mostrando que $\gamma$ no sería minimizante).
+Necesitamos un campo variacional $Z(s)$ adecuado.
+\begin{enumerate}
+    \item Tomamos un vector unitario $\vec{w} \in T_{p_1}S$ tal que $\vec{w} \perp \gamma'(0)$.
+    \item Sea $W(s)$ el \textbf{transporte paralelo} de $\vec{w}$ a lo largo de $\gamma$.
+    \item Propiedades de $W(s)$: es paralelo ($W'=0$), tiene norma 1 ($|W|=1$) y es ortogonal a la curva ($\langle W, \gamma' \rangle = 0$).
+    \item Definimos el campo:
+    \[
+    Z(s) = \sin\left( \frac{\pi}{l}s \right) W(s).
+    \]
+\end{enumerate}
+Comprobamos que es una variación propia:
+$Z(0) = \sin(0)W(0) = 0$ y $Z(l) = \sin(\pi)W(l) = 0$.
+
+Aplicamos la \textbf{Segunda Fórmula de Variación}:
+\[
+L''(0) = \int_0^l \left[ \left| \frac{DZ}{ds} \right|^2 - K(\gamma(s)) |Z(s)|^2 \right] ds.
+\]
+Calculamos los términos:
+\begin{itemize}
+    \item $|Z(s)|^2 = \sin^2(\frac{\pi}{l}s) |W(s)|^2 = \sin^2(\frac{\pi}{l}s)$.
+    \item $\frac{DZ}{ds} = \frac{\pi}{l} \cos(\frac{\pi}{l}s) W(s) + \sin(\dots) \underbrace{W'(s)}_{0} \implies \left| \frac{DZ}{ds} \right|^2 = \frac{\pi^2}{l^2} \cos^2(\frac{\pi}{l}s)$.
+\end{itemize}
+Sustituyendo en la integral y usando que $K \ge \delta$:
+\[
+L''(0) = \int_0^l \left[ \frac{\pi^2}{l^2} \cos^2\left(\frac{\pi}{l}s\right) - K \sin^2\left(\frac{\pi}{l}s\right) \right] ds < \int_0^l \left[ \frac{\pi^2}{l^2} \cos^2 - \delta \sin^2 \right] ds.
+\]
+\textit{Nota: Como $\delta > \frac{\pi^2}{l^2}$ (por la hipótesis del absurdo $l > \pi/\sqrt{\delta}$), el término que resta es "muy grande".}
+De hecho:
+\[
+L''(0) < \frac{\pi^2}{l^2} \int_0^l \left( \cos^2\left(\frac{\pi}{l}s\right) - \sin^2\left(\frac{\pi}{l}s\right) \right) ds = \frac{\pi^2}{l^2} \int_0^l \cos\left(\frac{2\pi}{l}s\right) ds = 0.
+\]
+Obtenemos $L''(0) < 0$. Esto implica que $L(t)$ tiene un \textbf{máximo} en $t=0$, lo cual contradice que $\gamma$ sea una geodésica minimizante (debería ser un mínimo).
+
+\textbf{Conclusión:} $D(S) \le \frac{\pi}{\sqrt{\delta}}$. Como $S$ es acotada (diámetro finito) y completa, es compacta.
+\end{proof}
+
+\begin{tcolorbox}[colback=maingreen!5!white, colframe=maingreen!75!black, title=Observaciones Finales]
+\begin{itemize}
+    \item No basta suponer $K > 0$. Ejemplo: Paraboloide de revolución $z = x^2 + y^2$. Tiene $K > 0$ pero no es compacta (no se cumple que $K \ge \delta > 0$, ya que $K \to 0$ en el infinito).
+    \item La cota es óptima. Para la esfera de radio $R$, $K = 1/R^2 = \delta$. Diámetro $= \pi R = \pi / \sqrt{\delta}$.
+\end{itemize}
+\end{tcolorbox}

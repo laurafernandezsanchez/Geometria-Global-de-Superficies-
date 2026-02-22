@@ -1,0 +1,42 @@
+\documentclass[a4paper,11pt]{book} % Usamos 'book' para tener capítulos
+
+% Importamos la configuración desde el otro archivo
+\input{preambulo.tex}
+
+% --- DATOS DEL DOCUMENTO ---
+\title{\textbf{Geometría Global de Superficies}}
+\author{Notas de Clase de Laura Fernández}
+\date{Curso 2025-2026}
+
+\begin{document}
+
+    \input{portada}
+    % --- AÑADE ESTA LÍNEA ---
+    \hypertarget{indice}{} % <-- Esto define el punto de destino
+    \tableofcontents
+
+    % Aquí empieza el contenido. 
+    % \include inserta el archivo y fuerza un salto de página (ideal para capítulos)
+
+    \chapter{Geodésicas en superficies} 
+    \input{capitulos/tema1}       
+
+    \chapter{Curvas Regulares a trozos y Variaciones}
+    %\input{capitulos/tema2.tex}
+
+    % Capítulo 3
+    \chapter{Teorema de Gauss Bonett}
+    %\input{capitulos/tema3}
+
+    % Capítulo 4
+    \chapter{Completitud y Teorema de Hopf-Rinow}
+    %\input{capitulos/tema4}
+
+    % Capítulo 5
+    \chapter{Superficies Abstractas}
+    %\input{capitulos/tema5}
+    \appendix 
+    %\input{capitulos/anexoedos} % Asumiendo que guardaste el archivo en la carpeta 'anexos'
+
+
+\end{document}
