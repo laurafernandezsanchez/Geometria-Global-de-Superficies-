@@ -3,10 +3,14 @@
 % -------------------------------------------------------------------------
 \section{Curvas regulares a trozos y Variaciones}
 
-Para estudiar las propiedades minimizantes de las geodésicas (que son las curvas más cortas localmente), necesitamos ampliar el espacio de curvas admisibles para permitir "esquinas".
+Para estudiar las propiedades minimizantes de las geodésicas (que son las curvas más cortas localmente), necesitamos 
+ampliar el espacio de curvas admisibles para permitir esquinas.
 
 \begin{definicion}{Curva regular a trozos}
-Una curva regular a trozos es una aplicación continua $\alpha: [a,b] \longrightarrow \mathbb{R}^n$ para la cual existe una partición $a=t_0 < t_1 < \dots < t_k = b$ tal que, para cada $i=1, \dots, k$, la restricción $\alpha_i := \alpha|_{[t_{i-1}, t_i]}$ es una curva regular diferenciable.
+Una curva regular a trozos es una aplicación continua 
+$\alpha: [a,b] \longrightarrow \mathbb{R}^n$ para la cual existe una 
+partición $a=t_0 < t_1 < \dots < t_k = b$ tal que, para cada $i=1, \dots, k$, 
+la restricción $\alpha_i := \alpha|_{[t_{i-1}, t_i]}$ es una curva regular diferenciable.
 \end{definicion}
 
 \textbf{Notación y Vértices:}
@@ -17,6 +21,11 @@ Denotaremos los límites laterales de la derivada en los puntos de la partición
 Diremos que $\alpha(t_i)$ es un \textbf{vértice} de $\alpha$ si $\alpha'_{-}(t_i) \neq \alpha'_{+}(t_i)$.
 \\
 \textit{Observación:} Toda curva regular a trozos puede reparametrizarse por el arco (p.p.a.). Y en $t=a$ y $t=b$ solo existe una derivada, excepto si la curva es cerrada (y podría haber un vértice o cerrarse regularmente).
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.65]{imagenes/CurvaRegularTrozos.png}    
+\end{figure}
+
 
 \subsection{El concepto de Variación}
 \begin{definicion}{Variación de una curva}
@@ -30,12 +39,28 @@ Una \textbf{variación} de $\alpha$ es una aplicación continua $\phi : [a, b] \
 
 Además, se dice que $\phi$ es una \textbf{variación propia} (o con \textbf{extremos fijos}) cuando $\alpha_t(a) = \phi(a, t) = \alpha(a)$ y $\alpha_t(b) = \phi(b, t) = \alpha(b)$ para todo $t \in (-\varepsilon, \varepsilon)$.
 \end{definicion}
+
+
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.4]{imagenes/Variación de Una Cruva.png}
+\end{figure}
+
+\begin{definicion}{Curvas Transversales y de Variación}
+Dada una variación $\phi$ de $\alpha$, se llama \textbf{curvas transversales} a las curvas $\beta_s : (-\varepsilon, \varepsilon) \longrightarrow S$ definidas por $\beta_s(t) = \phi(s, t)$, para cada $s \in [a, b]$.
+Se llama \textbf{curvas de la variación} a las curvas $\alpha_t : [a, b] \longrightarrow S$ definidas por $\alpha_t(s) = \phi(s, t)$, para cada $t \in (-\varepsilon, \varepsilon)$.    
+\end{definicion}
+
+
+
 \begin{definicion}{Campo Variacional}
 Sea $\phi$ una variación de una curva regular a trozos $\alpha$. Se define el \textbf{campo variacional} de $\phi$ como:
 \[
-Z(s) = \frac{\partial \phi}{\partial t}(s, 0) \in \mathfrak{X}(\alpha).
+\beta'(s)=Z(s) = \frac{\partial \phi}{\partial t}(s, 0) \in \mathfrak{X}(\alpha).
 \]
-\end{definicion}
+\end{definicion}    
+
 
 \textbf{Tipos de variaciones:}
 \begin{itemize}
@@ -43,12 +68,15 @@ Z(s) = \frac{\partial \phi}{\partial t}(s, 0) \in \mathfrak{X}(\alpha).
     \item \textbf{Variación normal:} Si el campo variacional es ortogonal a la curva, $\inner{Z(s)}{\alpha'(s)} = 0$.
 \end{itemize}
 
+
 % -------------------------------------------------------------------------
 \section{Fórmulas de Variación de la Longitud}
 Una variación $\phi$ de $\alpha$ genera una familia uniparamétrica $\{\alpha_t\}_{t\in (-\epsilon,\epsilon)}$ de curvas en la superficie, cuya longitud es el llamado \textbf{funcional longitud:}
 \[
 L(t) := L_{a}^{b}(\alpha_{t}) = \sum_{i=1}^{k} L_{s_{i-1}}^{s_{i}}(\alpha_{t}) = \sum_{i=1}^{k} \int_{s_{i-1}}^{s_{i}} |\alpha_{t}^{\prime}(s)| \, ds.
 \]
+Ponemos los sumatorios porque tenemos una curva regular a trozos, y cada tramo es regular, así que podemos calcular la longitud de cada tramo y sumarlas.
+
 
 
 \begin{teorema}{Primera fórmula de variación}
@@ -63,18 +91,154 @@ Si la variación es \textbf{propia} (extremos fijos), los términos de frontera 
 \[
 L'(0) = - \sum_{i=1}^{k-1} \inner{Z(s_i)}{\Delta_i \alpha'} - \int_0^l \inner{Z(s)}{\frac{D\alpha'}{ds}(s)} ds.
 \]
+\begin{observacion}{Fórmula de variación para las geodésicas}
+    Observemos que si $\alpha$ es una geodésica, entonces $\frac{D\alpha'}{ds} \equiv 0$. Por tanto, para cualquier 
+    variación propia de $\alpha$, se cumple que que $L'(0) = - \sum_{i=1}^{k-1} \inner{Z(s_i)}{\Delta_i \alpha'}$. En particular, si $\alpha$ no tiene vértices, 
+    entonces $L'(0) = 0$ para toda variación propia de $\alpha$. (Por ser geodésica, no tendrá vértices porque es regular)
+    Será cierto el recíproco? Es decir, si $L'(0) = 0$ para toda variación propia de $\alpha$, entonces $\alpha$ es una geodésica?
+\end{observacion}
+
+\begin{proof}[Demostración de la primera variación de la longitud de arco]
+Sea $\alpha: [0, l] \to S$ una curva p.p.a. y regular a trozos, con vértices en $0 = s_0 < s_1 < \dots < s_k = l$. Sea $\phi(s,t)$ una variación de $\alpha$, tal que $\alpha_t(s) = \phi(s,t)$ y el campo variacional es $Z(s) = \frac{\partial \phi}{\partial t}(s,0)$.
+
+Tomamos un intervalo donde la curva es regular, $[s_{i-1}, s_i]$. Calculamos la longitud de arco de la curva variada en ese tramo, que denotaremos como $L_i(t)$:
+\[
+L_i(t) = \int_{s_{i-1}}^{s_i} |\alpha'_t(s)| \, ds = \int_{s_{i-1}}^{s_i} \left| \frac{\partial \phi}{\partial s}(s,t) \right| ds = \int_{s_{i-1}}^{s_i} \left\langle \frac{\partial \phi}{\partial s}, \frac{\partial \phi}{\partial s} \right\rangle^{\frac{1}{2}} ds
+\]
+
+Derivemos $L_i(t)$ respecto del parámetro de variación $t$:
+\[
+L'_i(t) = \int_{s_{i-1}}^{s_i} \frac{2 \left\langle \frac{\partial^2 \phi}{\partial s \partial t}, \frac{\partial \phi}{\partial s} \right\rangle}{2 \underbrace{\left\langle \frac{\partial \phi}{\partial s}, \frac{\partial \phi}{\partial s} \right\rangle^{\frac{1}{2}}}_{|\alpha'_t(s)|}} \, ds
+\]
+
+Sustituyendo en $t = 0$, y recordando que $\alpha_0(s) = \alpha(s)$ está p.p.a. (por lo que $|\alpha'_0(s)| = 1$):
+\[
+L'_i(0) = \int_{s_{i-1}}^{s_i} \frac{\left\langle \frac{\partial^2 \phi}{\partial s \partial t}(s,0), \frac{\partial \phi}{\partial s} \right\rangle}{\underbrace{|\alpha'_0(s)|}_{= 1}} \, ds = \int_{s_{i-1}}^{s_i} \left\langle \frac{\partial^2 \phi}{\partial s \partial t}(s,0), \frac{\partial \phi}{\partial s}(s,0) \right\rangle ds
+\]
+
+Por la regla del producto para la derivada de un producto escalar, se tiene:
+\[
+\frac{d}{ds} \left\langle \frac{\partial \phi}{\partial t}, \frac{\partial \phi}{\partial s} \right\rangle = \left\langle \frac{\partial^2 \phi}{\partial t \partial s}, \frac{\partial \phi}{\partial s} \right\rangle + \left\langle \frac{\partial \phi}{\partial t}, \frac{\partial^2 \phi}{\partial s^2} \right\rangle
+\]
+Despejando el primer sumando del lado derecho (y usando el Teorema de Schwarz $\frac{\partial^2 \phi}{\partial t \partial s} = \frac{\partial^2 \phi}{\partial s \partial t}$) e integrando:
+
+\begin{align*}
+L'_i(0) &= \int_{s_{i-1}}^{s_i} \left[ \frac{d}{ds} \left\langle \underbrace{\frac{\partial \phi}{\partial t}(s,0)}_{Z(s)}, \underbrace{\frac{\partial \phi}{\partial s}(s,0)}_{\alpha'(s)} \right\rangle - \left\langle \underbrace{\frac{\partial \phi}{\partial t}(s,0)}_{Z(s)}, \underbrace{\frac{\partial^2 \phi}{\partial s^2}(s,0)}_{\alpha''(s)} \right\rangle \right] ds \\
+&= \left[ \langle Z(s), \alpha'(s) \rangle \right]_{s_{i-1}}^{s_i} - \int_{s_{i-1}}^{s_i} \langle Z(s), \alpha''(s) \rangle \, ds
+\end{align*}
+
+Sabemos que $\alpha''(s) = \frac{D\alpha'}{ds} + (\alpha'')^\perp$. Al hacer el producto escalar $\langle Z(s), \alpha''(s) \rangle$, como el campo variacional $Z(s)$ es un campo tangente a la superficie, su producto con la componente normal $(\alpha'')^\perp$ se anula. Por tanto, nos quedamos únicamente con la componente tangente:
+\[
+L'_i(0) = \left[ \langle Z(s), \alpha'(s) \rangle \right]_{s_{i-1}}^{s_i} - \int_{s_{i-1}}^{s_i} \left\langle Z(s), \frac{D\alpha'}{ds}(s) \right\rangle ds
+\]
+
+Entonces, sumando para todos los tramos $i = 1, \dots, k$, obtenemos la variación total de la longitud $L'(0) = \sum_{i=1}^k L'_i(0)$:
+\begin{align*}
+L'(0) &= \sum_{i=1}^k \left( \langle Z(s_i), \alpha'_-(s_i) \rangle - \langle Z(s_{i-1}), \alpha'_+(s_{i-1}) \rangle \right) - \underbrace{\sum_{i=1}^k \int_{s_{i-1}}^{s_i} \left\langle Z, \frac{D\alpha'}{ds} \right\rangle ds}_{\int_0^l \langle Z, \frac{D\alpha'}{ds} \rangle \, ds}
+\end{align*}
+Donde $\alpha'_-(s_i)$ y $\alpha'_+(s_{i-1})$ denotan las velocidades por la izquierda y por la derecha en los respectivos vértices, ya que la curva es solo regular a trozos.
+
+Falta desarrollar la primera parte (la suma telescópica con saltos). Extrayendo los términos de los extremos $0$ y $l$, y reordenando los índices:
+\begin{align*}
+\sum_{i=1}^k \big( \langle Z(s_i), &\alpha'_-(s_i) \rangle - \langle Z(s_{i-1}), \alpha'_+(s_{i-1}) \rangle \big) \\
+&= \langle Z(l), \alpha'(l) \rangle + \sum_{i=1}^{k-1} \langle Z(s_i), \alpha'_-(s_i) \rangle - \langle Z(0), \alpha'(0) \rangle - \sum_{i=2}^k \langle Z(s_{i-1}), \alpha'_+(s_{i-1}) \rangle \\
+\intertext{Haciendo un cambio de índice en el último sumatorio para que coincida con el anterior:}
+&= \langle Z(l), \alpha'(l) \rangle - \langle Z(0), \alpha'(0) \rangle + \sum_{i=1}^{k-1} \langle Z(s_i), \alpha'_-(s_i) \rangle - \sum_{i=1}^{k-1} \langle Z(s_i), \alpha'_+(s_i) \rangle \\
+&= \left[ \langle Z, \alpha' \rangle \right]_0^l - \sum_{i=1}^{k-1} \left\langle Z(s_i), \underbrace{\alpha'_+(s_i) - \alpha'_-(s_i)}_{\Delta_i \alpha'} \right\rangle
+\end{align*}
+
+Sustituyendo esto en la expresión general de $L'(0)$, concluimos la demostración:
+\[
+L'(0) = - \int_0^l \left\langle Z, \frac{D\alpha'}{ds} \right\rangle ds + \left[ \langle Z, \alpha' \rangle \right]_0^l - \sum_{i=1}^{k-1} \langle Z(s_i), \Delta_i \alpha' \rangle
+\]
+\end{proof}
+
+
 
 \begin{teorema}{Caracterización variacional de las geodésicas}
-Una curva regular a trozos p.p.a. $\alpha$ es un segmento de geodésica si, y solo si, $L'(0) = 0$ para toda variación propia de $\alpha$.
+Una curva regular a trozos p.p.a. $\alpha$ es un segmento de geodésica si, y solo si, $L'(0) = 0$ 
+para toda variación propia de $\alpha$.
 \end{teorema}
-Esto implica que las geodésicas son los "puntos críticos"  del funcional longitud.
+
+Esto implica que las geodésicas son los \textbf{puntos críticos} del funcional longitud.
+
 \begin{proposicion}{Existencia de variaciones para un campo dado}
-Sean $\alpha : [0, \ell] \longrightarrow S$ una curva regular a trozos p.p.a. en una superficie regular $S$ y $0 = s_0 < s_1 < \dots < s_k = \ell$ una partición de $[0, \ell]$ tal que $\alpha|_{[s_{i-1}, s_i]}$ es regular para cada $i = 1, \dots, k$. Sea $Z$ un campo de vectores tangente a lo largo de $\alpha$, continuo en $[0, \ell]$ y diferenciable en cada subintervalo $[s_{i-1}, s_i]$.
+Sean $\alpha : [0, \ell] \longrightarrow S$ una curva regular a trozos p.p.a. en una superficie regular $S$ y $0 = s_0 < s_1 < \dots < s_k = \ell$ una partición de $[0, \ell]$ 
+tal que $\alpha|_{[s_{i-1}, s_i]}$ es regular para cada $i = 1, \dots, k$. 
+Sea $Z$ un campo de vectores tangente cualquiera a lo largo de $\alpha$, continuo en $[0, \ell]$ y diferenciable en cada subintervalo $[s_{i-1}, s_i]$.
 \begin{enumerate}[label=\roman*)]
     \item Entonces existe una variación $\phi$ de $\alpha$ cuyo campo variacional es $Z$.
     \item Si $Z(0) = \mathbf{0}$ y $Z(\ell) = \mathbf{0}$, se puede elegir $\phi$ de forma que sea variación propia.
 \end{enumerate}
 \end{proposicion}
+\begin{proof}[Demostración de la proposición]
+    Lo vamos a demostrar en la hoja de problemas. 
+\end{proof}
+
+
+\begin{proof}[Demostración del teorema de caracterización variacional de las geodésicas]
+La demostración consta de dos implicaciones.
+
+\vspace{0.3cm}
+\noindent $\Longrightarrow]$ \textbf{Supongamos que $\alpha$ es geodésica.} 
+
+Por definición de geodésica, la curva $\alpha$ es regular en todo su dominio (no tiene vértices) y su aceleración geodésica es nula, es decir, $\frac{D\alpha'}{ds} = 0$. 
+Además, como estamos considerando una variación propia $\phi$, los extremos de la curva permanecen fijos durante la deformación, lo que implica que el campo variacional se anula en los extremos: $Z(0) = Z(l) = 0$. Al no existir vértices, los términos de salto $\Delta_i \alpha'$ también son nulos.
+Sustituyendo estas condiciones en la fórmula de la primera variación de la longitud (obtenida en la proposición anterior), resulta de manera directa que:
+\[
+L'(0) = - \int_0^l \left\langle Z, \underbrace{\frac{D\alpha'}{ds}}_{=0} \right\rangle ds + \underbrace{\langle Z(l), \alpha'(l) \rangle}_{=0} - \underbrace{\langle Z(0), \alpha'(0) \rangle}_{=0} - \sum_{i=1}^{k-1} \langle Z(s_i), \underbrace{\Delta_i \alpha'}_{=0} \rangle = 0.
+\]
+
+\vspace{0.3cm}
+\noindent $\Longleftarrow]$ \textbf{Supongamos que $L'(0) = 0$ para toda variación propia.}
+
+Como la variación es propia, los términos de frontera desaparecen ($Z(0)=Z(l)=0$), y nuestra hipótesis de partida se reduce a la ecuación:
+\begin{equation} \label{eq:hipotesis_variacion}
+0 = L'(0) = - \sum_{i=1}^{k-1} \langle Z(s_i), \Delta_i \alpha' \rangle - \int_0^l \left\langle Z, \frac{D\alpha'}{ds} \right\rangle ds
+\end{equation}
+para cualquier campo variacional $Z$ a lo largo de $\alpha$ que se anule en los extremos. Y esto se tiene que cumplir para toda variación propia. 
+
+La demostración de que $\alpha$ es geodésica la dividiremos en dos pasos:
+
+\textbf{Paso 1: Demostrar que $\alpha$ es geodésica a trozos.} \\
+Fijemos un intervalo de regularidad cualquiera $(s_{i-1}, s_i)$. Sea $f: [0, l] \to \mathbb{R}$ una función diferenciable tal que $f(s) > 0$ 
+para todo $s \in (s_{i-1}, s_i)$ y $f(s) = 0$ en el resto del dominio $[0, l]$.
+
+Construimos el siguiente campo vectorial a lo largo de $\alpha$:
+\[
+Z(s) = f(s) \frac{D\alpha'}{ds}(s) \in \mathfrak{X}(\alpha)
+\]
+Por propiedades conocidas de las variaciones, existe una variación propia $\phi$ de $\alpha$ que tiene a este $Z$ como campo variacional asociado. Evaluamos nuestra hipótesis \eqref{eq:hipotesis_variacion} para este campo $Z$ en particular:
+\[
+0 = - \sum_{j=1}^{k-1} \langle \underbrace{Z(s_j)}_{=0}, \Delta_j \alpha' \rangle - \int_0^l \left\langle f(s) \frac{D\alpha'}{ds}, \frac{D\alpha'}{ds} \right\rangle ds
+\]
+La sumatoria se anula porque la función $f$ vale cero en todos los vértices $s_j$. La integral, al anularse el integrando fuera de $(s_{i-1}, s_i)$, se reduce a:
+\[
+0 = - \int_{s_{i-1}}^{s_i} f(s) \left| \frac{D\alpha'}{ds} \right|^2 ds
+\]
+Dado que $f(s) > 0$ en el intervalo de integración y la norma al cuadrado es siempre no negativa ($\left| \frac{D\alpha'}{ds} \right|^2 \ge 0$), la única forma de que la integral de una función no negativa sea cero es que el integrando sea idénticamente nulo casi por todas partes. Al ser las funciones continuas, deducimos que:
+\[
+\frac{D\alpha'}{ds} = 0 \quad \text{en } (s_{i-1}, s_i).
+\]
+Como este razonamiento es válido para cualquier subintervalo, concluimos que $\alpha$ es una geodésica a trozos.
+
+\vspace{0.3cm}
+\textbf{Paso 2: Demostrar que no existen vértices.} \\
+Ahora debemos probar que $\alpha$ es globalmente regular, es decir, que no hay cambios bruscos de dirección en los vértices: $\alpha'_+(s_i) = \alpha'_-(s_i)$, o equivalentemente, $\Delta_i \alpha' = 0$ para todo $i$.
+
+Fijemos un vértice arbitrario $s_i$. Mediante el uso de particiones de la unidad y transporte paralelo, es posible construir un campo vectorial diferenciable $Z \in \mathfrak{X}(\alpha)$ tal que en dicho vértice tome exactamente el valor del salto, $Z(s_i) = \Delta_i \alpha'$, y que se anule en todos los demás vértices, $Z(s_j) = 0$ para todo $j \neq i$, así como en los extremos de la curva.
+Tomando la variación propia asociada a este nuevo campo $Z$ y aplicando de nuevo la hipótesis \eqref{eq:hipotesis_variacion}:
+\[
+0 = - \sum_{j=1}^{k-1} \langle Z(s_j), \Delta_j \alpha' \rangle - \int_0^l \left\langle Z, \underbrace{\frac{D\alpha'}{ds}}_{=0} \right\rangle ds
+\]
+La integral se anula completamente porque, según demostramos en el Paso 1, $\frac{D\alpha'}{ds} = 0$ en el interior de cada subintervalo. La sumatoria colapsa a un único término, correspondiente al vértice $s_i$ que hemos fijado:
+\[
+0 = - \langle Z(s_i), \Delta_i \alpha' \rangle = - \langle \Delta_i \alpha', \Delta_i \alpha' \rangle = - |\Delta_i \alpha'|^2
+\]
+Esto implica que $|\Delta_i \alpha'|^2 = 0$, de donde se deduce ineludiblemente que $\Delta_i \alpha' = 0$.
+
+Al ser nulo el salto en cada vértice, la derivada $\alpha'$ es continua en todo el dominio $[0, l]$. Por lo tanto, la curva está formada por un único "trozo" regular. Queda así demostrado que $\alpha$ es, en efecto, una geodésica global.
+\end{proof}
 
 \begin{definicion}{Variación normal}
 Sea $\alpha : [0, \ell] \longrightarrow S$ una curva regular a trozos en una superficie regular $S$. Una variación de $\alpha$ se dice \textbf{normal} si su campo variacional $Z$ es normal a $\alpha$, esto es, $\langle Z(s), \alpha'(s) \rangle = 0$.
