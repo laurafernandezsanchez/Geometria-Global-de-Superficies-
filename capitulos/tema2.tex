@@ -244,10 +244,36 @@ Al ser nulo el salto en cada vértice, la derivada $\alpha'$ es continua en todo
 Sea $\alpha : [0, \ell] \longrightarrow S$ una curva regular a trozos en una superficie regular $S$. Una variación de $\alpha$ se dice \textbf{normal} si su campo variacional $Z$ es normal a $\alpha$, esto es, $\langle Z(s), \alpha'(s) \rangle = 0$.
 \end{definicion}
 
+\begin{corolario}{}
+Sea $\alpha: [a,b] \longrightarrow S$ una curva regular p.p.a. en una superficie regular $S$. Entonces $\alpha$ es un segmento de geodésica de $S$ si, y solo si, $L'(0) = 0$ para toda variación \textbf{\textcolor{red}{normal}} $\phi$ de la curva $\alpha$.
+\end{corolario}
 
-\begin{proposicion}{Corolario}
-Sea $\alpha : [a, b] \longrightarrow S$ una curva regular p.p.a. en una superficie regular $S$. Entonces $\alpha$ es un segmento de geodésica de $S$ si, y solo si, $L'(0) = 0$ para toda variación \textbf{normal} $\phi$ de la curva $\alpha$.
-\end{proposicion}
+\begin{observacion}{Justificación del uso de variaciones normales}
+En el teorema general de variaciones se habla de cualquier variación, pero aquí se puede exigir únicamente que sea una variación \textbf{normal}. La justificación matemática (como indican las notas manuscritas) es la siguiente:
+
+Si para la demostración construimos el campo variacional ortogonal clásico:
+\[
+Z(s) = f(s) \frac{D\alpha'}{ds}
+\]
+podemos asegurar que este campo \textbf{es un campo normal} a la curva $\alpha$.
+
+\textbf{Demostración de este hecho:}
+Como la curva $\alpha$ está parametrizada por longitud de arco (p.p.a.), su vector velocidad tiene norma constante igual a 1. Es decir:
+\[
+\langle \alpha', \alpha' \rangle = 1
+\]
+Si derivamos esta expresión a lo largo de la curva (usando la derivada covariante):
+\[
+\frac{d}{ds} \langle \alpha', \alpha' \rangle = 2 \left\langle \alpha', \frac{D\alpha'}{ds} \right\rangle = 0 \implies \left\langle \alpha', \frac{D\alpha'}{ds} \right\rangle = 0
+\]
+Multiplicando por la función escalar $f(s)$:
+\[
+\left\langle \alpha', f(s) \frac{D\alpha'}{ds} \right\rangle = 0 \implies \langle \alpha', Z(s) \rangle = 0
+\]
+
+\textbf{Conclusión:}
+Como el producto escalar del campo $Z$ con el vector tangente $\alpha'$ es cero, significa que \textit{``la parte tangencial se va''}. El campo $Z$ no tiene componente en la dirección de la curva, por lo que es un campo estrictamente normal, y la variación asociada $\phi$ será una variación normal.
+\end{observacion}
 
 \begin{teorema}{Segunda fórmula de variación}
 Sea $\gamma: [0,l] \longrightarrow S$ una geodésica p.p.a. (por tanto, $L'(0)=0$). Para una variación propia y normal con campo $Z$, la segunda derivada de la longitud es:
@@ -266,13 +292,85 @@ L''(0) = \int_0^l \left[ \left| \frac{DZ}{ds} \right|^2 - K(\gamma(s)) |Z(s)|^2 
 Sea $S \subset \mathbb{R}^{3}$ una superficie regular y orientada, con aplicación de Gauss $N$. Se denomina \textbf{\textcolor{mainred}{elemento de área}} de $S$ en un punto $p \in S$ a la aplicación $dA(p) : T_{p}S \times T_{p}S \longrightarrow \mathbb{R}$ dada por $dA(p)(\mathbf{v}, \mathbf{w}) = \det(\mathbf{v}, \mathbf{w}, N(p))$.
 \end{definicion}
 
-\begin{tcolorbox}[colback=maingreen!5!white, colframe=maingreen!75!black, title=Observaciones]
+\begin{observacion}{MUCHO OJO}
+    No confundir con una diferencial o con el operador forma (Operador Weingarten).\\
+    $dA(p)$ es una forma bilineal antisimétrica.\\
+    $dA(p)(X_{u}(q), X_{v}(q)) = \sqrt{EG - F^{2}}(q)$.
+\end{observacion}
+
+\begin{proof}[Demostración de la tercera observación]
+Sea $S$ una superficie regular orientada y sea $X: U \subset \mathbb{R}^2 \longrightarrow S$ una parametrización de $S$ en un entorno del punto $p = X(q)$, donde $q = (u,v) \in U$.
+
+Por definición topológica y algebraica, el elemento de área $dA$ (la 2-forma de área asociada a la métrica y a la orientación de $S$) evaluado en un par de vectores tangentes $\vec{w}_1, \vec{w}_2 \in T_pS$ devuelve el volumen con signo del paralelepípedo formado por $\vec{w}_1, \vec{w}_2$ y el vector normal unitario $N(p)$. Es decir, se define mediante el producto mixto:
+$$dA(p)(\vec{w}_1, \vec{w}_2) = \langle \vec{w}_1 \times \vec{w}_2, N(p) \rangle$$
+
+Para demostrar la observación, evaluamos esta 2-forma en los vectores de la base coordenada del plano tangente, $\{X_u(q), X_v(q)\}$:
+$$dA(p)(X_u(q), X_v(q)) = \langle X_u(q) \times X_v(q), N(p) \rangle$$
+
+Sabemos que el campo normal unitario $N(p)$ que orienta la superficie de forma compatible con la parametrización está dado precisamente por el producto vectorial normalizado de la base coordenada:
+$$N(p) = \frac{X_u(q) \times X_v(q)}{|X_u(q) \times X_v(q)|}$$
+
+Sustituyendo la expresión de $N(p)$ en nuestra evaluación de la 2-forma:
+$$dA(p)(X_u(q), X_v(q)) = \left\langle X_u(q) \times X_v(q), \frac{X_u(q) \times X_v(q)}{|X_u(q) \times X_v(q)|} \right\rangle$$
+
+Por la bilinealidad (o linealidad en este caso) del producto escalar, podemos extraer el escalar del denominador:
+$$dA(p)(X_u(q), X_v(q)) = \frac{1}{|X_u(q) \times X_v(q)|} \langle X_u(q) \times X_v(q), X_u(q) \times X_v(q) \rangle$$
+
+Recordando que $\langle \vec{v}, \vec{v} \rangle = |\vec{v}|^2$ para cualquier vector en $\mathbb{R}^3$, el numerador se convierte en el cuadrado de la norma:
+$$dA(p)(X_u(q), X_v(q)) = \frac{|X_u(q) \times X_v(q)|^2}{|X_u(q) \times X_v(q)|} = |X_u(q) \times X_v(q)|$$
+
+Físicamente y geométricamente, esto corrobora que el valor de la 2-forma sobre la base es el área del paralelogramo tangente que expanden $X_u$ y $X_v$. Ahora, para conectarlo con la geometría intrínseca de la superficie, utilizamos la \textbf{Identidad de Lagrange}:
+$$|\vec{a} \times \vec{b}|^2 = |\vec{a}|^2 |\vec{b}|^2 - \langle \vec{a}, \vec{b} \rangle^2$$
+
+Aplicando esta identidad de álgebra vectorial a nuestros vectores tangentes:
+$$|X_u(q) \times X_v(q)|^2 = |X_u(q)|^2 |X_v(q)|^2 - \langle X_u(q), X_v(q) \rangle^2$$
+
+A continuación, recordamos la definición de los coeficientes de la Primera Forma Fundamental:
 \begin{itemize}
-    \item \textbf{\textcolor{red}{¡OJO!}} No confundir con una diferencial o con el operador forma (Operador Weingarten).
-    \item $dA(p)$ es una forma bilineal antisimétrica.
-    \item $dA(p)(X_{u}(q), X_{v}(q)) = \sqrt{EG - F^{2}}(q)$.
+    \item $E(q) = \langle X_u(q), X_u(q) \rangle = |X_u(q)|^2$
+    \item $F(q) = \langle X_u(q), X_v(q) \rangle$
+    \item $G(q) = \langle X_v(q), X_v(q) \rangle = |X_v(q)|^2$
 \end{itemize}
-\end{tcolorbox}
+
+Sustituyendo directamente estos coeficientes métricos en la identidad de Lagrange desarrollada:
+$$|X_u(q) \times X_v(q)|^2 = E(q)G(q) - (F(q))^2$$
+
+Tomando la raíz cuadrada positiva (puesto que la norma representa un área geométrica real, siempre no negativa):
+$$|X_u(q) \times X_v(q)| = \sqrt{EG - F^2}(q)$$
+
+Por lo tanto, enlazando el principio con el final del desarrollo, queda formalmente demostrado que:
+$$dA(p)(X_u(q), X_v(q)) = \sqrt{EG - F^2}(q)$$
+\end{proof}
+
+\begin{observacion}{Relación de áreas mediante la diferencial}
+Con la diferencial "pasamos" del plano a la superficie:
+
+
+
+Si tomamos un pequeño rectángulo $R$ de lados $\Delta u, \Delta v$ en el dominio de los parámetros a partir de un punto $q$, la diferencial linealiza esta transformación. Se tiene para la dirección $u$:
+\[
+dX_q((\Delta u, 0)) = \Delta u \underbrace{dX_q(1,0)}_{X_u}
+\]
+
+El área del paralelogramo $R'$ formado en el plano tangente $T_pS$ por la imagen de los lados del rectángulo se calcula mediante la norma del producto vectorial:
+\[
+A(R') = |dX_q(\Delta u, 0) \times dX_q(0, \Delta v)| = \Delta u \Delta v |X_u \times X_v| = \underbrace{\Delta u \Delta v}_{A(R)} \sqrt{EG-F^2}
+\]
+
+Al pasar al límite (haciendo que el rectángulo sea infinitamente pequeño), el área del paralelogramo tangente $A(R')$ y el área de la región curva real sobre la superficie $A(\tilde{R})$ se igualan, obteniéndose el siguiente límite:
+\[
+\lim_{\Delta u, \Delta v \to 0} \frac{A(\tilde{R})}{A(R)} = \sqrt{EG-F^2}
+\]
+
+\textbf{Conclusión:}
+Las áreas entre el plano de parámetros y la superficie están relacionadas (distorsionadas) localmente mediante el factor $\sqrt{EG-F^2}$. Esto es lo que justifica que, al integrar, el elemento diferencial de área sea $dA = \sqrt{EG-F^2} \, du \, dv$.
+\end{observacion}
+
+\begin{center}
+    \includegraphics[width=0.7\textwidth]{Imagenes/AreaSuperficies.png}
+\end{center}
+
+%%%% AREA DE UNA REGION %%%
 
 \begin{definicion}{Área de una región}
 El área de una región $R \subset S$ viene dada por la expresión
@@ -289,6 +387,39 @@ Sea $f : S \longrightarrow \mathbb{R}$ una función real definida sobre una supe
 \]
 \end{definicion}
 
+
+
+
+\begin{observacion}{El problema de integrar funciones sobre superficies}
+Si se tiene una función escalar $f: S \longrightarrow \mathbb{R}$ definida sobre una superficie, nos planteamos cómo calcular su integral:
+\[
+\int_S f \, dA \quad \text{?}
+\]
+
+``Nos vamos'' al plano utilizando una parametrización local $X: \mathcal{U} \subset \mathbb{R}^2 \longrightarrow S$. Podríamos intentar definir la integral simplemente arrastrando la función:
+\[
+\int_S f \, dA \overset{?}{=} \iint_{\mathcal{U}} (f \circ X)(u,v) \, du \, dv
+\]
+Se puede hacer esto, pero... \textbf{¿es una buena definición?} Es decir, ¿depende de la parametrización?
+
+\textbf{¡Pues es una castaña de definición!} ¿Por qué?
+
+Si tenemos dos cartas distintas:
+Sea $\phi = \bar{X}^{-1} \circ X : \mathcal{U} \longrightarrow \bar{\mathcal{U}}$ el cambio de coordenadas, tal que $(\bar{u}, \bar{v}) = \phi(u,v)$. 
+
+Aplicando el Teorema del Cambio de Variable para integrales dobles, se tiene:
+\[
+\iint_{\bar{\mathcal{U}}} (f \circ \bar{X})(\bar{u}, \bar{v}) \, d\bar{u} \, d\bar{v} = \iint_{\phi^{-1}(\bar{\mathcal{U}})} (f \circ \bar{X})(\phi(u,v)) \, |J\phi| \, du \, dv
+\]
+
+Sabiendo que $\phi^{-1}(\bar{\mathcal{U}}) = \mathcal{U}$ y que la composición es $(f \circ \bar{X}) \circ \phi = f \circ (\bar{X} \circ \bar{X}^{-1} \circ X) = f \circ X$, sustituimos y nos queda:
+\[
+\iint_{\bar{\mathcal{U}}} (f \circ \bar{X})(\bar{u}, \bar{v}) \, d\bar{u} \, d\bar{v} = \iint_{\mathcal{U}} \underbrace{(f \circ \bar{X})(\phi(u,v))}_{f \circ X} \underbrace{|J\phi|}_{\substack{\text{pero esto se} \\ \text{queda ahí}}} \, du \, dv \neq \iint_{\mathcal{U}} (f \circ X)(u,v) \, du \, dv
+\]
+
+Entonces \textbf{no es una buena definición}, debe aparecer el elemento de área por algún lado, luego...
+\end{observacion}
+
 \begin{definicion}{Integral de $f$ en $S$ (Caso Local)}
 Sea $f : S \longrightarrow \mathbb{R}$ una función con soporte compacto, definida sobre una superficie regular orientada $S$, tal que existe una parametrización $(U, X)$ de $S$ de forma que $\text{sop}(f) \subset X(U)$. Se define la \textbf{\textcolor{mainred}{integral de $f$ en $S$}} como
 \[
@@ -296,20 +427,51 @@ Sea $f : S \longrightarrow \mathbb{R}$ una función con soporte compacto, defini
 \]
 (siempre y cuando la integral sobre $U \subset \mathbb{R}^{2}$ esté definida).
 \end{definicion}
-
-\textit{¿Y si el soporte de $f$ no está contenido en un entorno coordenado?}
+Hay que ver que esta definición no depende de la parametrización. Para ello, basta con aplicar el Teorema del Cambio de Variable y la fórmula de transformación de los coeficientes métricos $E, F, G$ bajo cambios de coordenadas. Lo veremos en la hoja de problemas.
+Ahora bien, \textbf{¿Y si el soporte de $f$ no está contenido en un entorno coordenado?}
 
 \begin{definicion}{Partición de la unidad}
-Una \textbf{\textcolor{mainred}{partición}} (diferenciable) \textbf{\textcolor{mainred}{de la unidad}} en una superficie regular $S$ es una colección de funciones (diferenciables) $f_{i} : S \longrightarrow \mathbb{R}$, $i = 1, \dots, n$, tales que $0 \le f_{i} \le 1$, $i = 1, \dots, n$ y $\sum_{i=1}^{n} f_{i} \equiv 1$. La partición $\{f_{i}\}_{i=1}^{n}$ está \textbf{subordinada a un cubrimiento abierto} de $S$, $\{V_{1}, \dots, V_{n}\}$, si $\text{sop}(f_{i}) \subset V_{i}$, $i = 1, \dots, n$.\\
-Recordemos que un \textbf{cubrimiento} de una superficie es coger un  montón de parametrizaciones de forma que al final los entornos coordenados (imagen de cada una de nuestras parametrizaciones) me lo cubran todo.
+Una \textbf{\textcolor{mainred}{partición}} (diferenciable) \textbf{\textcolor{mainred}{de la unidad}} en una superficie regular $S$ es una colección de funciones (diferenciables) $f_{i} : S \longrightarrow \mathbb{R}$, $i = 1, \dots, n$,
+ tales que $0 \le f_{i} \le 1$, $i = 1, \dots, n$ y $\sum_{i=1}^{n} f_{i} \equiv 1$. 
+ La partición $\{f_{i}\}_{i=1}^{n}$ está \textbf{subordinada a un cubrimiento abierto} de $S$, $\{V_{1}, \dots, V_{n}\}$, si $\text{sop}(f_{i}) \subset V_{i}$, $i = 1, \dots, n$.\\
+Recordemos que un \textbf{cubrimiento} de una superficie es coger un  montón de parametrizaciones de forma que al final los 
+entornos coordenados (imagen de cada una de nuestras parametrizaciones) me lo cubran todo.
 \end{definicion}
 
-\begin{tcolorbox}[colback=maingreen!5!white, colframe=maingreen!75!black, title=Observaciones]
+\begin{observacion}{Particiones de la unidad y soporte de funciones}
 \begin{itemize}
-    \item Dado un cubrimiento finito $\{V_{1}, \dots, V_{n}\}$ por abiertos de $S$, siempre existe una partición (diferenciable) de la unidad subordinada a éste.
-    \item Sea $\{g, g_{1}, \dots, g_{n}\}$ una partición de la unidad subordinada al cubrimiento $\{S \setminus \text{sop}(f), X_{1}(U_{1}), \dots, X_{n}(U_{n})\}$ y sea $f_{i} := f g_{i}$. Entonces $f = \sum_{i=1}^{n} f_{i}$ y $\text{sop}(f_{i}) \subset X_{i}(U_{i})$ para todo $i = 1, \dots, n$.
+    \item Dado un cubrimiento finito $\{V_1, \ldots, V_n\}$ por abiertos de $S$, siempre existe una partición (diferenciable) de la unidad subordinada a éste.
+    \item Sea $\{g, g_1, \ldots, g_n\}$ una partición de la unidad subordinada al cubrimiento $\{S \setminus \text{sop}(f), X_1(U_1), \ldots, X_n(U_n)\}$, y sea $f_i := f g_i$. Entonces $f = \sum_{i=1}^n f_i$ y $\text{sop}(f_i) \subset X_i(U_i)$ para todo $i = 1, \ldots, n$.
 \end{itemize}
-\end{tcolorbox}
+
+\vspace{0.3cm}
+\textbf{Justificación (Desarrollo lógico de los soportes):}
+
+Por definición de partición de la unidad subordinada al cubrimiento dado, sabemos dónde se localiza el soporte de cada función de la partición:
+\begin{itemize}
+    \item Soporte de $g_1$ en $X_1(U_1)$.
+    \item Soporte de $g_2$ en $X_2(U_2)$.
+    \item $\vdots$
+    \item Soporte de $g$ en $S \setminus \text{sop}(f)$.
+\end{itemize}
+
+Dado que las funciones de la partición de la unidad suman $1$ en todo punto, podemos reescribir la función $f$ en un punto $p$ de la siguiente manera:
+\[
+f(p) = f(p) \cdot 1 = f(p) \left( g(p) + \sum g_i(p) \right) = \underbrace{f(p)g(p)}_{0} + \sum \underbrace{f \cdot g_i}_{f_i}(p) = \sum f_i(p)
+\]
+
+\textbf{¿Por qué el término $f(p) \cdot g(p) = 0$?}
+\begin{itemize}
+    \item Si $f(p) \neq 0 \implies p \in \text{sop}(f)$. Pero por construcción, sabemos que $\text{sop}(g) \subset S \setminus \text{sop}(f)$, lo que implica que $p$ está fuera del soporte de $g$, y por tanto $g(p) = 0$.
+    \item (Si $f(p) = 0$ ya está, el producto es trivialmente cero).
+\end{itemize}
+
+Finalmente, para ver que cada $f_i$ se queda dentro de su respectivo entorno coordenado, analizamos su soporte:
+Y se tiene: 
+\[
+\text{sop}(f_i) = \text{sop}(f \cdot g_i) = (\text{sop}(f)) \cap (\text{sop}(g_i)) \subset X_i(U_i) \quad \square
+\]
+\end{observacion}
 
 \begin{definicion}{Integral de $f$ en $S$ (Caso Global)}
 Se define la \textbf{\textcolor{mainred}{integral de $f$ en $S$}} como
@@ -397,6 +559,21 @@ Una variación $\phi$ de $X(D)$ genera una familia uniparamétrica $\{X^{t}(D)\}
 A(t) = A(X^{t}(D)).
 \]
 
+\begin{observacion}{}
+Todo esto realmente es sencillo. 
+Cogemos un disco $D$ (por comodidad) con la clausura del disco contenida en el abierto $\mathcal{U}$ (es decir, $\bar{D} \subset \mathcal{U}$). 
+Se tiene que $\mathbf{X}(D)$ es una superficie regular y la restricción $\mathbf{X}|_D$ es una parametrización. Le creamos una \textbf{variación normal} a esta superficie $\mathbf{X}(D)$.
+
+\textbf{Analogía geométrica:} Es como una cama elástica, cada ``posición'' o deformación de la tela sería una variación normal de la superficie.
+
+Esa pequeña variación nos la da el parámetro $t \in (-\varepsilon, \varepsilon)$ (se varía estrictamente en la dirección del vector normal). 
+
+Y todas esas parametrizaciones deformadas nos dan una \textbf{familia} de superficies.
+\end{observacion}
+
+\begin{center}
+    \includegraphics[width=0.7\textwidth]{Imagenes/VariacionNormalSup.png}
+\end{center}
 
 % --- DEFINICIONES DE SUPERFICIES MINIMALES ---
 
